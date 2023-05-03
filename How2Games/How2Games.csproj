@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -17,6 +17,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\How2Game.DataAccess\How2Game.DataAccess.csproj" />
+    <ProjectReference Include="..\How2Games.Domain\How2Games.Domain.csproj" />
+    <ProjectReference Include="..\How2Games.Services\How2Games.Services.csproj" />
   </ItemGroup>
 
 </Project>
