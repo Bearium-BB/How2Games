@@ -1,3 +1,8 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using How2Games.Models;
+using How2Games.Data;
+
 namespace How2Games
 {
     public class Program
@@ -8,6 +13,12 @@ namespace How2Games
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddControllersWithViews();
+
+            builder.Services.AddRazorPages();
+            builder.Services.AddDbContext<GamesContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString(@"Data Source=(localdb)\ProjectModels;Initial Catalog=Chores;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")));
 
             var app = builder.Build();
 
