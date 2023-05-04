@@ -8,18 +8,22 @@ using System.Threading.Tasks;
 
 namespace How2Game.DataAccess.User
 {
-    internal class UserCRUD
+    public class UserCRUD : IUserCRUD
     {
-        private GamesContext context;
+        private readonly GamesContext _context;
 
+        public UserCRUD(GamesContext context)
+        {
+            _context = context;
+        }
         public void Insert() { 
             How2GamesUser user = new How2GamesUser();
             user.UserName = "name";
             user.Password = "password";
             user.Email = "email";
             user.FullName = "name2";
-            context.Add(user);
-            context.SaveChanges();
+            _context.Add(user);
+            _context.SaveChanges();
         }
     }
 }

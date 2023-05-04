@@ -1,4 +1,5 @@
 ﻿using How2Games.Domain.DB;
+using How2Games.Services.User;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,10 +8,13 @@ namespace How2Games.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUserCRUDServices _userCRUDServices;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger, IUserCRUDServices userCRUDServices)
         {
             _logger = logger;
+            _userCRUDServices= userCRUDServices;
         }
 
         public IActionResult Index()
@@ -20,6 +24,7 @@ namespace How2Games.Controllers
 
         public IActionResult Privacy()
         {
+            _userCRUDServices.Insert();
             return View();
         }
 

@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using How2Game.DataAccess.Data;
-
+using How2Game.DataAccess.User;
+using How2Games.Services.User;
 namespace How2Games
 {
     public class Program
@@ -18,6 +19,9 @@ namespace How2Games
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<GamesContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString(@"Data Source=(localdb)\ProjectModels;Initial Catalog=Chores;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")));
+            
+            builder.Services.AddScoped<IUserCRUD, UserCRUD>();
+            builder.Services.AddScoped<IUserCRUDServices, UserCRUDServices>();
 
             var app = builder.Build();
 

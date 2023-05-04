@@ -19,4 +19,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\How2Game.DataAccess\How2Game.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>
