@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using How2Games.Models;
-using How2Games.Data;
+using How2Game.DataAccess.Data;
 
 namespace How2Games
 {

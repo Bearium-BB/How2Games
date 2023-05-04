@@ -1,4 +1,4 @@
-﻿using How2Games.Models;
+﻿using How2Games.Domain.DB;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
