@@ -1,6 +1,6 @@
-﻿namespace How2Games.Models
+﻿namespace How2Games.Domain.DB
 {
-    public class Question
+    public class Post
     {
         public int Id { get; set; }
         public string Title { get; set; }

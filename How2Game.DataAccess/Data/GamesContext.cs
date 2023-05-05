@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using How2Games.Models;
-
-namespace How2Games.Data
+using How2Games.Domain.DB;
+namespace How2Game.DataAccess.Data
 {
     public class GamesContext : DbContext
     {
@@ -18,10 +17,10 @@ namespace How2Games.Data
         public DbSet<QuestionImage> QuestionImages { get; set; }
         public DbSet<QuestionText> QuestionTexts { get; set; }
         public DbSet<TextBox> Texts { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<How2GamesUser> Users { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",b => b.MigrationsAssembly("How2Game.DataAccess"));
         }
     }
 }

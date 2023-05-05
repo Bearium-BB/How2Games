@@ -5,11 +5,11 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "How2Games", "How2Games\How2Games.csproj", "{779633E3-241A-444D-A14A-E60D325F521B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "How2Game.DataAccess", "How2Game.DataAccess\How2Game.DataAccess.csproj", "{D376D098-878C-4359-A484-AC29EFA1B52F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "How2Game.DataAccess", "How2Game.DataAccess\How2Game.DataAccess.csproj", "{D376D098-878C-4359-A484-AC29EFA1B52F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "How2Games.Domain", "How2Games.Domain\How2Games.Domain.csproj", "{63506AE9-ACBF-4E71-B666-8DB19F11C925}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "How2Games.Domain", "How2Games.Domain\How2Games.Domain.csproj", "{63506AE9-ACBF-4E71-B666-8DB19F11C925}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "How2Games.Services", "How2Games.Services\How2Games.Services.csproj", "{1B100817-E454-41FF-89B3-2AE5A479C8DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "How2Games.Services", "How2Games.Services\How2Games.Services.csproj", "{1B100817-E454-41FF-89B3-2AE5A479C8DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

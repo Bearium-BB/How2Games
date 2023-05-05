@@ -1,4 +1,4 @@
-﻿namespace How2Games.Models
+﻿namespace How2Games.Domain.DB
 {
     public class PostText
     {
