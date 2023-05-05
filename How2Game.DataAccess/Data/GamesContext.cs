@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using How2Games.Domain.DB;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 namespace How2Game.DataAccess.Data
 {
-    public class GamesContext : DbContext
+    public class GamesContext : IdentityDbContext<How2GamesUser>
     {
         public GamesContext(DbContextOptions<GamesContext> options) : base(options) { }
         public DbSet<Answer> Answers { get; set; }
