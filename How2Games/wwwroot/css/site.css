@@ -16,6 +16,7 @@ html {
 body {
     display:block;
     margin: 0;
+    overflow-x:hidden;
 }
 
 header {
@@ -108,8 +109,9 @@ nav {
                 }
 
                 fieldset{
-                    margin:0;
+                    margin-left:80%;
                     border:0;
+                    
                 }
 
 input[type="text"] {
