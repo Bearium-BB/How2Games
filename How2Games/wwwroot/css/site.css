@@ -109,7 +109,7 @@ nav {
                 }
 
                 fieldset{
-                    margin-left:80%;
+                    margin-left:95%;
                     border:0;
                     
                 }
@@ -121,9 +121,9 @@ input[type="text"] {
 
 input {
     width: 300px;
-    height: 40px;
-    padding: 0px 25px;
-    border-radius: 14px;
+    height: 30px;
+    padding: 0px 15px;
+    border-radius: 24px;
     background-color: white;
     border-color: white;
     font-size: 16px;
