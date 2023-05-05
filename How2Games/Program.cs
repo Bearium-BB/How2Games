@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using How2Game.DataAccess.Data;
-using How2Game.DataAccess.User;
+using How2Games.DataAccess.Data;
+using How2Games.DataAccess.User;
 using How2Games.Domain.DB;
 using How2Games.Services.User;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Identity;
+
 namespace How2Games
 {
     public class Program

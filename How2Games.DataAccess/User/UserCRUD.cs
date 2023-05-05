@@ -1,4 +1,4 @@
-﻿using How2Game.DataAccess.Data;
+﻿using How2Games.DataAccess.Data;
 using How2Games.Domain.DB;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Identity;
@@ -13,8 +13,9 @@ using Azure.Core;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text.Encodings.Web;
 using Microsoft.EntityFrameworkCore;
+using How2Games.DataAccess.Data;
 
-namespace How2Game.DataAccess.User
+namespace How2Games.DataAccess.User
 {
     public class UserCRUD : IUserCRUD
     {

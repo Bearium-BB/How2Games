@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using How2Game.DataAccess.User;
+using How2Games.DataAccess.User;
 
 namespace How2Games.Services.User
 {

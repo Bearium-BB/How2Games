@@ -2,7 +2,7 @@
 using How2Games.Domain.DB;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace How2Game.DataAccess.Data
+namespace How2Games.DataAccess.Data
 {
     public class GamesContext : IdentityDbContext<How2GamesUser>
     {
