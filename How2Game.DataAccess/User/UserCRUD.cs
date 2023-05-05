@@ -49,9 +49,9 @@ namespace How2Game.DataAccess.User
         public void Insert(string FullName,string Email ,string UserName,string password) {
             How2GamesUser user = new How2GamesUser();
 
-            user.FullName = "test";
-            user.Email = "test";
-            user.UserName = "test";
+            user.FullName = FullName;
+            user.Email = Email;
+            user.UserName = UserName;
             user.EmailConfirmed = true;
 
             var hashedPassword = _passwordHasher.HashPassword(user, password);
