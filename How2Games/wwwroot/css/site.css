@@ -1,18 +1,147 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    display:block;
+    margin: 0;
+}
+
+header {
+    text-decoration: none;
+    justify-content: right;
+    overflow: hidden;
+}
+
+    header div {
+        display: flex;
+        justify-content: space-between;
+    }
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 90%;
+    background-color: #331E6D;
+}
+
+
+#imgDiv {
+    height: 60px;
+    width: 100px;
+    cursor: pointer;
+}
+
+
+.container {
+    position: relative;
+    width: 90%;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+
+
+hr {
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+    margin: 0 auto;
+    border-top: 3px solid #000;
+    border-radius: 20px;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+}
+
+
+nav {
+    height: 56px;
+    font-size: 100%;
+    color: white;
+    overflow: hidden;
+}
+
+    nav ul {
+        float: none;
+        list-style: none;
+        font-size: 0;
+    }
+
+        nav ul li {
+            display: inline;
+            line-height: 56px;
+        }
+
+            nav ul li + li {
+                margin-left: 0;
+            }
+
+            nav ul li a {
+                display: inline-block;
+                padding: 0 20px;
+                background-color: transparent;
+                font-size: 14px;
+                color: #FFCF31;
+                font-weight: 300;
+                text-decoration: none;
+                letter-spacing: 0.5px;
+                text-transform: none;
+            }
+
+                nav ul li a:hover {
+                    background-color: rgba(0, 0, 0, 0.15);
+                }
+
+                fieldset{
+                    margin:0;
+                    border:0;
+                }
+
+input[type="text"] {
+    background-size: 12px 12px;
+    color: white;
+}
+
+input {
+    width: 300px;
+    height: 40px;
+    padding: 0px 25px;
+    border-radius: 14px;
+    background-color: white;
+    border-color: white;
+    font-size: 16px;
+    color: #000;
+}
+
+    input::placeholder {
+        color: black;
+    }
+
+.notBtn {
+    cursor: pointer;
+}
+
+    .notBtn:hover {
+        font-weight: 600;
+    }
+#pfp {
+    width: 100px;
+    height: 60px;
+    margin-left: 10px;
+
 }
