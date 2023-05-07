@@ -22,7 +22,11 @@ namespace How2Games.DataAccess.Data
         public DbSet<How2GamesUser> Users { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",b => b.MigrationsAssembly("How2Games.DataAccess"));
+            string connectionString = "server=206.45.156.125;port=3306;database=test;user=brett;";
+            ServerVersion serverVersion = ServerVersion.AutoDetect(connectionString);
+            optionsBuilder.UseMySql(connectionString, serverVersion)
+                .EnableSensitiveDataLogging(true)
+                .EnableDetailedErrors(true);
         }
     }
 }

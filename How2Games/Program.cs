@@ -22,7 +22,10 @@ namespace How2Games
 
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<GamesContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")));
+            options.UseMySql("server=206.45.156.125;port=3306;database=test;user=brett;",
+                new MySqlServerVersion(new Version(8, 0, 26))) // Replace with the appropriate MySQL version you're using
+            .EnableSensitiveDataLogging(true)
+            .EnableDetailedErrors(true));
 
             builder.Services.AddDefaultIdentity<How2GamesUser>(options => options.SignIn.RequireConfirmedAccount = false)
             .AddEntityFrameworkStores<GamesContext>();
