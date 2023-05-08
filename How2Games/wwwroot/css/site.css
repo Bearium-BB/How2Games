@@ -41,8 +41,6 @@ header {
 
 
 #imgDiv {
-    height: 60px;
-    width: 100px;
     cursor: pointer;
 }
 
@@ -52,17 +50,6 @@ header {
     width: 90%;
     max-width: 1080px;
     margin: 0 auto;
-}
-
-
-
-hr {
-    display: flex;
-    width: 100%;
-    margin-top: 20px;
-    margin: 0 auto;
-    border-top: 3px solid #000;
-    border-radius: 20px;
 }
 
 .flex-container {
@@ -90,20 +77,20 @@ fieldset{
     margin:0;
 }
 
-input[type="text"] {
+#Search[type="text"] {
     background-size: 12px 12px;
-    color: white;
+    color: #000;
 }
 
-input {
-    width: 10px;
-    height: 3px;
+#Search {
+    width: 80%;
+    height: 30px;
     flex: 1;
     flex-basis: 0.000000001px;
     padding: 0px 4px 0px 16px;
     border: 2px solid #CCCCCC;
-    border-right: none;
-    border-radius: 40px 0 0 40px;
+
+    border-radius: 40px;
     box-shadow: inset 0 1px 2px var(--ytd-searchbox-legacy-border-shadow-color);
     background-color: white;
     font-size: 16px;
@@ -130,13 +117,26 @@ input {
     background-color: black;
     color: white
 }
+.overlay {
+    position: fixed;
+    display: none;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    z-index: 111;
+    background-color: rgba(0, 0, 0, 0.459);
+}
+
 .form {
-    margin-top: 60px;
     right: 700px;
-    margin-left: 15px;
+    margin: 10%;
+    border: 3px solid whitesmoke;
+    border-radius: 24px;
 }
 
     .form h2 {
+        margin-top: 21.580px;
         font-size: 26px;
         font-weight: 600;
         text-align: center;
@@ -148,7 +148,7 @@ input {
         font-size: 16px;
         font-weight: 400;
         text-align: center;
-        color: #FFCF31;
+        color: #000;
     }
 
 form {
@@ -162,7 +162,7 @@ input {
     width: 100%;
     height: 50px;
     padding: 0 15px;
-    background-color: whitesmoke;
+    background-color: #FFF;
     border: 1px solid #FFCF31;
     border-radius: 4px;
     font-size: 16px;
@@ -170,6 +170,8 @@ input {
     color: #000;
     transition: all .25s ease-in-out;
 }
+
+
 
 form input + input {
     margin-top: 15px;
@@ -184,18 +186,16 @@ input[type="reset"] {
     height: 46px;
     margin-left: 38%;
     text-align: center;
-    background-color: whitesmoke;
-    border: 1px solid #FFCF31;
+    background-color: #FFCF31;
     letter-spacing: .2px;
     font-weight: 600;
-    color: black;
+    color: #FFF;
     cursor: pointer;
 }
 
     input[type="reset"]:hover {
-        border: 1px solid #FFCF31;
         background-color: #FFF;
-        color: black;
+        color: #FFCF31;
     }
 
 input[type="submit"] {
@@ -203,11 +203,11 @@ input[type="submit"] {
     width: 110px;
     height: 46px;
     text-align: center;
-    background-color: whitesmoke;
-    border: 1px solid #FFCF31;
+    background-color: #FFCF31;
+    
     letter-spacing: .2px;
     font-weight: 600;
-    color: black;
+    color: #FFF;
     cursor: pointer;
 }
 
@@ -216,21 +216,14 @@ input[type="submit"] {
         background-color: #FFF;
     }
 
-input[type="text"]:valid, [type="email"]:valid, textarea:valid {
+.check input[type="text"]:valid, [type="email"]:valid, textarea:valid {
     background: #FFF url(../ok-48.png) no-repeat 96% center;
     background-size: 13px 13px;
     outline: none;
 }
-
-#overlay {
-    position: fixed;
-    display: none;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    justify-content: center;
-    z-index: 111;
-    background-color: rgba(0, 0, 0, 0.459);
+.buttons {
+    margin-top: 14px;
+    margin-bottom: 21.580px;
 }
 
 #popUp {

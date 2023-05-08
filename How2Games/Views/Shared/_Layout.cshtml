@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - How2Games</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/How2Games.styles.css" asp-append-version="true" />
 </head>
@@ -23,7 +25,7 @@
             <div class="mid">
             <form>
                 <fieldset>
-                    <input type="text" placeholder="Search ...">
+                    <input id="Search" type="text" placeholder="Search">
 
                 </fieldset>
             </form>
@@ -34,7 +36,7 @@
         </div>
 
     </header>
-    
+    <br />
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
