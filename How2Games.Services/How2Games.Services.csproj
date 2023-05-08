@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\How2Game.DataAccess\How2Game.DataAccess.csproj" />
     <ProjectReference Include="..\How2Games.DataAccess\How2Games.DataAccess.csproj" />
   </ItemGroup>
 
