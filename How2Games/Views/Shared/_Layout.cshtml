@@ -7,40 +7,55 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/How2Games.styles.css" asp-append-version="true" />
 </head>
+<script>
+    function darkMode() {
+        var element = document.body;
+        element.classList.toggle("dark-mode");
+    }
+</script>
 <body>
+<div class="background">
     <header>
         <div class="flex-container">
+            <div class="left"> 
             <div id="imgDiv"><img src="/how2games-low-resolution-color-logo-removebg-preview (1).png" id="pfp"></div>
+            </div>
+            <div class="mid">
             <form>
                 <fieldset>
                     <input type="text" placeholder="Search ...">
+
                 </fieldset>
             </form>
-            <nav>
-                <ul>
-                    
-                </ul>
+            </div>
+            <div class="right">
 
-            </nav>
+            </div>
         </div>
 
     </header>
-    <hr />
+    
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+
         </main>
+
+
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - How2Games - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
+
     </footer>
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-    
+
+    </div>
 </body>
 </html>

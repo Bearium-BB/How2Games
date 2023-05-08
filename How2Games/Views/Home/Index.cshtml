@@ -3,6 +3,26 @@
 }
 
 <div class="text-center">
+    <div class="overlay">
+         <div class="form">
+        
+        <h2>Registration form</h2>
+        <p>Fields with * are required</p>
+        <br>
+        <form method="POST" action="#" name="registration" onsubmit="return validatePassword()">
+            <input type="text" name="first_name" placeholder="First Name *" required pattern="^[A-Za-z]{1,20}$">
+            <input type="text" name="last_name" placeholder="Last Name *" required pattern="^[A-Za-z]{1,20}$">
+            <input type="email" name="email" placeholder="Email (abc@email.com) *" required pattern="^(?=^.{8,}$)[-_A-Za-z0-9]+([_.-][a-zA-Z0-9]+)*@[A-Za-z0-9]+([.-][a-zA-Z0-9]+)*\.[A-Za-z]{2,}$">
+            <input type="tel" name="phoneNumber" placeholder="123-456-7891 *" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" >
+            <input type="password" name="password" placeholder="Password12345!!! *" id="password" >
+             <div class="buttons">
+                <input type="submit" value="Submit">
+                <input type="reset" value="Reset">
+
+            </div>
+        </form>
+
+    </div>
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
