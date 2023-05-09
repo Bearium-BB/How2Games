@@ -206,13 +206,16 @@ input[type="reset"] {
     background-color: #FFCF31;
     letter-spacing: .2px;
     font-weight: 600;
-    color: #FFF;
+    color: #331E6D;
     cursor: pointer;
 }
 
     input[type="reset"]:hover {
-        background-color: #FFF;
+        background-color: #331E6D;
         color: #FFCF31;
+    }
+    input[type="reset"]:focus {
+        border: 1px solid #FFCF31;
     }
 
 input[type="submit"] {
@@ -220,18 +223,21 @@ input[type="submit"] {
     width: 110px;
     height: 36px;
     text-align: center;
-    background-color: #FFCF31;
+    background-color: #331E6D;
     
     letter-spacing: .2px;
     font-weight: 600;
-    color: #FFF;
+    color: #FFCF31;
     cursor: pointer;
 }
 
     input[type="submit"]:hover {
-        color: #FFCF31;
-        background-color: #FFF;
+        color: #331E6D;
+        background-color: #FFCF31;
     }
+input[type="submit"]:focus {
+    border: 1px solid #331E6D;
+}
 
 .check input[type="text"]:valid, [type="email"]:valid, textarea:valid {
     background: #FFF url(../ok-48.png) no-repeat 96% center;
