@@ -5,5 +5,7 @@
         public int Id { get; set; }
         public int QuestionId { get; set; }
         public int ImageId { get; set; }
+
+        public QuestionImage() { }
     }
 }
