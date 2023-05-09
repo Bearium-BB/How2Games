@@ -17,8 +17,9 @@ using How2Games.DataAccess.Data;
 
 namespace How2Games.DataAccess.User
 {
-    public class UserCRUD : IUserCRUD
+    public class UserCRUD : IUserCRUD // Define the public class UserCRUD that implements the IUserCRUD interface
     {
+        // Define private variables for the necessary dependencies
         private readonly GamesContext _context;
         private readonly SignInManager<How2GamesUser> _signInManager;
         private readonly UserManager<How2GamesUser> _userManager;
@@ -28,7 +29,7 @@ namespace How2Games.DataAccess.User
         private readonly IEmailSender _emailSender;
         private readonly PasswordHasher<IdentityUser> _passwordHasher;
 
-
+        // Constructor that injects the dependencies
         public UserCRUD(
             UserManager<How2GamesUser> userManager,
             IUserStore<How2GamesUser> userStore,
@@ -47,20 +48,25 @@ namespace How2Games.DataAccess.User
             _context = context;
             _passwordHasher = passwordHasher;
         }
-        public void Insert(string FullName,string Email ,string UserName,string password) {
-            How2GamesUser user = new How2GamesUser();
 
+        // Method to insert a new user into the database
+        public void Insert(string FullName, string Email, string UserName, string Password)
+        {
+            How2GamesUser user = new How2GamesUser(); // Create a new instance of the How2GamesUser class
+
+            // Set the properties of the user object based on the parameters passed to the method
             user.FullName = FullName;
             user.Email = Email;
             user.UserName = UserName;
             user.EmailConfirmed = true;
 
-            var hashedPassword = _passwordHasher.HashPassword(user, password);
+            // Hash the user's password using the PasswordHasher class and set it to the user object
+            var hashedPassword = _passwordHasher.HashPassword(user, Password);
             user.PasswordHash = hashedPassword;
+
+            // Add the user object to the Users DbSet of the GamesContext and save changes to the database
             _context.Users.Add(user);
             _context.SaveChanges();
         }
-
     }
 }
-

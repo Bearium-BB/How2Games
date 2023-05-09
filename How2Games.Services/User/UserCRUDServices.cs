@@ -16,9 +16,9 @@ namespace How2Games.Services.User
             _userCRUD = userCRUD;
         }
 
-        public void Insert(string FullName, string Email, string UserName, string password)
+        public void Insert(string FullName, string Email, string UserName, string Password)
         {
-            _userCRUD.Insert(FullName, Email, UserName, password);
+            _userCRUD.Insert(FullName, Email, UserName, Password);
         }
 
     }
