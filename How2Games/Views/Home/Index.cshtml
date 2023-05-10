@@ -4,32 +4,53 @@
 
 <div class="text-center">
     <div class="container">
-    <div class="overlay">
-         <div class="form">
-        
-        <h2>How2Games</h2>
-        <p>Create a How2Games Acccount</p>
-        <br>
-        <form method="POST" action="#" name="registration" onsubmit="return validatePassword()">
-           
-            <input  type="text" name="first_name" placeholder="First Name *" required pattern="^[A-Za-z]{1,20}$">
-            
-            
-            <input  type="text" name="last_name" placeholder="Last Name *" required pattern="^[A-Za-z]{1,20}$">
-            
-            <input class="check" type="email" name="email" placeholder="Email (abc@email.com) *" required pattern="^(?=^.{8,}$)[-_A-Za-z0-9]+([_.-][a-zA-Z0-9]+)*[A-Za-z0-9]+([.-][a-zA-Z0-9]+)*\.[A-Za-z]{2,}$">
-            <input class="check" type="text" name="UserName" placeholder="Username *" required pattern="{1-30}" >
-            <input class="check" type="password" name="password" placeholder="Password12345!!! *" id="password" >
-            <br>
-            <div class="buttons">
-                <input type="submit" value="Submit">
-                <input type="reset" value="Clear">
+        <div id="overlay">
+            <div class="form">
+
+                <h2>How2Games</h2>
+                <p>Create a How2Games Acccount</p>
+                <br>
+                <form method="POST" action="#" name="registration" onsubmit="return validatePassword()">
+
+                    <input type="text" name="first_name" placeholder="First Name *" required pattern="^[A-Za-z]{1,20}$">
+
+
+                    <input type="text" name="last_name" placeholder="Last Name *" required pattern="^[A-Za-z]{1,20}$">
+
+                    <input class="check" type="email" name="email" placeholder="Email (abc@email.com) *" required pattern="^(?=^.{8,}$)[-_A-Za-z0-9]+([_.-][a-zA-Z0-9]+)*[A-Za-z0-9]+([.-][a-zA-Z0-9]+)*\.[A-Za-z]{2,}$">
+                    <input class="check" type="text" name="UserName" placeholder="Username *" required pattern="{1-30}">
+                    <input class="check" type="password" name="password" placeholder="Password12345!!! *" id="password">
+                    <br>
+                    <div class="buttons">
+                        <input type="submit" value="Submit">
+                        <input type="reset" value="Clear">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        </div>
+        <div class="container">
+            <div id="overlay1">
+                <div class="form1">
+
+                    <h2>How2Games</h2>
+                    <p>Log in to your How2Games Acccount</p>
+                    <br>
+                    <form method="POST" action="#" name="registration" onsubmit="return validatePassword()">
+
+                        <input class="check" type="text" name="UserName" placeholder="Username *" required pattern="{1-30}">
+                        <input class="check" type="password" name="password" placeholder="Password12345!!! *" id="password">
+                        <br>
+                        <div class="buttons">
+                            <input type="submit" value="Submit">
+                            <input type="reset" value="Clear">
+                        </div>
+
+                    </form>
+                    </div>
+                </div>
                 </div>
 
-        </form>
-        </div>
-        </div>
-       
-    <h5 class="display-4">Welcome to How2Games</h5>
-    </div>
+            <h5 class="display-4">Welcome to How2Games</h5>
     </div>

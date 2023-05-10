@@ -36,13 +36,12 @@ header {
     height: 60px;
     justify-content: space-between;
     min-width: 90%;
-    background-color: #FFF;
+    background-color: #f3f3f3;
     box-shadow: 0 -2px 8px 0 #808080;
 }
 
 
 #imgDiv {
-    margin-left: 20px;
     width: 40px;
     height: 40px;
     cursor: pointer;
@@ -58,29 +57,38 @@ header {
 
 .flex-container {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     background: #f3f3f3;
     height: 60px;
+    width: 96%;
+    margin: 0 auto;
 }
 
 .left{
-    
+    width: 33%;
     align-items: flex-start;
+
 }
 .mid{
+    width: 33%;
     align-items: center;
-
 }
 .right {
-    align-items: flex-end;
+    display: flex;
+    width: 33%;
+    justify-content: space-around;
 }
 
+.right-class{
+    width: 50%;
+}
 
 fieldset{    
     border:0;
     padding-top: 8.75px;
     padding-bottom: 8.75px;
-    margin:0;
+    margin-left: 0 auto;
 }
 
 #Search[type="text"] {
@@ -90,13 +98,12 @@ fieldset{
 }
 
 #Search {
-    width: 80%;
+    width: 95%;
     height: 30px;
     flex: 1;
     flex-basis: 0.000000001px;
     padding: 0px 4px 0px 16px;
     border: 2px solid #CCCCCC;
-
     border-radius: 40px;
     box-shadow: inset 0 1px 2px var(--ytd-searchbox-legacy-border-shadow-color);
     background-color: white;
@@ -126,19 +133,32 @@ fieldset{
     background-color: black;
     color: white
 }
-.overlay {
+#overlay {
     position: fixed;
-    display: flex;
+    display: none;
     align-items: center;
     width: 100vw;
     height: 55vh;
     justify-content: center;
     z-index: 1111;
-    background-color: rgba(240,240,240,0.3);
+    background-color: rgba(220,220,220,0.3);
     left: 0;
     top: 100px;
 }
 
+#overlay1 {
+    position: fixed;
+    display: none;
+    align-items: center;
+    width: 100vw;
+    height: 60vh;
+    justify-content: center;
+    z-index: 1111;
+    background-color: rgba(220,220,220,0.3);
+    left: 0;
+    top:100px;
+    
+}
 
 .form {
     width: 40vw;
@@ -151,6 +171,16 @@ fieldset{
     padding-right: 15px;
 }
 
+.form1 {
+    width: 40vw;
+    height: 55vh;
+    margin: 10%;
+    background: #FFF;
+    border: 3px solid whitesmoke;
+    border-radius: 24px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
     .form h2 {
         margin-top: 21.580px;
         font-size: 26px;
@@ -250,20 +280,37 @@ input[type="submit"]:focus {
     margin-bottom: 21.580px;
 }
 
-#popUp {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    width: 410px;
-    height: 490px;
-    background-color: rgb(255, 255, 255);
-    border-radius: 8px;
-    z-index: 555;
+
+.right button{
+   margin: 10px;
+    background: none;
+    padding: 10px;
+    border: none;
+    font-weight:400;
+    font-size: 18px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius:10px;
+    font-family:Arial;
+
 }
 
+#signUp {
+    background: #331E6D;
+    color: #FFCF31;
+    transition: all .2s ease-in-out;
+}
+    #signUp:hover {
+        transform: scale(1.102);
 
+    }
+#logIn {
+    color: #331E6D;
+    transition: all .2s ease;
+}
+#logIn:hover {
+    transform: scale(1.13)
+}
 
 @media screen and (min-width:320px) {
     nav {
