@@ -27,7 +27,7 @@ namespace How2Games
             options.UseSqlServer(builder.Configuration.GetConnectionString(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")));
 
 
-            builder.Services.AddDbContext<SecondDbContext>(options =>
+            builder.Services.AddDbContext<SteamApiContext>(options =>
                 options.UseSqlServer("second datatbase connection string"));
 
             builder.Services.AddDefaultIdentity<How2GamesUser>(options => options.SignIn.RequireConfirmedAccount = false)
