@@ -26,6 +26,10 @@ namespace How2Games
             builder.Services.AddDbContext<GamesContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")));
 
+
+            builder.Services.AddDbContext<SecondDbContext>(options =>
+                options.UseSqlServer("second datatbase connection string"));
+
             builder.Services.AddDefaultIdentity<How2GamesUser>(options => options.SignIn.RequireConfirmedAccount = false)
             .AddEntityFrameworkStores<GamesContext>();
             builder.Services.AddScoped<PasswordHasher<IdentityUser>>();
