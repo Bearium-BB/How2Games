@@ -1,4 +1,5 @@
 ﻿using How2Games.Domain.DB;
+using How2Games.Services.TagServices;
 using How2Games.Services.User;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -9,12 +10,15 @@ namespace How2Games.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUserCRUDServices _userCRUDServices;
+        private readonly ITagCRUDServices _tagCRUDServices;
 
 
-        public HomeController(ILogger<HomeController> logger, IUserCRUDServices userCRUDServices)
+
+        public HomeController(ILogger<HomeController> logger, IUserCRUDServices userCRUDServices, ITagCRUDServices tagCRUDServices)
         {
             _logger = logger;
             _userCRUDServices= userCRUDServices;
+            _tagCRUDServices = tagCRUDServices;
         }
 
         public IActionResult Index()
@@ -24,7 +28,7 @@ namespace How2Games.Controllers
 
         public IActionResult Privacy()
         {
-            _userCRUDServices.Insert("name","email","userName","test");
+            //_userCRUDServices.Insert("name","email","userName","test");
             return View();
         }
 
