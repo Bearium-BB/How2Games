@@ -24,7 +24,10 @@ function validatePassword() {
     return true;
 }
 
-
+function darkMode() {
+    var element = document.body;
+    element.classList.toggle("darkmode-toggle");
+}
 
 signup.onclick = function () {
     if (login_overlay.style.display == 'flex') {

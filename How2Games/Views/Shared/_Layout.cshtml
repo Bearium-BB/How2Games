@@ -9,12 +9,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/How2Games.styles.css" asp-append-version="true" />
 </head>
-<script>
-    function darkMode() {
-        var element = document.body;
-        element.classList.toggle("dark-mode");
-    }
-</script>
+
 <body>
 <div class="background">
     <header>
@@ -34,7 +29,7 @@
                 <div class="right-div">
                 <button id="logIn">Log in</button>
                 <button id="signUp">Sign up</button>
-                </divc>
+                </div>
             </div>
         </div>
 
@@ -52,7 +47,9 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - How2Games - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        
         </div>
+        
 
     </footer>
     
