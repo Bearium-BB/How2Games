@@ -9,8 +9,8 @@ namespace How2Games.DataAccess.GameAction
 {
     public interface IGameCRUD
     {
-        void Insert(string text);
-        void Update(int id, string text);
+        void Insert(string detailedDescription, string imgUrl);
+        void Update(int id, string? text, string? imgUrl, string? detailedDescription);
         Game Read(int id);
         void Delete(int id);
     }

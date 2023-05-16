@@ -26,4 +26,8 @@
     <ProjectReference Include="..\How2Games.Domain\How2Games.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

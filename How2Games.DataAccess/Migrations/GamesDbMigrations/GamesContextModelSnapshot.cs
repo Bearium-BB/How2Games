@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace How2Game.DataAccess.Migrations
+namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 {
     [DbContext(typeof(GamesContext))]
     partial class GamesContextModelSnapshot : ModelSnapshot
@@ -335,11 +335,16 @@ namespace How2Game.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("GameId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GameId");
 
                     b.ToTable("Tags");
                 });
@@ -498,6 +503,13 @@ namespace How2Game.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("How2Games.Domain.DB.Tag", b =>
+                {
+                    b.HasOne("How2Games.Domain.DB.Game", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("GameId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -547,6 +559,11 @@ namespace How2Game.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("How2Games.Domain.DB.Game", b =>
+                {
+                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }

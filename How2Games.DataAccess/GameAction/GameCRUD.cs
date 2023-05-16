@@ -1,4 +1,5 @@
 ﻿using How2Games.DataAccess.Data;
+using How2Games.DataAccess.TagAction;
 using How2Games.Domain.DB;
 using System;
 using System.Collections.Generic;
@@ -17,48 +18,66 @@ namespace How2Games.DataAccess.GameAction
             _context = context;
         }
 
-        public void Insert(string detailedDescription)
+        public void Insert(string detailedDescription,string imgUrl,List<string> tags)
         {
             Game NewGame = new Game();
             NewGame.DetailedDescription = detailedDescription;
-            NewGame.ImgUrl = "Url";
+            NewGame.ImgUrl = imgUrl;
+
+            foreach(string tag in tags)
+            {
+                Tag NewTag = new Tag();
+                NewTag.Text = tag;
+                NewGame.Tags.Add(NewTag);
+            }
             _context.Games.Add(NewGame);
             _context.SaveChanges();
         }
 
-        public void Update(int id, string text)
+        public void Update(int id, string? text,string? imgUrl,string? detailedDescription)
         {
-            Tag? TagUpdate = _context.Tags.Where(x => x.Id == id)
+            Game? GameUpdate = _context.Games.Where(x => x.Id == id)
                 .FirstOrDefault();
 
-            if (TagUpdate != null)
+            if (GameUpdate != null)
             {
-                TagUpdate.Text = text;
+
+                if (imgUrl != null)
+                {
+                    GameUpdate.ImgUrl = imgUrl;
+
+                }
+                if (detailedDescription != null)
+                {
+                    GameUpdate.DetailedDescription = detailedDescription;
+
+                }
+
+
                 _context.SaveChanges();
             }
 
         }
-        public Tag Read(int id)
+        public Game Read(int id)
         {
-            Tag? TagRead = _context.Tags.Where(x => x.Id == id)
+            Game? GameRead = _context.Games.Where(x => x.Id == id)
                 .FirstOrDefault();
 
-            if (TagRead != null)
+            if (GameRead != null)
             {
-                return TagRead;
+                return GameRead;
             }
-            return new Tag();
+            return new Game();
         }
 
         public void Delete(int id)
         {
-            Tag? TagDelete = _context.Tags.Where(x => x.Id == id)
+            Game? GameDelete = _context.Games.Where(x => x.Id == id)
                 .FirstOrDefault();
-            if (TagDelete != null)
+            if (GameDelete != null)
             {
-                _context.Tags.Remove(TagDelete);
+                _context.Games.Remove(GameDelete);
                 _context.SaveChanges();
-
             }
         }
     }

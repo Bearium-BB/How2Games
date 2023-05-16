@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace How2Games.Domain.DB
 {
-    public class Game
+    public class SteamGameIdName
     {
         public int Id { get; set; }
-        public string DetailedDescription { get; set; }
-        public string ImgUrl { get; set; }
-        public ICollection<Tag> Tags { get; set;}
+        public string SteamId { get; set; }
+        public string Name { get; set; }
     }
 }
