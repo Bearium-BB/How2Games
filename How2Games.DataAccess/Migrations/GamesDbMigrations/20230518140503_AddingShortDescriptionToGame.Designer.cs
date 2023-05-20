@@ -4,6 +4,7 @@ using How2Games.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 {
     [DbContext(typeof(GamesContext))]
-    partial class GamesContextModelSnapshot : ModelSnapshot
+    [Migration("20230518140503_AddingShortDescriptionToGame")]
+    partial class AddingShortDescriptionToGame
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("GameTag", b =>
-                {
-                    b.Property<int>("GamesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("GamesId", "TagsId");
-
-                    b.HasIndex("TagsId");
-
-                    b.ToTable("GameTag", (string)null);
-                });
 
             modelBuilder.Entity("How2Games.Domain.DB.Answer", b =>
                 {
@@ -57,7 +45,7 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Answers", (string)null);
+                    b.ToTable("Answers");
                 });
 
             modelBuilder.Entity("How2Games.Domain.DB.Comment", b =>
@@ -77,7 +65,7 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("How2Games.Domain.DB.Game", b =>
@@ -106,7 +94,7 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Games", (string)null);
+                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("How2Games.Domain.DB.How2GamesUser", b =>
@@ -193,7 +181,7 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Images", (string)null);
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("How2Games.Domain.DB.Post", b =>
@@ -213,7 +201,7 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Posts", (string)null);
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("How2Games.Domain.DB.PostComment", b =>
@@ -232,7 +220,7 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PostComments", (string)null);
+                    b.ToTable("PostComments");
                 });
 
             modelBuilder.Entity("How2Games.Domain.DB.PostImage", b =>
@@ -251,7 +239,7 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PostImages", (string)null);
+                    b.ToTable("PostImages");
                 });
 
             modelBuilder.Entity("How2Games.Domain.DB.PostText", b =>
@@ -270,7 +258,7 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PostTexts", (string)null);
+                    b.ToTable("PostTexts");
                 });
 
             modelBuilder.Entity("How2Games.Domain.DB.Question", b =>
@@ -290,7 +278,7 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Questions", (string)null);
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("How2Games.Domain.DB.QuestionComment", b =>
@@ -309,7 +297,7 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("QuestionComments", (string)null);
+                    b.ToTable("QuestionComments");
                 });
 
             modelBuilder.Entity("How2Games.Domain.DB.QuestionImage", b =>
@@ -328,7 +316,7 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("QuestionImages", (string)null);
+                    b.ToTable("QuestionImages");
                 });
 
             modelBuilder.Entity("How2Games.Domain.DB.QuestionText", b =>
@@ -347,7 +335,7 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("QuestionTexts", (string)null);
+                    b.ToTable("QuestionTexts");
                 });
 
             modelBuilder.Entity("How2Games.Domain.DB.Tag", b =>
@@ -358,13 +346,18 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("GameId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags", (string)null);
+                    b.HasIndex("GameId");
+
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("How2Games.Domain.DB.TextBox", b =>
@@ -381,7 +374,7 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Texts", (string)null);
+                    b.ToTable("Texts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -521,19 +514,11 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GameTag", b =>
+            modelBuilder.Entity("How2Games.Domain.DB.Tag", b =>
                 {
                     b.HasOne("How2Games.Domain.DB.Game", null)
-                        .WithMany()
-                        .HasForeignKey("GamesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("How2Games.Domain.DB.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Tags")
+                        .HasForeignKey("GameId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -585,6 +570,11 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("How2Games.Domain.DB.Game", b =>
+                {
+                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }

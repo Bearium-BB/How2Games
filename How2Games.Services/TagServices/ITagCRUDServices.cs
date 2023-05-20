@@ -13,5 +13,7 @@ namespace How2Games.Services.TagServices
         void Update(int id, string text);
         Tag Read(int id);
         void Delete(int id);
+        Tag Create(string text);
+
     }
 }

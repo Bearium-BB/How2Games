@@ -9,8 +9,10 @@ namespace How2Games.Domain.DB
     public class Game
     {
         public int Id { get; set; }
+        public string Name { get; set; }
+        public string ShortDescription { get; set; }
         public string DetailedDescription { get; set; }
         public string ImgUrl { get; set; }
-        public ICollection<Tag> Tags { get; set;}
+        public ICollection<Tag> Tags { get; set;} = new List<Tag>();
     }
 }

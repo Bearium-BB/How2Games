@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace How2Games.DataAccess.GameAction
+namespace How2Games.Services.GameServices
 {
-    public interface IGameCRUD
+    public interface IGameCRUDServices
     {
         void Insert(string name, string shortDescription, string detailedDescription, string imgUrl, List<string> tags);
         void Update(int? id, string? name, string? detailedDescription, string? imgUrl, List<string>? tags);

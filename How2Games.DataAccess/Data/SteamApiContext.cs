@@ -12,8 +12,6 @@ namespace How2Games.DataAccess.Data
     {
         public SteamApiContext(DbContextOptions<SteamApiContext> options) : base(options) { }
         public DbSet<SteamGameIdName> SteamGameIdName { get; set; }
-
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string connectionString = "server=mysql.brettbowley.com;port=3306;database=test2;user=brett;";

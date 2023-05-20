@@ -6,6 +6,8 @@ using How2Games.Domain.DB;
 using How2Games.Services.User;
 using How2Games.Services.TagServices;
 using How2Games.DataAccess.TagAction;
+using How2Games.Services.GameServices;
+using How2Games.DataAccess.GameAction;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -45,6 +47,9 @@ namespace How2Games
 
             builder.Services.AddScoped<ITagCRUD, TagCRUD>();
             builder.Services.AddScoped<ITagCRUDServices, TagCRUDServices>();
+
+            builder.Services.AddScoped<IGameCRUD, GameCRUD>();
+            builder.Services.AddScoped<IGameCRUDServices, GameCRUDServices>();
 
             var app = builder.Build();
 

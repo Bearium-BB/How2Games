@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using How2Games.Domain.DB;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace How2Games.DataAccess.TagAction
 {
@@ -23,10 +24,12 @@ namespace How2Games.DataAccess.TagAction
 
         public void Insert(string text)
         {
-            Tag NewTag = new Tag();
-            NewTag.Text = text;
-            _context.Tags.Add(NewTag);
-            _context.SaveChanges();
+            if (_context.Tags.FirstOrDefault(x => x.Text == text) == null)
+            {
+                _context.Tags.Add(Create(text));
+                _context.SaveChanges();
+            }
+
         }
 
         public void Update(int id,string text)
@@ -63,6 +66,14 @@ namespace How2Games.DataAccess.TagAction
                 _context.SaveChanges();
 
             }
+        }
+
+        public Tag Create(string text)
+        {
+
+            Tag NewTag = new Tag();
+            NewTag.Text = text;
+            return NewTag;
         }
     }
 }

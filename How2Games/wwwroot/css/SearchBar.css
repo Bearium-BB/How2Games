@@ -1,0 +1,21 @@
+﻿#searchResults {
+    position: absolute;
+    top: 100%; /* Position it below the search bar */
+    left: 0;
+    width: 100%;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: none; /* Hide it initially */
+    z-index:10;
+}
+
+#searchResults p {
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#SearchResultsContainer {
+    position: relative;
+}

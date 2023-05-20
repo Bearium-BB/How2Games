@@ -1,4 +1,6 @@
-﻿using How2Games.Domain.DB;
+﻿using How2Games.DataAccess.Data;
+using How2Games.Domain.DB;
+using How2Games.Services.GameServices;
 using How2Games.Services.TagServices;
 using How2Games.Services.User;
 using Microsoft.AspNetCore.Mvc;
@@ -11,24 +13,31 @@ namespace How2Games.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IUserCRUDServices _userCRUDServices;
         private readonly ITagCRUDServices _tagCRUDServices;
+        private readonly IGameCRUDServices _gameCRUDServices;
+        private readonly GamesContext _db;
 
 
 
-        public HomeController(ILogger<HomeController> logger, IUserCRUDServices userCRUDServices, ITagCRUDServices tagCRUDServices)
+
+
+        public HomeController(ILogger<HomeController> logger, IUserCRUDServices userCRUDServices, ITagCRUDServices tagCRUDServices, IGameCRUDServices gameCRUDServices,GamesContext db)
         {
             _logger = logger;
             _userCRUDServices= userCRUDServices;
-            _tagCRUDServices = tagCRUDServices;
+            _tagCRUDServices = tagCRUDServices; 
+            _gameCRUDServices = gameCRUDServices;
+            _db = db;
         }
 
         public IActionResult Index()
         {
+            
             return View();
         }
 
         public IActionResult Privacy()
         {
-            //_userCRUDServices.Insert("name","email","userName","test");
+            _gameCRUDServices.AutoCreateSteamGameByAppId("ARK: Survival Evolved");
             return View();
         }
 

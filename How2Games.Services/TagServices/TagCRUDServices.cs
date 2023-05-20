@@ -38,5 +38,10 @@ namespace How2Games.Services.TagServices
             _tagCRUD.Delete(id);
         }
 
+        public Tag Create(string text)
+        {
+            return _tagCRUD.Create(text);
+        }
+
     }
 }
