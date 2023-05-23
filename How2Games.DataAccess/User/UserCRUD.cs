@@ -47,10 +47,10 @@ namespace How2Games.DataAccess.User
             _context = context;
             _passwordHasher = passwordHasher;
         }
-        public void Insert(string FullName,string Email ,string UserName,string password) {
+        public void Insert(string FirstName, string LastName,string Email ,string UserName,string password) {
             How2GamesUser user = new How2GamesUser();
-
-            user.FullName = FullName;
+            
+            user.FullName = $"{FirstName} {LastName}";
             user.Email = Email;
             user.UserName = UserName;
             user.EmailConfirmed = true;
@@ -58,6 +58,7 @@ namespace How2Games.DataAccess.User
             var hashedPassword = _passwordHasher.HashPassword(user, password);
             user.PasswordHash = hashedPassword;
             _context.Users.Add(user);
+            //How add a brake point
             _context.SaveChanges();
         }
 

@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<How2GamesUser> SignedIn;
+@using How2Games.DataAccess.Data;
+
+@model FormUser
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -26,10 +31,20 @@
             </form>
             </div>
             <div class="right">
-                <div class="right-div">
-                <button id="logIn">Log in</button>
-                <button id="signUp">Sign up</button>
-                </div>
+                    @if (SignedIn.IsSignedIn(User))
+                    {
+                 <div class="right-div">
+                            <h4>Hello @User.Identity?.Name</h4>
+                        </div>
+                    }
+                    else{
+
+                        <div class="right-div">
+                            <button id="logIn">Log in</button>
+                            <button id="signUp">Sign up</button>
+
+                        </div>
+                    }
             </div>
         </div>
 

@@ -1,0 +1,20 @@
+﻿@model How2Games.Domain.DB.FormUser;
+<div class="form1">
+
+    <h2>How2Games</h2>
+    <p>Log in to your How2Games Acccount</p>
+    <br>
+    <form method="POST" action="LogIn" name="registration" onsubmit="return validatePassword()">
+
+        <input class="check" type="text" name="UserName" placeholder="Username *" required pattern="{1-30}">
+        <input class="check" type="password" name="password" placeholder="Password12345!!! *" id="password">
+        <br>
+        <div class="buttons">
+            <input class="clearBtn" type="reset" value="Clear">
+
+            <input class="submitBtn" type="submit" value="Submit">
+        </div>
+
+    </form>
+</div>
+

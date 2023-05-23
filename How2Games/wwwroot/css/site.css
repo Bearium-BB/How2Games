@@ -296,6 +296,11 @@ input[type="submit"] {
     font-family:Arial;
 
 }
+.right-div h4{
+    font-size: 18px;
+    font-weight: 400;
+
+}
 
 #signUp {
     background: #1A73E8;
