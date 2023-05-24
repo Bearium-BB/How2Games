@@ -50,7 +50,7 @@ namespace How2Games.Controllers
             
                 if (!_signInManager.IsSignedIn(User))
                 {
-                    _userCRUDServices.Insert(user.FirstName, user.LastName, user.Email, user.UserName, user.Password);
+                    _userCRUDServices.Insert(user.FirstName, user.Email, user.UserName, user.Password);
 
                     return View(user);
                 }
