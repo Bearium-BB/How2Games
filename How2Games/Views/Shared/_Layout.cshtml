@@ -23,12 +23,9 @@
             <div id="imgDiv"><img src="/Logo.png" id="pfp"></div>
             </div>
             <div class="mid">
-            <form>
                 <fieldset>
-                    <input id="Search" type="text" placeholder="Search">
-
+                    <partial name="~/Views/SearchBar/Search.cshtml" />
                 </fieldset>
-            </form>
             </div>
             <div class="right">
                     @if (SignedIn.IsSignedIn(User))

@@ -4,16 +4,19 @@ using How2Games.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace How2Game.DataAccess.Migrations
+namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 {
     [DbContext(typeof(GamesContext))]
-    partial class GamesContextModelSnapshot : ModelSnapshot
+    [Migration("20230518150206_AddingListGamesToTag")]
+    partial class AddingListGamesToTag
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,21 @@ namespace How2Game.DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("GameTag", b =>
+                {
+                    b.Property<int>("GamesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("GamesId", "TagsId");
+
+                    b.HasIndex("TagsId");
+
+                    b.ToTable("GameTag", (string)null);
+                });
 
             modelBuilder.Entity("How2Games.Domain.DB.Answer", b =>
                 {
@@ -63,6 +81,35 @@ namespace How2Game.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("How2Games.Domain.DB.Game", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DetailedDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImgUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShortDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("How2Games.Domain.DB.How2GamesUser", b =>
@@ -306,6 +353,23 @@ namespace How2Game.DataAccess.Migrations
                     b.ToTable("QuestionTexts");
                 });
 
+            modelBuilder.Entity("How2Games.Domain.DB.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags");
+                });
+
             modelBuilder.Entity("How2Games.Domain.DB.TextBox", b =>
                 {
                     b.Property<int>("Id")
@@ -458,6 +522,21 @@ namespace How2Game.DataAccess.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("GameTag", b =>
+                {
+                    b.HasOne("How2Games.Domain.DB.Game", null)
+                        .WithMany()
+                        .HasForeignKey("GamesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("How2Games.Domain.DB.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

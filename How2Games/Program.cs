@@ -4,8 +4,13 @@ using How2Games.DataAccess.Data;
 using How2Games.DataAccess.User;
 using How2Games.Domain.DB;
 using How2Games.Services.User;
+using How2Games.Services.TagServices;
+using How2Games.DataAccess.TagAction;
+using How2Games.Services.GameServices;
+using How2Games.DataAccess.GameAction;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 
 namespace How2Games
 {
@@ -22,13 +27,30 @@ namespace How2Games
 
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<GamesContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString(@"Server=localhost\SQLEXPRESS;Database=How2GamesTest;Integrated Security=false;User ID=zach;Password=NewPassword1234;TrustServerCertificate=true;")));
+            options.UseSqlServer(builder.Configuration.GetConnectionString(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")));
+            
+            builder.Services.AddDbContext<SteamApiContext>(options =>
+            options.UseMySql("server=mysql.brettbowley.com;port=3306;database=test;user=brett;",
+            new MySqlServerVersion(new Version(8, 0, 26)))
+            .EnableSensitiveDataLogging(true)
+            .EnableDetailedErrors(true));
+
+            builder.Services.AddDbContext<SteamApiContext>(options =>
+                options.UseSqlServer("second datatbase connection string"));
+
+
             builder.Services.AddDefaultIdentity<How2GamesUser>(options => options.SignIn.RequireConfirmedAccount = false)
             .AddEntityFrameworkStores<GamesContext>();
             builder.Services.AddScoped<PasswordHasher<IdentityUser>>();
 
             builder.Services.AddScoped<IUserCRUD, UserCRUD>();
             builder.Services.AddScoped<IUserCRUDServices, UserCRUDServices>();
+
+            builder.Services.AddScoped<ITagCRUD, TagCRUD>();
+            builder.Services.AddScoped<ITagCRUDServices, TagCRUDServices>();
+
+            builder.Services.AddScoped<IGameCRUD, GameCRUD>();
+            builder.Services.AddScoped<IGameCRUDServices, GameCRUDServices>();
 
             var app = builder.Build();
 

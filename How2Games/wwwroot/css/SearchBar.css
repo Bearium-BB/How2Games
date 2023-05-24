@@ -1,0 +1,27 @@
+﻿#searchResults {
+    position: absolute;
+    top: 100%; /* Position it below the search bar */
+    left: 0;
+    width: 100%;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: none; /* Hide it initially */
+    z-index:10;
+}
+
+#searchResults a {
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    text-decoration:none;
+    color: black;
+}
+#searchResults a:hover {
+    background-color: rgba(0, 0, 255, 0.05);
+}
+#SearchResultsContainer {
+    position: relative;
+}
