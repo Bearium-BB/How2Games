@@ -22,7 +22,6 @@ body {
 header {
     text-decoration: none;
     justify-content: right;
-    overflow: hidden;
 }
 
     header div {
@@ -160,6 +159,7 @@ fieldset{
 }
 
 .form {
+    display: none;
     width: 40vw;
     height: 85vh;
     margin: 10%;
