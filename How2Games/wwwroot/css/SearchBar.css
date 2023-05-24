@@ -10,11 +10,17 @@
     z-index:10;
 }
 
-#searchResults p {
+#searchResults a {
     font-size: 20px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: block;
+    text-decoration:none;
+    color: black;
+}
+#searchResults a:hover {
+    background-color: rgba(0, 0, 255, 0.05);
 }
 #SearchResultsContainer {
     position: relative;

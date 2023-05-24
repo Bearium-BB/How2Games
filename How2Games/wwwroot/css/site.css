@@ -136,6 +136,7 @@ fieldset{
     background-color: rgba(240,240,240,0.3);
     left: 0;
     top: 100px;
+    display: none;
 }
 
 

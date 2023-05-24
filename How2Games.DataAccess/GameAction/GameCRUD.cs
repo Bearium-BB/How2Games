@@ -2,6 +2,7 @@
 using How2Games.DataAccess.TagAction;
 using How2Games.Domain.DB;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -115,23 +116,43 @@ namespace How2Games.DataAccess.GameAction
                     string name = SteamGame["name"];
 
                     List<string> tags = new List<string>();
-                    foreach (var category in SteamGame["categories"])
+                    var genres = SteamGame["genres"];
+                    if (genres != null && genres.Type != JTokenType.Null)
                     {
-                        string description = category["description"].ToString();
-                        tags.Add(description);
+                        foreach (var genre in genres)
+                        {
+                            var description = genre["description"]?.ToString();
+                            if (!string.IsNullOrEmpty(description))
+                            {
+                                tags.Add(description);
+                            }
+                        }
                     }
-                    foreach (var genre in SteamGame["genres"])
+
+                    var publishers = SteamGame["publishers"];
+                    if (publishers != null && publishers.Type != JTokenType.Null)
                     {
-                        string description = genre["description"].ToString();
-                        tags.Add(description);
+                        foreach (var publisher in publishers)
+                        {
+                            var publisherName = publisher?.ToString();
+                            if (!string.IsNullOrEmpty(publisherName))
+                            {
+                                tags.Add(publisherName);
+                            }
+                        }
                     }
-                    foreach (var publisher in SteamGame["publishers"])
+
+                    var developers = SteamGame["developers"];
+                    if (developers != null && developers.Type != JTokenType.Null)
                     {
-                        tags.Add(publisher.ToString());
-                    }
-                    foreach (var developer in SteamGame["developers"])
-                    {
-                        tags.Add(developer.ToString());
+                        foreach (var developer in developers)
+                        {
+                            var developerName = developer?.ToString();
+                            if (!string.IsNullOrEmpty(developerName))
+                            {
+                                tags.Add(developerName);
+                            }
+                        }
                     }
                     Insert(
                         name,

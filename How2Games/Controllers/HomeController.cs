@@ -37,7 +37,6 @@ namespace How2Games.Controllers
 
         public IActionResult Privacy()
         {
-            _gameCRUDServices.AutoCreateSteamGameByAppId("ARK: Survival Evolved");
             return View();
         }
 

@@ -14,7 +14,7 @@ namespace How2Games.DataAccess.Data
         public DbSet<SteamGameIdName> SteamGameIdName { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connectionString = "server=mysql.brettbowley.com;port=3306;database=test2;user=brett;";
+            string connectionString = "server=206.45.156.125;port=3306;database=test2;user=brett;"; 
             ServerVersion serverVersion = ServerVersion.AutoDetect(connectionString);
             optionsBuilder.UseMySql(connectionString, serverVersion)
                     .EnableSensitiveDataLogging(true)
