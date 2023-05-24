@@ -7,6 +7,10 @@ namespace How2Games.DataAccess.Data
 {
     public class GamesContext : IdentityDbContext<How2GamesUser>
     {
+        public GamesContext()
+        {
+        }
+
         public GamesContext(DbContextOptions<GamesContext> options) : base(options) { }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Comment> Comments { get; set; }

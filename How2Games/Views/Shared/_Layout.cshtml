@@ -31,9 +31,10 @@
                     @if (SignedIn.IsSignedIn(User))
                     {
                  <div class="right-div">
-                            <h4>Hello @User.Identity?.Name</h4>
+                            <h4 asp-area="Identity">Hello @User.Identity?.Name</h4>
                         </div>
                     }
+
                     else{
 
                         <div class="right-div">
