@@ -34,8 +34,6 @@ namespace How2Games.Controllers
         {
             _logger = logger;
             _userCRUDServices= userCRUDServices;
-            _tagCRUDServices = tagCRUDServices; 
-            _gameCRUDServices = gameCRUDServices;
             _userManager = userManager;
             _signInManager = signInManager;
             _gamesContext = gamesContext;
@@ -57,7 +55,7 @@ namespace How2Games.Controllers
                     
 {
                 
-                _userCRUDServices.Insert(user.FirstName, user.LastName, user.Email, user.UserName, user.Password);
+                _userCRUDServices.Insert(user.FirstName, user.Email, user.UserName, user.Password);
                 var test = _gamesContext.Users.FirstOrDefault(x=> x.UserName == user.UserName);
                 var result = _signInManager.CheckPasswordSignInAsync(test, user.Password, lockoutOnFailure: false);
                 if (result.IsCompletedSuccessfully)
