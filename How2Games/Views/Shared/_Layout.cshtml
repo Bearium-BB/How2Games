@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<How2GamesUser> SignedIn;
+@using How2Games.DataAccess.Data;
+
+@model FormUser
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,18 +14,13 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/How2Games.styles.css" asp-append-version="true" />
 </head>
-<script>
-    function darkMode() {
-        var element = document.body;
-        element.classList.toggle("dark-mode");
-    }
-</script>
+
 <body>
 <div class="background">
     <header>
         <div class="flex-container">
             <div class="left"> 
-            <div id="imgDiv"><img src="/how2games-low-resolution-logo-color-on-transparent-background.png" id="pfp"></div>
+            <div id="imgDiv"><img src="/Logo.png" id="pfp"></div>
             </div>
             <div class="mid">
                 <fieldset>
@@ -28,7 +28,20 @@
                 </fieldset>
             </div>
             <div class="right">
+                    @if (SignedIn.IsSignedIn(User))
+                    {
+                 <div class="right-div">
+                            <h4>Hello @User.Identity?.Name</h4>
+                        </div>
+                    }
+                    else{
 
+                        <div class="right-div">
+                            <button id="logIn">Log in</button>
+                            <button id="signUp">Sign up</button>
+
+                        </div>
+                    }
             </div>
         </div>
 
@@ -36,7 +49,7 @@
     <br />
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+        @RenderBody()
 
         </main>
 
@@ -46,7 +59,9 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - How2Games - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        
         </div>
+        
 
     </footer>
     

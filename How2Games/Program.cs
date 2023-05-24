@@ -38,6 +38,7 @@ namespace How2Games
             builder.Services.AddDbContext<SteamApiContext>(options =>
                 options.UseSqlServer("second datatbase connection string"));
 
+
             builder.Services.AddDefaultIdentity<How2GamesUser>(options => options.SignIn.RequireConfirmedAccount = false)
             .AddEntityFrameworkStores<GamesContext>();
             builder.Services.AddScoped<PasswordHasher<IdentityUser>>();
