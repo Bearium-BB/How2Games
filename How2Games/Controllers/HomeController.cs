@@ -43,59 +43,35 @@ namespace How2Games.Controllers
 
         public IActionResult Index()
         {
-            
             return View();
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> SignUp(FormUser user)
-                    
-{
+        public async Task<IActionResult> SignUp(FormUser user)           
+        {
             user.FullName = $"{user.FirstName} {user.LastName}";
-                _userCRUDServices.Insert(user.FullName, user.Email, user.UserName, user.Password);
-                var test = _gamesContext.Users.FirstOrDefault(x=> x.UserName == user.UserName);
-                var result = _signInManager.CheckPasswordSignInAsync(test, user.Password, lockoutOnFailure: false);
-                if (result.IsCompletedSuccessfully)
-                {
-                    return RedirectToAction("Index", "Home");
+            await _userCRUDServices.Insert(user.FullName, user.Email, user.UserName, user.Password);
+            var test = _gamesContext.Users.FirstOrDefault(x=> x.UserName == user.UserName);
+            var result = await _signInManager.PasswordSignInAsync(_gamesContext.Users.FirstOrDefault(x => x.UserName== user.UserName), user.Password,true,false);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
 
-                }
-                else
-                {
-                    throw new ArgumentException("");
-                }
-                  
-
-
-
+            }
+            else
+            {
+                throw new ArgumentException("");
+            }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogIn(FormUser user)
         {
-           
-
-            //UserManager<How2GamesUser> userManager = new UserManager<How2GamesUser>(
-            //    new UserStore<How2GamesUser>(new GamesContext()),
-            //    Options.Create(options),
-            //    new PasswordHasher<How2GamesUser>(),
-            //    new IUserValidator<How2GamesUser>[0],
-            //    new IPasswordValidator<How2GamesUser>[0],
-            //    new UpperInvariantLookupNormalizer(),
-            //    new IdentityErrorDescriber(),
-            //    new ServiceCollection().BuildServiceProvider(),
-            //    NullLogger<UserManager<How2GamesUser>>.Instance
-            
             var testUser = _gamesContext.Users.FirstOrDefault(x => x.UserName == user.UserName);
+            var result = await _signInManager.PasswordSignInAsync(_gamesContext.Users.FirstOrDefault(x => x.UserName == user.UserName), user.Password, true, false);
 
-            var result = await _signInManager.CheckPasswordSignInAsync(testUser, user.Password, false);
-
-            
-
-                return RedirectToAction("Index", "Home");
-            
-            
+            return RedirectToAction("Index", "Home");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

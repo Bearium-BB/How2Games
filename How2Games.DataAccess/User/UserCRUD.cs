@@ -47,7 +47,7 @@ namespace How2Games.DataAccess.User
             _context = context;
             _passwordHasher = passwordHasher;
         }
-        public async void Insert(string FullName,string Email ,string UserName,string password) {
+        public async Task Insert(string FullName,string Email ,string UserName,string password) {
             How2GamesUser user = new How2GamesUser();
             user.FullName = FullName;
             user.Email = Email;

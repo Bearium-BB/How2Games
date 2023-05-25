@@ -8,6 +8,6 @@ namespace How2Games.Services.User
 {
     public interface IUserCRUDServices
     {
-        void Insert(string FirstName, string Email, string UserName, string password);
+        Task Insert(string FirstName, string Email, string UserName, string password);
     }
 }
