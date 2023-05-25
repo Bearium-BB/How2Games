@@ -1,25 +1,29 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity;
+@inject UserManager<How2GamesUser> userManger;
+@model How2Games.Domain.DB.FormUser;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <div class="container">
+
         <div id="overlay">
             <div class="form">
-
                 <h2>How2Games</h2>
                 <p>Create a How2Games Acccount</p>
                 <br>
-                <form method="POST" action="#" name="registration" onsubmit="return validatePassword()">
+                <form method="POST" asp-action="SignUp" asp-controller="Home" name="registration" onsubmit="return validatePassword()">
 
-                    <input type="text" name="first_name" placeholder="First Name *" required pattern="^[A-Za-z]{1,20}$">
+                    <input type="text" asp-for="@Model.FirstName" name="first_name" placeholder="First Name *" required pattern="^[A-Za-z]{1,20}$">
+                    <input type="text" asp-for="@Model.LastName" name="last_name" placeholder="Last Name *" required pattern="^[A-Za-z]{1,20}$">
 
 
-                    <input type="text" name="last_name" placeholder="Last Name *" required pattern="^[A-Za-z]{1,20}$">
 
-                    <input class="check" type="email" name="email" placeholder="Email (abc@email.com) *" required pattern="^(?=^.{8,}$)[-_A-Za-z0-9]+([_.-][a-zA-Z0-9]+)*[A-Za-z0-9]+([.-][a-zA-Z0-9]+)*\.[A-Za-z]{2,}$">
-                    <input class="check" type="text" name="UserName" placeholder="Username *" required pattern="{1-30}">
-                    <input class="check" type="password" name="password" placeholder="Password12345!!! *" id="password">
+                    <input class="check" asp-for="@Model.Email" type="email" name="email" placeholder="Email (abc@email.com) *">
+                    <input class="check" asp-for="@Model.UserName" type="text" name="UserName" placeholder="Username *" required pattern="{1-30}">
+                    <input class="check" asp-for="@Model.Password" type="password" name="password" placeholder="Password12345!!! *" id="password">
                     <br>
                     <div class="buttons">
                         <input class="clearBtn" type="reset" value="Clear">
@@ -29,29 +33,30 @@
 
                 </form>
             </div>
+
         </div>
         </div>
         <div class="container">
-            <div id="overlay1">
-                <div class="form1">
+        <div id="overlay1">
+            <div class="form1">
 
-                    <h2>How2Games</h2>
-                    <p>Log in to your How2Games Acccount</p>
+                <h2>How2Games</h2>
+                <p>Log in to your How2Games Acccount</p>
+                <br>
+                <form method="POST" asp-action="LogIn" asp-controller="Home" name="registration" >
+
+                    <input asp-for="@Model.UserName" class="check" type="text" name="UserName" placeholder="Username *" required pattern="{1-30}">
+                    <input asp-for="@Model.Password" class="check" type="password" name="password" placeholder="Password12345!!! *" id="password">
                     <br>
-                    <form method="POST" action="#" name="registration" onsubmit="return validatePassword()">
+                    <div class="buttons">
+                        <input class="clearBtn" type="reset" value="Clear">
 
-                        <input class="check" type="text" name="UserName" placeholder="Username *" required pattern="{1-30}">
-                        <input class="check" type="password" name="password" placeholder="Password12345!!! *" id="password">
-                        <br>
-                        <div class="buttons">
-                            <input class="clearBtn" type="reset" value="Clear">
-                            
-                            <input class="submitBtn" type="submit" value="Submit">
-                        </div>
-
-                    </form>
+                        <input class="submitBtn" type="submit" value="Submit">
                     </div>
-                </div>
+
+                </form>
+            </div>
+            </div>
                 </div>
 
             <h5 class="display-4">Welcome to How2Games</h5>

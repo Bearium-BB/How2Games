@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<How2GamesUser> SignedIn;
+@using How2Games.DataAccess.Data;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -18,18 +22,26 @@
             <div id="imgDiv"><img src="/Logo.png" id="pfp"></div>
             </div>
             <div class="mid">
-            <form>
                 <fieldset>
-                    <input id="Search" type="text" placeholder="Search">
-
+                    <partial name="~/Views/SearchBar/Search.cshtml" />
                 </fieldset>
-            </form>
             </div>
             <div class="right">
-                <div class="right-div">
-                <button id="logIn">Log in</button>
-                <button id="signUp">Sign up</button>
-                </div>
+                    @if (SignedIn.IsSignedIn(User))
+                    {
+                 <div class="right-div">
+                            <h4 asp-area="Identity">Hello @User.Identity?.Name</h4>
+                        </div>
+                    }
+
+                    else{
+
+                        <div class="right-div">
+                            <button id="logIn">Log in</button>
+                            <button id="signUp">Sign up</button>
+
+                        </div>
+                    }
             </div>
         </div>
 

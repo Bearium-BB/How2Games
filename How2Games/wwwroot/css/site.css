@@ -22,7 +22,6 @@ body {
 header {
     text-decoration: none;
     justify-content: right;
-    overflow: hidden;
 }
 
     header div {
@@ -160,6 +159,7 @@ fieldset{
 }
 
 .form {
+    display: none;
     width: 40vw;
     height: 85vh;
     margin: 10%;
@@ -294,6 +294,11 @@ input[type="submit"] {
     cursor: pointer;
     border-radius:5px;
     font-family:Arial;
+
+}
+.right-div h4{
+    font-size: 18px;
+    font-weight: 400;
 
 }
 
