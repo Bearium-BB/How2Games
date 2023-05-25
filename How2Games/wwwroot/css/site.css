@@ -299,9 +299,13 @@ input[type="submit"] {
 .right-div h4{
     font-size: 18px;
     font-weight: 400;
+    
 
 }
-
+h4{
+    margin-top: 19px;
+    margin-bottom: 0px;
+}
 #signUp {
     background: #1A73E8;
     color: white;
@@ -318,7 +322,14 @@ input[type="submit"] {
 #logIn:hover {
     transform: scale(1.13)
 }
+#logOut {
+    color: #1A73E8;
+    transition: all .2s ease;
+}
 
+    #logOut:hover {
+        transform: scale(1.13)
+    }
 @media screen and (min-width:320px) {
     nav {
         display: none;
