@@ -43,10 +43,8 @@ namespace How2Games.Controllers
 
         public IActionResult Index()
         {
-            FormUser user = new FormUser();
-           
-
-            return View(user);
+            
+            return View();
         }
 
 
@@ -54,8 +52,8 @@ namespace How2Games.Controllers
         public async Task<IActionResult> SignUp(FormUser user)
                     
 {
-                
-                _userCRUDServices.Insert(user.FirstName, user.Email, user.UserName, user.Password);
+            user.FullName = $"{user.FirstName} {user.LastName}";
+                _userCRUDServices.Insert(user.FullName, user.Email, user.UserName, user.Password);
                 var test = _gamesContext.Users.FirstOrDefault(x=> x.UserName == user.UserName);
                 var result = _signInManager.CheckPasswordSignInAsync(test, user.Password, lockoutOnFailure: false);
                 if (result.IsCompletedSuccessfully)
