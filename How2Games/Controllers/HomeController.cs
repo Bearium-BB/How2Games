@@ -90,7 +90,7 @@ namespace How2Games.Controllers
 
             if (result.Succeeded)
             {
-                await _signInManager.SignInAsync(user, isPersistent: false);
+                await _signInManager.SignInAsync(testUser, isPersistent: false);
                 return RedirectToAction("Index", "Home");
             }
             else

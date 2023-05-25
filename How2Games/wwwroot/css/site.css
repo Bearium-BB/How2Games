@@ -303,7 +303,7 @@ input[type="submit"] {
 
 }
 h4{
-    margin-top: 19px;
+    margin-top: 14%;
     margin-bottom: 0px;
 }
 #signUp {
@@ -330,6 +330,19 @@ h4{
     #logOut:hover {
         transform: scale(1.13)
     }
+.form2 {
+    width: 121px;
+    margin: 5px;
+    background: none;
+    padding: 10px;
+    border: none;
+    font-weight: 400;
+    font-size: 18px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: Arial;
+}
 @media screen and (min-width:320px) {
     nav {
         display: none;
