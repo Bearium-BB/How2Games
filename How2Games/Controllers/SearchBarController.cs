@@ -44,12 +44,8 @@ namespace How2Games.Controllers
         }
 
         [HttpPost]
-        public ActionResult Search(string searchQuery)
+        public IActionResult Search(string searchQuery)
         {
-            //_userCRUDServices.Insert("yesssssssssssss2", "bretttttt1@gmail.com", "testttttt3", "Passsssssssssss1!");
-            //_signInManager.PasswordSignInAsync(_gamedb.Users.FirstOrDefault(x => x.UserName == "testttttt3"), "Passsssssssssss1!",true,false);
-            //_signInManager.SignOutAsync();
-
 
             if (!searchQuery.IsNullOrEmpty())
             {
