@@ -45,11 +45,16 @@ namespace How2Games.Controllers
         {
             return View();
         }
+        public IActionResult HomePage()
+        {
+            return View();
+        }
 
 
         [HttpPost]
-        public async Task<IActionResult> SignUp(FormUser user)           
-        {
+        public async Task<IActionResult> SignUp(FormUser user)
+                    
+         {
             user.FullName = $"{user.FirstName} {user.LastName}";
             await _userCRUDServices.Insert(user.FullName, user.Email, user.UserName, user.Password);
             var test = _gamesContext.Users.FirstOrDefault(x=> x.UserName == user.UserName);
