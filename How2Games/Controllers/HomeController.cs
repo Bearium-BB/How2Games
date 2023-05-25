@@ -21,7 +21,10 @@ namespace How2Games.Controllers
         {
             return View();
         }
-
+        public IActionResult HomePage()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             _userCRUDServices.Insert("name","email","userName","test");
