@@ -8,9 +8,13 @@ using How2Games.Services.TagServices;
 using How2Games.DataAccess.TagAction;
 using How2Games.Services.GameServices;
 using How2Games.DataAccess.GameAction;
+using How2Games.DataAccess.SearchBarAction;
+using How2Games.Services.SearchBarServices;
+
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
+using How2Games.DataAccess.SearchBarAction;
 
 namespace How2Games
 {
@@ -48,6 +52,9 @@ namespace How2Games
 
             builder.Services.AddScoped<IGameCRUD, GameCRUD>();
             builder.Services.AddScoped<IGameCRUDServices, GameCRUDServices>();
+
+            builder.Services.AddScoped<ISearchTypes, SearchTypes>();
+            builder.Services.AddScoped<ISearchBarServices, SearchBarServices>();
 
             var app = builder.Build();
 

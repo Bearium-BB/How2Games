@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+    var debounceTimeout;
+
     // Triggered when the input in the searchQuery field changes
     $('#searchQuery').on('input', function () {
         var searchQuery = $(this).val();
@@ -8,25 +10,31 @@
             return;
         }
 
-        // Make an AJAX request to the '/SearchBar/Search' URL
-        $.ajax({
-            url: '/SearchBar/Search',
-            type: 'POST',
-            data: { searchQuery: searchQuery },
-            success: function (result) {
-                if (result.trim() !== '') {
-                    // If the result is not empty, display the search results and show them
-                    $('#searchResults').html(result).show();
-                } else {
-                    // If the result is empty, hide the search results
-                    $('#searchResults').empty().hide();
+        // Clear the previous debounce timeout
+        clearTimeout(debounceTimeout);
+
+        // Set a new debounce timeout of 300 milliseconds
+        debounceTimeout = setTimeout(function () {
+            // Make an AJAX request to the '/SearchBar/Search' URL
+            $.ajax({
+                url: '/SearchBar/Search',
+                type: 'POST',
+                data: { searchQuery: searchQuery },
+                success: function (result) {
+                    if (result.trim() !== '') {
+                        // If the result is not empty, display the search results and show them
+                        $('#searchResults').html(result).show();
+                    } else {
+                        // If the result is empty, hide the search results
+                        $('#searchResults').empty().hide();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Log any errors to the console
+                    console.log(xhr.responseText);
                 }
-            },
-            error: function (xhr, status, error) {
-                // Log any errors to the console
-                console.log(xhr.responseText);
-            }
-        });
+            });
+        }, 500);
     });
 
     // Triggered when any element in the document is clicked
