@@ -25,3 +25,28 @@
 #SearchResultsContainer {
     position: relative;
 }
+
+#searchQuery[type="text"] {
+    background: rgba(245,245,245,90);
+    background-size: 12px 12px;
+    color: #000;
+}
+
+#searchQuery {
+    width: 95%;
+    height: 30px;
+    flex: 1;
+    flex-basis: 0.000000001px;
+    padding: 0px 4px 0px 16px;
+    border: 2px solid #CCCCCC;
+    border-radius: 40px;
+    box-shadow: inset 0 1px 2px var(--ytd-searchbox-legacy-border-shadow-color);
+    background-color: white;
+    font-size: 16px;
+    color: #000;
+}
+
+#searchQuery::placeholder {
+    background: rgba(245, 245, 245, 90);
+    color: black;
+}

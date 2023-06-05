@@ -27,16 +27,14 @@ namespace How2Games
 
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<GamesContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString(@"Data Source=localhost\SQLEXPRESS;Database=How2GamesTest23;Integrated Security=false;User ID=zach;Password=NewPassword1234;TrustServerCertificate=true;")));
+
+            options.UseSqlServer(builder.Configuration.GetConnectionString(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Connect Timeout=1200;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")));
             
             builder.Services.AddDbContext<SteamApiContext>(options =>
             options.UseMySql("server=mysql.brettbowley.com;port=3306;database=test;user=brett;",
             new MySqlServerVersion(new Version(8, 0, 26)))
             .EnableSensitiveDataLogging(true)
             .EnableDetailedErrors(true));
-
-            builder.Services.AddDbContext<SteamApiContext>(options =>
-                options.UseSqlServer("second datatbase connection string"));
 
 
             builder.Services.AddDefaultIdentity<How2GamesUser>(options => options.SignIn.RequireConfirmedAccount = false)

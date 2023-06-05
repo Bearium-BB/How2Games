@@ -19,6 +19,7 @@ namespace How2Games.Services.User
         public async Task Insert(string FullName, string Email, string UserName, string password)
         {
              await _userCRUD.Insert(FullName, Email, UserName, password);
+
         }
 
     }
