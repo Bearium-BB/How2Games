@@ -160,7 +160,7 @@ fieldset{
 }
 
 .form {
-    display: flex;
+    display: block;
     width: 40vw;
     height: 85vh;
     margin: 10%;
