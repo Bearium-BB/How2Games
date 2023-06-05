@@ -27,6 +27,7 @@ namespace How2Games
 
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<GamesContext>(options =>
+
             options.UseSqlServer(builder.Configuration.GetConnectionString(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Connect Timeout=1200;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")));
             
             builder.Services.AddDbContext<SteamApiContext>(options =>

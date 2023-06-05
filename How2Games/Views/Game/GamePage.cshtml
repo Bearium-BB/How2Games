@@ -1,9 +1,14 @@
 ﻿@using System.Web;
 @model Game
-
-<h1>@Model.Name</h1>
+@if (Model != null)
+{
+    <h1>@Model.Name</h1>
 
 
 <img src="@Model.ImgUrl"></img>
 
 @Html.Raw(HttpUtility.HtmlDecode(Model.DetailedDescription));
+}
+else{
+<h2>There is no content under the game you searched for</h2>
+}
