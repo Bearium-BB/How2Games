@@ -2,7 +2,6 @@
 @inject SignInManager<How2GamesUser> SignedIn;
 @using How2Games.DataAccess.Data;
 
-@model FormUser
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +31,7 @@
                     {
                  <div class="right-div">
                             <h4 asp-area="Identity">Hello @User.Identity?.Name</h4>
-                            <form method="POST" asp-action="LogOut" asp-controller="Home" class="form2">
+                            <form method="POST" asp-action="LogOut" asp-controller="User" class="form2">
                             <button  id="logOut" type="submit">Log Out</button>
                             </form>
                         </div>
@@ -53,9 +52,9 @@
     </header>
     <br />
     <div class="container">
+        @Html.Partial("_LoginPartial", new FormUser());
         <main role="main" class="pb-3">
         @RenderBody()
-
         </main>
 
 

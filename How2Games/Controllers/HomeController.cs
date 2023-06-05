@@ -43,69 +43,11 @@ namespace How2Games.Controllers
 
         public IActionResult Index()
         {
-            FormUser user = new FormUser();
            
 
-            return View(user);
+            return View();
         }
 
-
-        [HttpPost]
-        public async Task<IActionResult> SignUp(FormUser user)
-        {
-            await _userCRUDServices.Insert(user.FullName, user.Email, user.UserName, user.Password);
-            var result = await _signInManager.PasswordSignInAsync(_gamesContext.Users.FirstOrDefault(x=> x.UserName == user.UserName), user.Password,true , false);
-            if (result.Succeeded)
-            {
-
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                throw new ArgumentException("Invalid Log in attempt");
-            
-            }
-
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogIn(FormUser user)
-        {
-           
-
-            //UserManager<How2GamesUser> userManager = new UserManager<How2GamesUser>(
-            //    new UserStore<How2GamesUser>(new GamesContext()),
-            //    Options.Create(options),
-            //    new PasswordHasher<How2GamesUser>(),
-            //    new IUserValidator<How2GamesUser>[0],
-            //    new IPasswordValidator<How2GamesUser>[0],
-            //    new UpperInvariantLookupNormalizer(),
-            //    new IdentityErrorDescriber(),
-            //    new ServiceCollection().BuildServiceProvider(),
-            //    NullLogger<UserManager<How2GamesUser>>.Instance
-            
-            var testUser = _gamesContext.Users.FirstOrDefault(x => x.UserName == user.UserName);
-
-            var result = await _signInManager.PasswordSignInAsync(testUser, user.Password, true, false);
-
-            if (result.Succeeded)
-            {
-                await _signInManager.SignInAsync(testUser, isPersistent: false);
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                throw new ArgumentException("invalid log in attempt");
-            }
-            
-            
-        }
-        [HttpPost]
-        public IActionResult LogOut()
-        {
-            _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

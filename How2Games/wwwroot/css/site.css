@@ -130,7 +130,8 @@ fieldset{
 }
 .darkmode-toggle{
     background-color: black;
-    color: white
+    color: white;
+    
 }
 #overlay {
     position: fixed;
@@ -159,7 +160,7 @@ fieldset{
 }
 
 .form {
-    display: none;
+    display: flex;
     width: 40vw;
     height: 85vh;
     margin: 10%;
