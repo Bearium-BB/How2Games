@@ -1,40 +1,35 @@
 ﻿using How2Games.DataAccess.Data;
 using How2Games.Domain.DB;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using How2Games.Domain.DB;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace How2Games.DataAccess.TagAction
 {
-    public class TagCRUD : ITagCRUD
+    public class GenreTagCRUD
     {
         private readonly GamesContext _context;
 
-        public TagCRUD(GamesContext context)
+        public GenreTagCRUD(GamesContext context)
         {
             _context = context;
         }
 
         public void Insert(string text)
         {
-            if (_context.Tags.FirstOrDefault(x => x.Text == text) == null)
+            if (_context.GenreTags.FirstOrDefault(x => x.Text == text) == null)
             {
-                _context.Tags.Add(Create(text));
+                _context.GenreTags.Add(Create(text));
                 _context.SaveChanges();
             }
 
         }
 
-        public void Update(int id,string text)
+        public void Update(int id, string text)
         {
-            Tag? TagUpdate = _context.Tags.Where(x => x.Id == id)
+            GenreTag? TagUpdate = _context.GenreTags.Where(x => x.Id == id)
                 .FirstOrDefault();
 
             if (TagUpdate != null)
@@ -44,34 +39,33 @@ namespace How2Games.DataAccess.TagAction
             }
 
         }
-        public Tag Read(int id)
+        public GenreTag Read(int id)
         {
-            Tag? TagRead = _context.Tags.Where(x => x.Id == id)
+            GenreTag? TagRead = _context.GenreTags.Where(x => x.Id == id)
                 .FirstOrDefault();
 
             if (TagRead != null)
             {
-                return TagRead; 
+                return TagRead;
             }
-            return new Tag();
+            return new GenreTag();
         }
 
         public void Delete(int id)
         {
-            Tag? TagDelete = _context.Tags.Where(x => x.Id == id)
+            GenreTag? TagDelete = _context.GenreTags.Where(x => x.Id == id)
                 .FirstOrDefault();
             if (TagDelete != null)
             {
-                _context.Tags.Remove(TagDelete);
+                _context.GenreTags.Remove(TagDelete);
                 _context.SaveChanges();
 
             }
         }
-
-        public Tag Create(string text)
+        public GenreTag Create(string text)
         {
 
-            Tag NewTag = new Tag();
+            GenreTag NewTag = new GenreTag();
             NewTag.Text = text;
             return NewTag;
         }

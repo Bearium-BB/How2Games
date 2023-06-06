@@ -12,16 +12,14 @@ namespace How2Games.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUserCRUDServices _userCRUDServices;
-        private readonly ITagCRUDServices _tagCRUDServices;
         private readonly IGameCRUDServices _gameCRUDServices;
         private readonly SteamApiContext _steamdb;
         private readonly GamesContext _gamedb;
 
-        public GameController(ILogger<HomeController> logger, IUserCRUDServices userCRUDServices, ITagCRUDServices tagCRUDServices, IGameCRUDServices gameCRUDServices, SteamApiContext steamdb, GamesContext gamedb)
+        public GameController(ILogger<HomeController> logger, IUserCRUDServices userCRUDServices, IGameCRUDServices gameCRUDServices, SteamApiContext steamdb, GamesContext gamedb)
         {
             _logger = logger;
             _userCRUDServices = userCRUDServices;
-            _tagCRUDServices = tagCRUDServices;
             _gameCRUDServices = gameCRUDServices;
             _steamdb = steamdb;
             _gamedb = gamedb;
@@ -49,7 +47,7 @@ namespace How2Games.Controllers
         }
         public IActionResult GamePage(string GameName)
         {
-            var Game = _gamedb.Games.Include(x => x.Tags).FirstOrDefault(x => x.Name == GameName);
+            var Game = _gamedb.Games.Include(x => x.GenreTags).FirstOrDefault(x => x.Name == GameName);
             return View(Game);
         }
 

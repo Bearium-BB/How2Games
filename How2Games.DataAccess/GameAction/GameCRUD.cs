@@ -15,19 +15,24 @@ namespace How2Games.DataAccess.GameAction
     public class GameCRUD : IGameCRUD
     {
         private readonly GamesContext _context;
-        private readonly ITagCRUD _TagCRUD;
+        private readonly IPublisherTagCRUD _publisherTagCRUD;
+        private readonly IDeveloperTagCRUD _developerTagCRUD;
+        private readonly IGenreTagCRUD _genreTag;
+
         private readonly SteamApiContext _SteamApiContext;
 
         // Constructor
-        public GameCRUD(GamesContext context, ITagCRUD tagCRUD, SteamApiContext steamApiContext)
+        public GameCRUD(GamesContext context, SteamApiContext steamApiContext, IPublisherTagCRUD publisherTagCRUD, IDeveloperTagCRUD developerTagCRUD, IGenreTagCRUD genreTag)
         {
             _context = context;
-            _TagCRUD = tagCRUD;
             _SteamApiContext = steamApiContext;
+            _publisherTagCRUD = publisherTagCRUD;
+            _developerTagCRUD= developerTagCRUD;
+            _genreTag = genreTag;
         }
 
         // Insert a new game into the database
-        public void Insert(string name, string shortDescription, string detailedDescription, string imgUrl, List<string> tags)
+        public void Insert(string name, string shortDescription, string detailedDescription, string imgUrl, List<string> GenreTags, List<string> PublisherTags, List<string> DeveloperTags)
         {
             Game NewGame = new Game();
             NewGame.Name = name;
@@ -36,22 +41,56 @@ namespace How2Games.DataAccess.GameAction
             NewGame.ImgUrl = imgUrl;
 
             // Check if each tag already exists in the database
-            foreach (string tag in tags)
+            foreach (string tag in GenreTags)
             {
-                bool tagExists = _context.Tags.Any(x => x.Text == tag);
+                bool tagExists = _context.GenreTags.Any(x => x.Text == tag);
 
                 if (!tagExists)
                 {
                     // Create a new tag if it doesn't exist
-                    NewGame.Tags.Add(_TagCRUD.Create(tag));
+                    NewGame.GenreTags.Add(_genreTag.Create(tag));
                 }
                 else
                 {
                     // Add the existing tag to the game
-                    NewGame.Tags.Add(_context.Tags.FirstOrDefault(x => x.Text == tag));
+                    NewGame.GenreTags.Add(_context.GenreTags.FirstOrDefault(x => x.Text == tag));
                 }
             }
 
+
+
+            foreach (string tag in PublisherTags)
+            {
+                bool tagExists = _context.PublisherTags.Any(x => x.Text == tag);
+
+                if (!tagExists)
+                {
+                    // Create a new tag if it doesn't exist
+                    NewGame.PublisherTags.Add(_publisherTagCRUD.Create(tag));
+                }
+                else
+                {
+                    // Add the existing tag to the game
+                    NewGame.PublisherTags.Add(_context.PublisherTags.FirstOrDefault(x => x.Text == tag));
+                }
+            }
+
+
+            foreach (string tag in DeveloperTags)
+            {
+                bool tagExists = _context.DeveloperTags.Any(x => x.Text == tag);
+
+                if (!tagExists)
+                {
+                    // Create a new tag if it doesn't exist
+                    NewGame.DeveloperTags.Add(_developerTagCRUD.Create(tag));
+                }
+                else
+                {
+                    // Add the existing tag to the game
+                    NewGame.DeveloperTags.Add(_context.DeveloperTags.FirstOrDefault(x => x.Text == tag));
+                }
+            }
             // Add the new game to the database
             _context.Games.Add(NewGame);
             _context.SaveChanges();
@@ -128,7 +167,10 @@ namespace How2Games.DataAccess.GameAction
                     string headerImage = SteamGame["header_image"];
                     string name = SteamGame["name"];
 
-                    List<string> tags = new List<string>();
+                    List<string> PublisherTags = new List<string>();
+                    List<string> DeveloperTags = new List<string>();
+                    List<string> GenreTags = new List<string>();
+
 
                     // Extract genre tags
                     var genres = SteamGame["genres"];
@@ -139,7 +181,7 @@ namespace How2Games.DataAccess.GameAction
                             var description = genre["description"]?.ToString();
                             if (!string.IsNullOrEmpty(description))
                             {
-                                tags.Add(description);
+                                GenreTags.Add(description);
                             }
                         }
                     }
@@ -153,7 +195,7 @@ namespace How2Games.DataAccess.GameAction
                             var publisherName = publisher?.ToString();
                             if (!string.IsNullOrEmpty(publisherName))
                             {
-                                tags.Add(publisherName);
+                                PublisherTags.Add(publisherName);
                             }
                         }
                     }
@@ -167,7 +209,7 @@ namespace How2Games.DataAccess.GameAction
                             var developerName = developer?.ToString();
                             if (!string.IsNullOrEmpty(developerName))
                             {
-                                tags.Add(developerName);
+                                DeveloperTags.Add(developerName);
                             }
                         }
                     }
@@ -178,7 +220,9 @@ namespace How2Games.DataAccess.GameAction
                         shortDescription,
                         detailedDescription,
                         headerImage,
-                        tags
+                        GenreTags,
+                        PublisherTags,
+                        DeveloperTags
                     );
                 }
             }

@@ -18,7 +18,6 @@ namespace How2Games.Controllers
 
         private readonly ILogger<HomeController> _logger;
         private readonly IUserCRUDServices _userCRUDServices;
-        private readonly ITagCRUDServices _tagCRUDServices;
         private readonly IGameCRUDServices _gameCRUDServices;
         private readonly SteamApiContext _steamdb;
         private readonly GamesContext _gamedb;
@@ -32,7 +31,6 @@ namespace How2Games.Controllers
 
         public SearchBarController(ILogger<HomeController> logger, 
             IUserCRUDServices userCRUDServices, 
-            ITagCRUDServices tagCRUDServices,
             IGameCRUDServices gameCRUDServices,
             SteamApiContext steamdb,
             GamesContext gamedb,
@@ -41,7 +39,6 @@ namespace How2Games.Controllers
         {
             _logger = logger;
             _userCRUDServices = userCRUDServices;
-            _tagCRUDServices = tagCRUDServices;
             _gameCRUDServices = gameCRUDServices;
             _steamdb = steamdb;
             _gamedb = gamedb;

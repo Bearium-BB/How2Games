@@ -22,7 +22,6 @@ namespace How2Games.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUserCRUDServices _userCRUDServices;
-        private readonly ITagCRUDServices _tagCRUDServices;
         private readonly IGameCRUDServices _gameCRUDServices;
         private readonly UserManager<How2GamesUser> _userManager;
         private readonly SignInManager<How2GamesUser> _signInManager;

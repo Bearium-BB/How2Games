@@ -5,15 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace How2Games.DataAccess.TagAction
+namespace How2Games.Services.TagServices
 {
-    public interface ITagCRUD
+    public interface IDeveloperTagServices
     {
         void Insert(string text);
         void Update(int id, string text);
-        Tag Read(int id);
+        GenreTag Read(int id);
         void Delete(int id);
-        Tag Create(string text);
-
+        GenreTag Create(string text);
     }
 }
