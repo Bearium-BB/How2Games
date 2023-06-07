@@ -19,9 +19,9 @@ namespace How2Games.Services.GameServices
             _gameCRUD = gameCRUD;
         }
 
-        public void Insert(string name, string shortDescription, string detailedDescription, string imgUrl, List<string> tags)
+        public void Insert(string name, string shortDescription, string detailedDescription, string imgUrl, List<string> GenreTags, List<string> PublisherTags, List<string> DeveloperTags)
         {
-            _gameCRUD.Insert(name, shortDescription, detailedDescription, imgUrl, tags);
+            _gameCRUD.Insert(name, shortDescription, detailedDescription, imgUrl, GenreTags, PublisherTags, DeveloperTags);
         }
 
         public void Update(int? id, string? name, string? detailedDescription, string? imgUrl, List<string>? tags)
