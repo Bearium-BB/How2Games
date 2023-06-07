@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace How2Games.DataAccess.TagAction
 {
-    public class GenreTagCRUD
+    public class GenreTagCRUD : IGenreTagCRUD
     {
         private readonly GamesContext _context;
 

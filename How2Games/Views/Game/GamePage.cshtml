@@ -1,9 +1,11 @@
 ﻿@using System.Web;
 @model Game
 
+ <div class="hero-banner">
+    <img src="@Model.ImgUrl" alt="Hero Image">
+  </div>
 <h1>@Model.Name</h1>
 
-
-<img src="@Model.ImgUrl"></img>
-
-@Html.Raw(HttpUtility.HtmlDecode(Model.DetailedDescription));
+<div id="DetailedDescription">
+    @Html.Raw(HttpUtility.HtmlDecode(Model.DetailedDescription));
+</div>

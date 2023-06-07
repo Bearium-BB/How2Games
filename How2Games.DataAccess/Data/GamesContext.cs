@@ -20,6 +20,9 @@ namespace How2Games.DataAccess.Data
         public DbSet<DeveloperTag> DeveloperTags { get; set; }
         public DbSet<PublisherTag> PublisherTags { get; set; }
         public DbSet<GenreTag> GenreTags { get; set; }
+        public DbSet<VoteAnswer> VoteAnswer { get; set; }
+        public DbSet<VoteQuestion> VoteQuestion { get; set; }
+
 
 
         //Add-Migration InitialCreate -Context GamesContext -OutputDir Migrations\GamesDbMigrations

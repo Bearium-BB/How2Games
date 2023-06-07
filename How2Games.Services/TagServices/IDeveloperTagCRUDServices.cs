@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace How2Games.Services.TagServices
 {
-    public interface IDeveloperTagServices
+    public interface IDeveloperTagCRUDServices
     {
         void Insert(string text);
         void Update(int id, string text);
-        GenreTag Read(int id);
+        DeveloperTag Read(int id);
         void Delete(int id);
-        GenreTag Create(string text);
+        DeveloperTag Create(string text);
     }
 }

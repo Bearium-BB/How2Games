@@ -49,6 +49,15 @@ namespace How2Games
             //builder.Services.AddScoped<ITagCRUD, TagCRUD>();
             //builder.Services.AddScoped<ITagCRUDServices, TagCRUDServices>();
 
+            builder.Services.AddScoped<IGenreTagCRUD, GenreTagCRUD>();
+            builder.Services.AddScoped<IGenreTagCRUDServices, GenreTagCRUDServices>();
+
+            builder.Services.AddScoped<IDeveloperTagCRUD, DeveloperTagCRUD>();
+            builder.Services.AddScoped<IDeveloperTagCRUDServices, DeveloperTagCRUDServices>();
+
+            builder.Services.AddScoped<IPublisherTagCRUD, PublisherTagCRUD>();
+            builder.Services.AddScoped<IPublisherTagCRUDServices, PublisherTagCRUDServices>();
+
             builder.Services.AddScoped<IGameCRUD, GameCRUD>();
             builder.Services.AddScoped<IGameCRUDServices, GameCRUDServices>();
 

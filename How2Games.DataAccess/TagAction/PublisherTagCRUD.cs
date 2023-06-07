@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace How2Games.DataAccess.TagAction
 {
-    public class PublisherTagCRUD
+    public class PublisherTagCRUD : IPublisherTagCRUD
     {
         private readonly GamesContext _context;
 

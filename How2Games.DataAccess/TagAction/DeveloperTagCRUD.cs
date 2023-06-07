@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace How2Games.DataAccess.TagAction
 {
-    public class DeveloperTagCRUD
+    public class DeveloperTagCRUD : IDeveloperTagCRUD
     {
         private readonly GamesContext _context;
 
