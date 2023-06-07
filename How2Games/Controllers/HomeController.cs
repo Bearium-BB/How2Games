@@ -14,7 +14,8 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
 using How2Games.DataAccess.User;
-
+using How2Games.DataAccess;
+using How2Games.Domain.Roles;
 
 namespace How2Games.Controllers
 {
@@ -41,9 +42,8 @@ namespace How2Games.Controllers
 
         }
 
-        public IActionResult Index()
+        public  IActionResult Index()
         {
-           
 
             return View();
         }

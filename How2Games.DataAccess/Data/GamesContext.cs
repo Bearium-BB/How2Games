@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using How2Games.Domain.DB;
+using How2Games.Domain.Roles;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
@@ -42,6 +43,11 @@ namespace How2Games.DataAccess.Data
                 .HasMany(g => g.Tags)
                 .WithMany(t => t.Games)
                 .UsingEntity(j => j.ToTable("GameTag"));
+
+            
+
+
         }
+
     }
 }

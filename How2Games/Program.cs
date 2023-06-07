@@ -8,18 +8,26 @@ using How2Games.Services.TagServices;
 using How2Games.DataAccess.TagAction;
 using How2Games.Services.GameServices;
 using How2Games.DataAccess.GameAction;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Options;
+using Microsoft.Identity.Client;
+using How2Games.Domain.Roles;
+using Microsoft.AspNetCore.Authorization;
+using How2Games.DataAccess;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace How2Games
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddControllersWithViews();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
@@ -27,6 +35,7 @@ namespace How2Games
 
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<GamesContext>(options =>
+
             options.UseSqlServer(builder.Configuration.GetConnectionString(@"Data Source=localhost\SQLEXPRESS;Database=How2GamesTest23;Integrated Security=false;User ID=zach;Password=NewPassword1234;TrustServerCertificate=true;")));
             
             builder.Services.AddDbContext<SteamApiContext>(options =>
@@ -35,12 +44,10 @@ namespace How2Games
             .EnableSensitiveDataLogging(true)
             .EnableDetailedErrors(true));
 
-            builder.Services.AddDbContext<SteamApiContext>(options =>
-                options.UseSqlServer("second datatbase connection string"));
-
 
             builder.Services.AddDefaultIdentity<How2GamesUser>(options => options.SignIn.RequireConfirmedAccount = false)
-            .AddEntityFrameworkStores<GamesContext>();
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<GamesContext>();
             builder.Services.AddScoped<PasswordHasher<IdentityUser>>();
 
             builder.Services.AddScoped<IUserCRUD, UserCRUD>();
@@ -52,9 +59,27 @@ namespace How2Games
             builder.Services.AddScoped<IGameCRUD, GameCRUD>();
             builder.Services.AddScoped<IGameCRUDServices, GameCRUDServices>();
 
+            
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            using(var scope = app.Services.CreateScope())
+            {
+                var service = scope.ServiceProvider;
+
+                var context = service.GetRequiredService<GamesContext>();  
+                context.Database.Migrate();
+
+                var testUserPw = builder.Configuration.GetValue<string>("SeedUserPw");
+                // Obtain a reference to the RoleManager
+                var roleManager = service.GetRequiredService<RoleManager<IdentityRole>>();
+
+                // Call the InitializeRoles method
+                RoleInitializer.InitializeRoles(roleManager);
+
+
+                await SeedData.Initialize(service, testUserPw);
+            }
+// Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -70,12 +95,14 @@ namespace How2Games
             app.UseAuthentication();
             app.UseAuthorization();
 
-
+  
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
+
             app.Run();
         }
+
     }
 }
