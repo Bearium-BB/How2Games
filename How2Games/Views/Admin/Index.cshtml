@@ -1,0 +1,40 @@
+﻿@using System.Web;
+@model List<How2GamesUser>;
+@if(Model != null){
+    @if (Model.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                </tr>
+            </thead>
+            @if (Model != null)
+            {
+                @foreach (var user in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <th>@user.Id</th>
+                            <th>@user.FullName</th>
+                            <th>@user.UserName</th>
+                            <th>@user.Email</th>
+                            <td>
+                                <a class="btn btn-primary" asp-controller="Admin" asp-action="EditUser" asp-route-userId ="@user.Id">Manage User</a>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                }
+
+            }
+        </table>
+    }
+}
+else
+{
+    <p>No users have signed up.</p>
+}

@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @inject SignInManager<How2GamesUser> SignedIn;
+@inject RoleManager<IdentityRole> roleManager;
 @using How2Games.DataAccess.Data;
+@using How2Games.Domain.ViewModels;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +29,7 @@
                 </fieldset>
             </div>
             <div class="right">
+                @*If the user is signed in, then it will show the code below*@
                     @if (SignedIn.IsSignedIn(User))
                     {
                  <div class="right-div">
@@ -37,7 +40,7 @@
                         </div>
 
                     }
-
+                    @*If the user isnt logged in then it will show two buttons that ask log in or sign up*@
                     else{
 
                         <div class="right-div">
@@ -52,9 +55,17 @@
     </header>
     <br />
     <div class="container">
-        @Html.Partial("_LoginPartial", new FormUser());
+        @Html.Partial("_LoginPartial", new FormUser())
+       
         <main role="main" class="pb-3">
-        @RenderBody()
+                @if (SignedIn.IsSignedIn(User))
+                {
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-controller="Admin" asp-action="Index">Manage users</a>
+                    }
+                }
+                @RenderBody()
         </main>
 
 
@@ -62,7 +73,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - How2Games - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - How2Games
         
         </div>
         
