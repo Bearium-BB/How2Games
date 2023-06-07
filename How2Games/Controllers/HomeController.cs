@@ -32,7 +32,7 @@ namespace How2Games.Controllers
 
         {
             _logger = logger;
-            _userCRUDServices= userCRUDServices;
+            _userCRUDServices = userCRUDServices;
             _userManager = userManager;
             _signInManager = signInManager;
             _gamesContext = gamesContext;
@@ -44,11 +44,11 @@ namespace How2Games.Controllers
         {
             return View();
         }
+        
         public IActionResult HomePage()
         {
             return View();
         }
-
 
         [HttpPost]
         public async Task<IActionResult> SignUp(FormUser user)

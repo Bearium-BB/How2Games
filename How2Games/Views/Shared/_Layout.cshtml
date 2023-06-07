@@ -31,7 +31,11 @@
                     {
                  <div class="right-div">
                             <h4 asp-area="Identity">Hello @User.Identity?.Name</h4>
+                            <form method="POST" asp-action="LogOut" asp-controller="User" class="form2">
+                            <button  id="logOut" type="submit">Log Out</button>
+                            </form>
                         </div>
+
                     }
 
                     else{
@@ -48,9 +52,9 @@
     </header>
     <br />
     <div class="container">
+        @Html.Partial("_LoginPartial", new FormUser());
         <main role="main" class="pb-3">
         @RenderBody()
-
         </main>
 
 
