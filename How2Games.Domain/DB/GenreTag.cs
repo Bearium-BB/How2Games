@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace How2Games.Domain.DB
 {
-    public class Tag
+    public class GenreTag
     {
         public int Id { get; set; }
         public string Text { get; set; }

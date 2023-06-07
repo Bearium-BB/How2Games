@@ -15,38 +15,44 @@ namespace How2Games.DataAccess.Data
         public GamesContext(DbContextOptions<GamesContext> options) : base(options) { }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<Image> Images { get; set; }
         public DbSet<Post> Posts { get; set; }
-        public DbSet<PostComment> PostComments { get; set; }
-        public DbSet<PostImage> PostImages { get; set; }
-        public DbSet<PostText> PostTexts { get; set; }
-        public DbSet<Question> Questions { get; set; }
-        public DbSet<QuestionComment> QuestionComments { get; set; }
-        public DbSet<QuestionImage> QuestionImages { get; set; }
-        public DbSet<QuestionText> QuestionTexts { get; set; }
-        public DbSet<TextBox> Texts { get; set; }
         public DbSet<How2GamesUser> Users { get; set; }
         public DbSet<Game> Games { get; set; }
-        public DbSet<Tag> Tags { get; set; }
+        public DbSet<DeveloperTag> DeveloperTags { get; set; }
+        public DbSet<PublisherTag> PublisherTags { get; set; }
+        public DbSet<GenreTag> GenreTags { get; set; }
+        public DbSet<VoteAnswer> VoteAnswer { get; set; }
+        public DbSet<VoteQuestion> VoteQuestion { get; set; }
+
+
+
         //Add-Migration InitialCreate -Context GamesContext -OutputDir Migrations\GamesDbMigrations
         //Update-Database -Context GamesContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=localhost\SQLEXPRESS;Database=How2GamesTest23;Integrated Security=false;User ID=zach;Password=NewPassword1234;TrustServerCertificate=true;", b => b.MigrationsAssembly("How2Games.DataAccess"));
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Connect Timeout=1200;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False", b => b.MigrationsAssembly("How2Games.DataAccess"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Game>()
-                .HasMany(g => g.Tags)
+                .HasMany(g => g.GenreTags)
                 .WithMany(t => t.Games)
-                .UsingEntity(j => j.ToTable("GameTag"));
+                .UsingEntity(j => j.ToTable("GameGenreTag"));
 
-            
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Game>()
+                .HasMany(g => g.DeveloperTags)
+                .WithMany(t => t.Games)
+                .UsingEntity(j => j.ToTable("GameDeveloperTag"));
 
-
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Game>()
+                .HasMany(g => g.PublisherTags)
+                .WithMany(t => t.Games)
+                .UsingEntity(j => j.ToTable("GamePublisherTag"));
         }
 
     }

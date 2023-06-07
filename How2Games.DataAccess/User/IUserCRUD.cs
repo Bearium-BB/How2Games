@@ -8,6 +8,8 @@ namespace How2Games.DataAccess.User
 {
     public interface IUserCRUD
     {
+
         Task Insert(string FullName, string Email, string UserName, string password);
+
     }
 }

@@ -90,31 +90,6 @@ fieldset{
     margin-left: 0 auto;
 }
 
-#Search[type="text"] {
-    background: rgba(245,245,245,90);
-    background-size: 12px 12px;
-    color: #000;
-}
-
-#Search {
-    width: 95%;
-    height: 30px;
-    flex: 1;
-    flex-basis: 0.000000001px;
-    padding: 0px 4px 0px 16px;
-    border: 2px solid #CCCCCC;
-    border-radius: 40px;
-    box-shadow: inset 0 1px 2px var(--ytd-searchbox-legacy-border-shadow-color);
-    background-color: white;
-    font-size: 16px;
-    color: #000;
-}
-
-#Search::placeholder {
-    background: rgba(245, 245, 245, 90);
-    color: black;
-}
-
 .notBtn {
     cursor: pointer;
 }
@@ -160,6 +135,7 @@ fieldset{
 }
 
 .form {
+
     display: block;
     width: 40vw;
     margin: 10%;
@@ -406,4 +382,56 @@ h4{
     .col-lg-3 {
         flex: 0 0 25%;
     }
+}
+
+
+
+
+
+
+
+
+
+
+#DetailedDescription{
+    width: 616px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction:column;
+    margin:0 auto;
+}
+
+
+.hero-banner {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+.hero-banner img {
+    width: 100%;
+    height: auto;
+    object-fit:cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.hero-banner h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.hero-banner p {
+    font-size: 20px;
+    margin-bottom: 20px;
 }
