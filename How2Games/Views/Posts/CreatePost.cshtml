@@ -1,0 +1,205 @@
+﻿@{
+    Layout = "";    
+}
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="~/js/Post.js" defer></script>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        img {
+            width: 50%;
+        }
+
+        .textEditor {
+            width: 100%;
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 5px;
+        }
+
+        #text {
+            font-size: 11px;
+            font-weight: normal;
+            color: black;
+            height: 85%;
+            width: 100%;
+            border: none;
+            resize: none;
+            outline: none;
+            padding: 10px;
+            padding-left: 35px;
+            font-style: normal;
+        }
+
+        .operations {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            height: 15%;
+            width: 100%;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .select {
+            width: 40px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            margin-right: 10px;
+            border: none;
+        }
+
+        .operation {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            margin-right: 10px;
+            border: none;
+            background-color: white;
+        }
+
+        .operation:hover {
+            border: 1px solid lightgray;
+        }
+
+        .post {
+            width: 65%;
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid gray;
+            margin-bottom: 5px;
+            border-radius: 3px;
+            overflow: scroll;
+        }
+
+        .post-child {
+            width: 100%;
+        }
+
+        .main-container {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        .box {
+            width: 65%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid gray;
+            border-radius: 3px;
+        }
+
+        #add {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            margin-right: 10px;
+            border: none;
+            height: 20px;
+            width: 75px;
+            background-color: white;
+        }
+
+        #add:hover {
+            border: 1px solid lightgray;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        #addImage {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            margin-right: 10px;
+            border: none;
+            height: 20px;
+            width: 80px;
+            background-color: white;
+        }
+
+        #addImage:hover {
+            border: 1px solid lightgray;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="post" id="post"></div>
+
+        <div class="textEditor">
+            <div class="box">
+                <div contenteditable="true" id="text"></div>
+                <form class="operations" id="form1" name="form1" method="post">
+                    <select onchange="SelectChange(this)" id="colour" class="select">
+                        <option value="red" style="color: red">Aa</option>
+                        <option value="orange" style="color: orange">Aa</option>
+                        <option value="yellow" style="color: yellow">Aa</option>
+                        <option value="green" style="color: green">Aa</option>
+                        <option value="blue" style="color: blue">Aa</option>
+                        <option value="purple" style="color: purple">Aa</option>
+                        <option value="pink" style="color: pink">Aa</option>
+                        <option value="black" style="color: black">Aa</option>
+                        <option value="gray" style="color: gray">Aa</option>
+                    </select>
+                    <select onchange="SelectChange(this)" id="size" class="select">
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="15">15</option>
+                        <option value="18">18</option>
+                        <option value="20">20</option>
+                        <option value="22">22</option>
+                        <option value="25">25</option>
+                    </select>
+                    <button onclick="ChangeText(this)" type="button" id="italic" class="operation">I</button>
+                    <button onclick="ChangeText(this)" type="button" id="bold" class="operation">B</button>
+                    <button onclick="UploadImage()" type="button" id="addImage">Add Image</button>
+                    <button onclick="AddText()" id="add" type="button">Add Text</button>
+                    <input class="hidden" accept="image/*" id="fileInput" name="fileInput" type="file">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
