@@ -7,7 +7,7 @@
         public int UserId { get; set; }
         public int GameId { get; set; }
         public string Text { get; set; }
-        public int ViewCount { get; set; }
+        public int ViewCount { get; set; } = 0;
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
         public ICollection<VoteQuestion> Votes { get; set; } = new List<VoteQuestion>();
 

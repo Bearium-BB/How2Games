@@ -13,7 +13,7 @@ namespace How2Games.Domain.DB
         public string ShortDescription { get; set; }
         public string DetailedDescription { get; set; }
         public string ImgUrl { get; set; }
-        public int ViewCount { get; set; }
+        public int ViewCount { get; set; } = 0;
         public ICollection<GenreTag> GenreTags { get; set;} = new List<GenreTag>();
         public ICollection<DeveloperTag> DeveloperTags { get; set; } = new List<DeveloperTag>();
         public ICollection<PublisherTag> PublisherTags { get; set; } = new List<PublisherTag>();
