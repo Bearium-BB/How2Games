@@ -1,4 +1,42 @@
-﻿//when one of the selects is changed
+﻿document.getElementById('fileInput').addEventListener('change', function () {
+    console.log("File Selected");
+    var fileInput = this;
+    var file = fileInput.files[0];
+
+    if (file) {
+        var formData = new FormData();
+        formData.append('file', file);
+
+        var imgElement = document.createElement('img');
+        var fileName = generateGuid();
+        imgElement.src = "~/Images/" + fileName;
+
+        var imageContainer = document.getElementById('post');
+        imageContainer.appendChild(imgElement);
+
+        fetch('/Posts/UploadFile', {
+            method: 'POST',
+            body: JSON.stringify({ fileName: fileName, file: file })
+        })
+
+        .then(function (response) {
+            if (response.ok) {
+                console.log('File uploaded successfully.');
+                // Perform any additional actions on success if needed
+            } else {
+                console.error('File upload failed.');
+                // Handle the error if needed
+            }
+        })
+        .catch(function (error) {
+            console.error(error);
+            // Handle the error if needed
+        });
+    }
+});
+
+
+//when one of the selects is changed
 function SelectChange(element) {
     //highlighted text
     var selection = window.getSelection();
@@ -225,36 +263,6 @@ function ChangeText(element) {
     }
 }
 
-$(function () {
-    $('#fileInput').on('change', function () {
-        var fileInput = $(this);
-        var file = fileInput.prop('files')[0];
-        console.log(file);
-
-        if (file) {
-            var formData = new FormData();
-            formData.append('file', file);
-
-            $.ajax({
-                url: '/Posts/UploadFile',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (response) {
-                    console.log('File uploaded successfully.');
-                    // Perform any additional actions on success if needed
-                },
-                error: function (xhr, status, error) {
-                    console.error(error);
-                    // Handle the error if needed
-                }
-            });
-        }
-    });
-});
-
-
 function UploadImage() {
     const fileInput = document.getElementById("fileInput");
     fileInput.click();
@@ -267,4 +275,12 @@ function AddText() {
     const post = document.getElementById("post");
     var cloned = textBox.cloneNode(true);
     post.appendChild(cloned);
+}
+
+function generateGuid() {
+    return 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0,
+            v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
 }
