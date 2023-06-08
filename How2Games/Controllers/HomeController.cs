@@ -84,25 +84,5 @@ namespace How2Games.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
-        public ActionResult UploadImage()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult UploadImage(IFormFile imageFile)
-        {
-            if (imageFile != null && imageFile.Length > 0)
-            {
-                // Perform the necessary processing on the uploaded image
-                // e.g., save it to a directory, store it in the database, etc.
-
-                return Json(new { success = true, message = "Image uploaded successfully." });
-            }
-
-            return Json(new { success = false, message = "No image uploaded." });
-        }
-
     }
 }
