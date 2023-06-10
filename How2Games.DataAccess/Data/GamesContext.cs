@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using How2Games.Domain.DB;
+using How2Games.Domain.Roles;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
@@ -54,5 +55,6 @@ namespace How2Games.DataAccess.Data
                 .UsingEntity(j => j.ToTable("GamePublisherTag"));
 
         }
+
     }
 }
