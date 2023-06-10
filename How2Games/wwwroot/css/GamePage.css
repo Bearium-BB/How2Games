@@ -62,3 +62,14 @@
 img {
     border-radius: 5px;
 }
+
+#newQuestionedFlexbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#searchQueryQuestion{
+    width: 300px;
+    height: 29px;
+}

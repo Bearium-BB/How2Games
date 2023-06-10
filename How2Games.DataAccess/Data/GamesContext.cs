@@ -31,6 +31,7 @@ namespace How2Games.DataAccess.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Connect Timeout=1200;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False", b => b.MigrationsAssembly("How2Games.DataAccess"));
+            optionsBuilder.EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -41,18 +42,16 @@ namespace How2Games.DataAccess.Data
                 .WithMany(t => t.Games)
                 .UsingEntity(j => j.ToTable("GameGenreTag"));
 
-            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Game>()
                 .HasMany(g => g.DeveloperTags)
                 .WithMany(t => t.Games)
                 .UsingEntity(j => j.ToTable("GameDeveloperTag"));
 
-            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Game>()
                 .HasMany(g => g.PublisherTags)
                 .WithMany(t => t.Games)
                 .UsingEntity(j => j.ToTable("GamePublisherTag"));
-
         }
+
     }
 }

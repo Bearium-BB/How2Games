@@ -65,11 +65,14 @@ namespace How2Games.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SearchQuestion(string searchQuery,string gameName)
+        public async Task<IActionResult> SearchQuestion(string searchQueryQuestion, string gameName)
         {
-            if (!string.IsNullOrEmpty(searchQuery))
+            //Console.Clear();
+            //Console.WriteLine(gameName);
+            //Console.WriteLine(searchQueryQuestion);
+            if (!string.IsNullOrEmpty(searchQueryQuestion))
             {
-                var searchResults = await _searchBarServices.QuestionSearchBar(searchQuery, gameName);
+                var searchResults = await _searchBarServices.QuestionSearchBar(searchQueryQuestion, gameName);
 
                 return PartialView("_GamePageSearchResults", searchResults);
             }
