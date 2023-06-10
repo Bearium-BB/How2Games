@@ -6,7 +6,7 @@
         public string Title { get; set; }
         public int UserId { get; set; }
         public int GameId { get; set; }
-        public string Text { get; set; }
+        public string HTML { get; set; }
         public int ViewCount { get; set; } = 0;
         public ICollection<Answer> Answers { get; set; } = new List<Answer>();
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
