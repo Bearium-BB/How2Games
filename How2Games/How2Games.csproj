@@ -38,13 +38,10 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="wwwroot\js\" />
 
     <ProjectReference Include="..\How2Games.Services\How2Games.Services.csproj" />
 
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
 </Project>

@@ -12,7 +12,7 @@
     <title>@ViewData["Title"] - How2Games</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Header.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/How2Games.styles.css" asp-append-version="true" />
 </head>
 
@@ -58,12 +58,11 @@
         @Html.Partial("_LoginPartial", new FormUser())
        
         <main role="main" class="pb-3">
-                @if (SignedIn.IsSignedIn(User))
+                @if (SignedIn.IsSignedIn(User) && User.IsInRole("Admin"))
                 {
-                    @if (User.IsInRole("Admin"))
-                    {
+                    
                         <a asp-controller="Admin" asp-action="Index">Manage users</a>
-                    }
+                    
                 }
                 @RenderBody()
         </main>

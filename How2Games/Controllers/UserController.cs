@@ -45,7 +45,7 @@ namespace How2Games.Controllers
 
         public async Task<IActionResult> SignUp(FormUser user)
         {
-            user.FullName = user.FirstName + " " + user.LastName;
+            user.FullName = user.FirstName + user.LastName;
             await _userCRUDServices.Insert(user.FullName, user.Email, user.UserName, user.Password);
             var result = await _signInManager.PasswordSignInAsync(_gamesContext.Users.FirstOrDefault(x => x.UserName == user.UserName), user.Password, true, false);
             if (result.Succeeded)
@@ -78,7 +78,9 @@ namespace How2Games.Controllers
             //    NullLogger<UserManager<How2GamesUser>>.Instance
 
 
-            var testUser = _gamesContext.Users.FirstOrDefault(x => x.UserName == user.UserName);
+            var testUser =  _gamesContext.Users.FirstOrDefault(x => x.UserName == user.UserName);
+
+    
             if (testUser != null)
             {
                 var result = await _signInManager.CheckPasswordSignInAsync(testUser, user.Password, false);
