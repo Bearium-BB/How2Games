@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 
 namespace How2Games.Controllers
 {
@@ -18,7 +19,6 @@ namespace How2Games.Controllers
     {
         private readonly ILogger<UserController> _logger;
         private readonly IUserCRUDServices _userCRUDServices;
-        private readonly ITagCRUDServices _tagCRUDServices;
         private readonly IGameCRUDServices _gameCRUDServices;
         private readonly UserManager<How2GamesUser> _userManager;
         private readonly SignInManager<How2GamesUser> _signInManager;
@@ -50,33 +50,78 @@ namespace How2Games.Controllers
 
         public async Task<IActionResult> EditUser(string userId)
         {
-            var user = await _userManager.FindByIdAsync(userId);
-            if(user == null)
+            string connectionString = "Server =(localdb)\\ProjectModels; Database=How2Games;Integrated Security=True;Connect Timeout=1200;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False; MultipleActiveResultSets=True;";
+            using (var connection = new SqlConnection(connectionString))
+            {
+
+                await connection.OpenAsync();
+
+
+                using (var getUserCommand = new SqlCommand("SELECT * FROM AspNetUsers WHERE Id = @UserId", connection))
+                {
+                    getUserCommand.Parameters.AddWithValue("@UserId", userId);
+
+
+                    using (var reader = await getUserCommand.ExecuteReaderAsync())
+                    {
+
+
+
+
+                        await reader.CloseAsync();
+                    }
+                }
+
+
+                using (var checkRoleCommand = new SqlCommand("SELECT * FROM AspNetUserRoles WHERE UserId = @UserId", connection))
+                {
+                    checkRoleCommand.Parameters.AddWithValue("@UserId", userId);
+
+
+                    using (var reader = await checkRoleCommand.ExecuteReaderAsync())
+                    {
+
+
+
+
+                        await reader.CloseAsync();
+                    }
+                }
+
+
+
+            }
+            ManageUserRolesViewModel model = new ManageUserRolesViewModel();
+            model.user = await _userManager.FindByIdAsync(userId);
+
+            if (model.user == null)
             {
                 return View("NotFound");
 
             }
-            var model = new List<ManageUserRolesViewModel>();
-            foreach(var role in _roleManager.Roles)
+            foreach (var role in _roleManager.Roles)
             {
-                var userRolesViewModel = new ManageUserRolesViewModel
-                {
-                    RoleId = role.Id,
-                    RoleName = role.Name,
-                     
-                };
+                model.RoleId = role.Id;
+                model.RoleName = role.Name;
 
-                if(await _userManager.IsInRoleAsync(user, role.Name))
+
+                if (await _userManager.IsInRoleAsync(model.user, role.Name))
                 {
-                    userRolesViewModel.Selected = true;
+                    model.Selected = true;
                 }
                 else
                 {
-                    userRolesViewModel.Selected = false;
+                    model.Selected = false;
                 }
             }
-            return View();
+            return View(model);
         }
-        
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            await _userManager.DeleteAsync(user);
+            return RedirectToAction("Index");
+        }
     }
 }

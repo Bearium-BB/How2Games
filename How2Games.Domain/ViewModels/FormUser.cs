@@ -16,6 +16,5 @@ namespace How2Games.Domain.ViewModels
         public string Email { get; set; }
         public string UserName { get; set; }
 
-        public bool IsSignUp { get; set; }
     }
 }

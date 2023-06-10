@@ -41,7 +41,7 @@ namespace How2Games
             builder.Services.AddDbContext<GamesContext>(options =>
 
 
-            options.UseSqlServer(builder.Configuration.GetConnectionString(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Connect Timeout=1200;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")));
+            options.UseSqlServer(builder.Configuration.GetConnectionString(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Connect Timeout=1200;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False; MultipleActiveResultSets=True;")));
             
             builder.Services.AddDbContext<SteamApiContext>(options =>
             options.UseMySql("server=mysql.brettbowley.com;port=3306;database=test;user=brett;",
@@ -86,15 +86,12 @@ namespace How2Games
                 var context = service.GetRequiredService<GamesContext>();  
                 context.Database.Migrate();
 
-                var testUserPw = builder.Configuration.GetValue<string>("SeedUserPw");
-                // Obtain a reference to the RoleManager
                 var roleManager = service.GetRequiredService<RoleManager<IdentityRole>>();
 
                 // Call the InitializeRoles method
                 RoleInitializer.InitializeRoles(roleManager);
 
 
-                await SeedData.Initialize(service, testUserPw);
             }
 // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -117,7 +114,7 @@ namespace How2Games
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-
+            _ = RoleInitializer.Initialize(app);
             app.Run();
         }
 

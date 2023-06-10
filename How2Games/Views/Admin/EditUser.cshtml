@@ -1,27 +1,38 @@
 ﻿@using System.Web;
 @using Microsoft.AspNetCore.Identity;
-@model How2GamesUser;
+@using How2Games.Domain.ViewModels;
+@model ManageUserRolesViewModel;
 @inject RoleManager<IdentityRole> roleManager;
 
+<link rel="stylesheet" href="~/css/AdminSite.css" asp-append-version="true" />
 @if (Model != null)
 {
 
+    <ul>
+        <h5>Name:</h5>
+        <p>@Model.user.FullName</p>
+        <h5>UserName:</h5>
+        <p>@Model.user.UserName</p>
+        <h5>Email</h5>
+        <p>@Model.user.Email</p>
+    </ul>
 
-    <h5>Name:</h5> <p>@Model.FullName</p>
-    <h5>UserName:</h5><p>@Model.UserName</p>
-    <h5>Email</h5><p>@Model.Email</p>
-
-    @foreach(var role in roleManager.Roles)
+    @foreach (var role in roleManager.Roles)
     {
         <label>@role.Name</label>
-     <input type="checkbox"/>   
+        <input asp-for="Selected" type="checkbox" />
     }
+    <div class="divRight">
 
-
-<button type="button">Delete User</button>
-<button type="submit">Update User</button>
+        <form method="POST" asp-action="DeleteUser" asp-controller="Admin" asp-route-userId="@Model.user.Id">
+            <button class="btn btn-primary" type="submit">Delete User</button>
+        </form>
+        <form method="POST" asp-action="UpdateUser" asp-controller="Admin" asp-route-userId="@Model.user.Id">
+            <button class="btn btn-primary" type="submit">Update User</button>
+        </form>
+    </div>
 }
 else
 {
-<p>No user with that id exists.</p>
+    <p>No user with that id exists.</p>
 }
