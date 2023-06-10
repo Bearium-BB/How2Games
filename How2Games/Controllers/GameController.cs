@@ -53,12 +53,23 @@ namespace How2Games.Controllers
 
         public IActionResult Create()
         {
+            var question = new Question
+            {
+                Title = "Example Question",
+                UserId = 1,
+                Text = "This is an example question for ARK 2",
+                ViewCount = 0
+            };
+            _gamedb.Games.Include(x => x.Questions).First(x => x.Name == "ARK 2").Questions.Add(question);
+
+            _gamedb.SaveChanges();
             return View(new Game());
         }
 
         [HttpPost]
         public IActionResult SteamCreate()
         {
+
             return View();
         }
 

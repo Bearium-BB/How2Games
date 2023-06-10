@@ -52,6 +52,7 @@ namespace How2Games.DataAccess.Data
                 .HasMany(g => g.PublisherTags)
                 .WithMany(t => t.Games)
                 .UsingEntity(j => j.ToTable("GamePublisherTag"));
+
         }
     }
 }

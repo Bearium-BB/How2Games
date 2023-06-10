@@ -82,9 +82,9 @@ namespace How2Games.DataAccess.SearchBarAction
         }
 
 
-        public async Task<HashSet<Question>> QuestionSearchBar(string searchQuery,string GameName)
+        public async Task<HashSet<Question>> QuestionSearchBar(string searchQuery,string gameName)
         {
-            var game = await _gamescontext.Games.Include(g => g.Questions).FirstOrDefaultAsync(x => x.Name.ToUpper() == GameName.ToUpper());
+            var game = await _gamescontext.Games.Include(g => g.Questions).FirstOrDefaultAsync(x => x.Name.ToUpper() == gameName.ToUpper());
 
             var question = game.Questions.ToList();
             
