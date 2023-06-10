@@ -11,8 +11,10 @@ namespace How2Games.Controllers
         }
 
         [HttpPost]
-        public IActionResult UploadFile(string fileName, IFormFile file)
+        public JsonResult UploadFile(string fileName, IFormFile file)
         {
+            ImageUploadResponseModel responseModel = new ImageUploadResponseModel();
+
             if (file != null && file.Length > 0)
             {
                 // Set the path to save the file within the wwwroot/Uploads folder
@@ -21,10 +23,16 @@ namespace How2Games.Controllers
                 // Save the file
                 using (var stream = new FileStream(filePath, FileMode.Create))
                     file.CopyTo(stream);
+
+                responseModel.Success = true;
             }
 
+            else
+            {
+                responseModel.Success = false;
+            }
 
-            return View();
+            return Json(responseModel);
         }
     }
 }

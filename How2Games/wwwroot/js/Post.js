@@ -6,10 +6,10 @@
     if (file) {
         var formData = new FormData();
         formData.append('file', file);
-
+        var fileName = generateGuid()
         var imgElement = document.createElement('img');
         var fileName = generateGuid();
-        imgElement.src = "~/Images/" + fileName;
+        imgElement.src = "/Images/" + fileName;
 
         var imageContainer = document.getElementById('post');
         imageContainer.appendChild(imgElement);
