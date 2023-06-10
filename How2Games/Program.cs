@@ -79,20 +79,7 @@ namespace How2Games
 
             var app = builder.Build();
 
-            using(var scope = app.Services.CreateScope())
-            {
-                var service = scope.ServiceProvider;
 
-                var context = service.GetRequiredService<GamesContext>();  
-                context.Database.Migrate();
-
-                var roleManager = service.GetRequiredService<RoleManager<IdentityRole>>();
-
-                // Call the InitializeRoles method
-                RoleInitializer.InitializeRoles(roleManager);
-
-
-            }
 // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -114,7 +101,7 @@ namespace How2Games
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-            _ = RoleInitializer.Initialize(app);
+         
             app.Run();
         }
 
