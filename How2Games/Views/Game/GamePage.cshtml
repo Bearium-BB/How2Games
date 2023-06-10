@@ -1,11 +1,42 @@
 @using System.Web;
 @model Game
 
- <div class="hero-banner">
-    <img src="@Model.ImgUrl" alt="Hero Image">
-  </div>
-<h1>@Model.Name</h1>
+<link rel="stylesheet" href="~/css/GamePage.css" />
 
-<div id="DetailedDescription">
+<div id="Flex-GamePage">
+    <h1>@Model.Name</h1>
+    <img src="@Model.ImgUrl"></img>
+    <div id="Flex-GamePage-Text">
+        <p>@Model.ShortDescription</p>
+    </div>
+    <div id="newQuestionedFlexbox">
+        <a src="" id="NewQuestion">New Question</a>
+        <partial name="~/Views/SearchBar/_GamePageSearchBar.cshtml" />
+    </div>
+    <div id="SearchResultsQuestionContainer">
+        <div id="searchResultsQuestion">
+        </div>
+    </div>
+
+
+</div>
+
+
+@if (Model.Questions != null)
+{
+    @foreach (var i in Model.Questions)
+    {
+        <div>
+            <div>
+                @i.Votes
+            </div>
+            <div>
+                @i.Title
+            </div>
+        </div>
+    }
+}
+@*<div id="DetailedDescription">
     @Html.Raw(HttpUtility.HtmlDecode(Model.DetailedDescription));
 </div>
+*@

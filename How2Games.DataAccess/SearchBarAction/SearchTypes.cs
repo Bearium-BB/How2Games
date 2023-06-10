@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-
+using How2Games.Domain.DB;
 
 namespace How2Games.DataAccess.SearchBarAction
 {
@@ -74,6 +74,40 @@ namespace How2Games.DataAccess.SearchBarAction
             HashSet<string> searchResults = new HashSet<string>();
 
             foreach (var name in GmaeDistance.OrderBy(x => x.Value).Take(5))
+            {
+                searchResults.Add(name.Key);
+            }
+
+            return searchResults;
+        }
+
+
+        public async Task<HashSet<Question>> QuestionSearchBar(string searchQuery,string gameName)
+        {
+            var game = await _gamescontext.Games.Include(g => g.Questions).FirstOrDefaultAsync(x => x.Name.ToUpper() == gameName.ToUpper());
+
+            var question = game.Questions.ToList();
+            
+
+            for (int i = 0; i < question.Count; i++)
+            {
+                question[i].Title = question[i].Title.ToUpper();
+            }
+            searchQuery = searchQuery.ToUpper();
+
+            var questions = question.Where(x => x.Title.StartsWith(searchQuery));
+
+            Dictionary<Question, int> QuestionDistance = new Dictionary<Question, int>();
+
+            foreach (var i in questions)
+            {
+                int Distance = LevenshteinDistance(searchQuery, i.Title);
+                QuestionDistance.TryAdd(i, Distance);
+            }
+
+            HashSet<Question> searchResults = new HashSet<Question>();
+
+            foreach (var name in QuestionDistance.OrderBy(x => x.Value).Take(5))
             {
                 searchResults.Add(name.Key);
             }

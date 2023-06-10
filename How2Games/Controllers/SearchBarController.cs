@@ -64,5 +64,21 @@ namespace How2Games.Controllers
             return PartialView("_SearchResults", new HashSet<string>());
         }
 
+        [HttpPost]
+        public async Task<IActionResult> SearchQuestion(string searchQueryQuestion, string gameName)
+        {
+            //Console.Clear();
+            //Console.WriteLine(gameName);
+            //Console.WriteLine(searchQueryQuestion);
+            if (!string.IsNullOrEmpty(searchQueryQuestion))
+            {
+                var searchResults = await _searchBarServices.QuestionSearchBar(searchQueryQuestion, gameName);
+
+                return PartialView("_GamePageSearchResults", searchResults);
+            }
+
+            return PartialView("_GamePageSearchResults", new HashSet<Question>());
+        }
+
     }
 }

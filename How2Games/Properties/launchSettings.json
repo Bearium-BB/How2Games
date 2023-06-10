@@ -1,4 +1,5 @@
 ﻿{
+  "liveServer.settings.ignoreFiles": [ "**" ],
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -15,14 +16,17 @@
       "applicationUrl": "https://localhost:7180;http://localhost:5126",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "reloadConfigFile": ""
     },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "reloadConfigFile": ""
     }
   }
 }
+
