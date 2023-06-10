@@ -1,0 +1,27 @@
+﻿@using System.Web;
+@using Microsoft.AspNetCore.Identity;
+@model How2GamesUser;
+@inject RoleManager<IdentityRole> roleManager;
+
+@if (Model != null)
+{
+
+
+    <h5>Name:</h5> <p>@Model.FullName</p>
+    <h5>UserName:</h5><p>@Model.UserName</p>
+    <h5>Email</h5><p>@Model.Email</p>
+
+    @foreach(var role in roleManager.Roles)
+    {
+        <label>@role.Name</label>
+     <input type="checkbox"/>   
+    }
+
+
+<button type="button">Delete User</button>
+<button type="submit">Update User</button>
+}
+else
+{
+<p>No user with that id exists.</p>
+}

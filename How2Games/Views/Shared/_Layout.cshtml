@@ -1,47 +1,90 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<How2GamesUser> SignedIn;
+@inject RoleManager<IdentityRole> roleManager;
+@using How2Games.DataAccess.Data;
+@using How2Games.Domain.ViewModels;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - How2Games</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/How2Games.styles.css" asp-append-version="true" />
 </head>
+
 <body>
+<div class="background">
     <header>
         <div class="flex-container">
-            <div id="imgDiv"><img src="/how2games-low-resolution-color-logo-removebg-preview (1).png" id="pfp"></div>
-            <form>
+            <div class="left"> 
+            <div id="imgDiv"><img src="/Logo.png" id="pfp"></div>
+            </div>
+            <div class="mid">
                 <fieldset>
-                    <input type="text" placeholder="Search ...">
+                    <partial name="~/Views/SearchBar/Search.cshtml" />
                 </fieldset>
-            </form>
-            <nav>
-                <ul>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="CreatePost">Post</a>
-                    </li>
-                </ul>
-            </nav>
+            </div>
+            <div class="right">
+                @*If the user is signed in, then it will show the code below*@
+                    @if (SignedIn.IsSignedIn(User))
+                    {
+                 <div class="right-div">
+                            <h4 asp-area="Identity">Hello @User.Identity?.Name</h4>
+                            <form method="POST" asp-action="LogOut" asp-controller="User" class="form2">
+                            <button  id="logOut" type="submit">Log Out</button>
+                            </form>
+                        </div>
+
+                    }
+                    @*If the user isnt logged in then it will show two buttons that ask log in or sign up*@
+                    else{
+
+                        <div class="right-div">
+                            <button id="logIn">Log in</button>
+                            <button id="signUp">Sign up</button>
+
+                        </div>
+                    }
+            </div>
         </div>
 
     </header>
-    <hr />
+    <br />
     <div class="container">
+        @Html.Partial("_LoginPartial", new FormUser())
+       
         <main role="main" class="pb-3">
-            @RenderBody()
+                @if (SignedIn.IsSignedIn(User))
+                {
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-controller="Admin" asp-action="Index">Manage users</a>
+                    }
+                }
+                @RenderBody()
         </main>
+
+
     </div>
 
     <footer class="border-top footer text-muted">
+        <div>
+                &copy; 2023 - How2Games - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         <div class="container">
-            &copy; 2023 - How2Games - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - How2Games
+        
         </div>
     </footer>
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-    
+
+    </div>
 </body>
 </html>

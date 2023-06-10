@@ -1,0 +1,67 @@
+﻿
+@using Microsoft.AspNetCore.Identity;
+@using How2Games.Domain.ViewModels;
+@model FormUser;
+
+@*This part of my code gains all the infromation for the controller to utilize 
+    And add into the database. The log in or sign up show depeding on whether the user 
+    will click the log in button or the sign up button and depedning on that it will show
+    the corresponding form. There are two functions at play. The Sign up which allows the user 
+    to add thier First Name, Last name, Email, UserName, Password and after they enter those it 
+    will immidiately log them in
+*@
+<div class="text-center">
+    <div class="container">
+
+        <div id="overlay">
+            <div class="form">
+                <h2>How2Games</h2>
+                <p>Create a How2Games Acccount</p>
+                <br>
+                <form method="POST" asp-action="SignUp" asp-controller="User" name="registration" onsubmit="return validatePassword()">
+                    @*Grabs first name*@
+                    <input type="text" asp-for="@Model.FirstName" name="first_name" placeholder="First Name *" required pattern="^[A-Za-z]{1,20}$">
+                    @*Grabs last name*@
+                    <input type="text" asp-for="@Model.LastName" name="last_name" placeholder="Last Name *" required pattern="^[A-Za-z]{1,20}$">
+                    @*Grabs email*@
+                    <input class="check" asp-for="@Model.Email" type="email" name="email" placeholder="Email (abc@email.com) *">
+                    @*Grabs Username*@
+                    <input class="check" asp-for="@Model.UserName" type="text" name="UserName" placeholder="Username *" required pattern="{1-30}">
+                    @*Grabs password*@
+                    <input class="check" asp-for="@Model.Password" type="password" name="password" placeholder="Password12345!!! *" id="password">
+                    <br>
+                    <div class="buttons">
+                        <input class="clearBtn" type="reset" value="Clear">
+
+                        <input class="submitBtn" type="submit" value="Submit">
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <div class="container">
+        <div id="overlay1">
+            <div class="form1">
+
+                <h2>How2Games</h2>
+                <p>Log in to your How2Games Acccount</p>
+                <br>
+                <form method="POST" asp-action="LogIn" asp-controller="User" name="registration">
+                    @*Grabs username*@
+                    <input asp-for="@Model.UserName" class="check" type="text" name="UserName" placeholder="Username *" required pattern="{1-30}">
+                    @*Grabs password*@
+                    <input asp-for="@Model.Password" class="check" type="password" name="password" placeholder="Password12345!!! *" id="password">
+                    <br>
+                    <div class="buttons">
+                        <input class="clearBtn" type="reset" value="Clear">
+
+                        <input class="submitBtn" type="submit" value="Submit">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

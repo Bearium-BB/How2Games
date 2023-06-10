@@ -1,0 +1,9 @@
+﻿@model HashSet<Question>
+
+@foreach (var result in Model)
+{
+    <div id="Question">
+        <h3>@result.Title</h3>
+        <p>@result.Text</p>
+    </div>
+}

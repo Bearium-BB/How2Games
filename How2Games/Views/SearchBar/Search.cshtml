@@ -1,0 +1,12 @@
+﻿<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/js/searchBar.js" defer></script>
+
+<link rel="stylesheet" href="~/css/SearchBar.css" />
+
+<form method="post" asp-action="Search" asp-controller="SearchBar">
+    <input type="text" id="searchQuery" name="SearchQuery">
+    <div id="SearchResultsContainer">
+        <div id="searchResults">
+        </div>
+    </div>
+</form>

@@ -1,0 +1,6 @@
+﻿@model HashSet<string>
+
+@foreach (var result in Model)
+{
+    <a href="/Game/DoesGameExist?GameName=@result">@result</a>
+}
