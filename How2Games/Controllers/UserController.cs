@@ -1,4 +1,5 @@
-﻿using How2Games.DataAccess.Data;
+using How2Games.DataAccess.Data;
+using How2Games.Domain.ViewModels;
 using How2Games.Domain.DB;
 using How2Games.Services.GameServices;
 using How2Games.Services.LogInService;
@@ -6,6 +7,8 @@ using How2Games.Services.TagServices;
 using How2Games.Services.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using How2Games.Domain.Roles;
 
 namespace How2Games.Controllers
 {
@@ -47,7 +50,7 @@ namespace How2Games.Controllers
             var result = await _signInManager.PasswordSignInAsync(_gamesContext.Users.FirstOrDefault(x => x.UserName == user.UserName), user.Password, true, false);
             if (result.Succeeded)
             {
-
+                await _userManager.AddToRoleAsync(user, Roles.Basic.ToString());
                 return RedirectToAction("Index", "Home");
             }
             else

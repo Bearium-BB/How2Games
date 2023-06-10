@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using How2Games.Domain.DB;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace How2Games.Domain.DB
+namespace How2Games.Domain.ViewModels
 {
     public class FormUser : How2GamesUser
     {

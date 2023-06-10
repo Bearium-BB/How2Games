@@ -138,7 +138,6 @@ fieldset{
 
     display: block;
     width: 40vw;
-    height: 85vh;
     margin: 10%;
     background: #FFF;
     border: 3px solid whitesmoke;
@@ -149,7 +148,7 @@ fieldset{
 
 .form1 {
     width: 35vw;
-    height: 55vh;
+    
     margin: 10%;
     background: #FFF;
     border: 3px solid whitesmoke;
