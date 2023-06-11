@@ -1,0 +1,12 @@
+.divRight {
+    display:flex;
+    margin-top: 20px;
+    margin-bottom: 21.580px;
+    justify-content: space-between;
+    width: 300px;
+    font-size:12px;
+}
+.labelRadio{
+    font-size: 12px;
+
+}

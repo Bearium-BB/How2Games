@@ -4,32 +4,45 @@
 @model ManageUserRolesViewModel;
 @inject RoleManager<IdentityRole> roleManager;
 
-<link rel="stylesheet" href="~/css/AdminSite.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
 @if (Model != null)
 {
-
+    <div>
     <ul>
-        <h5>Name:</h5>
-        <p>@Model.user.FullName</p>
-        <h5>UserName:</h5>
-        <p>@Model.user.UserName</p>
-        <h5>Email</h5>
-        <p>@Model.user.Email</p>
+        <li>Name: @Model.user.FullName</li>
+        <li>UserName: @Model.user.UserName</li>
+        <li>Email: @Model.user.Email</li>
     </ul>
+    </div>
 
-    @foreach (var role in roleManager.Roles)
-    {
-        <label>@role.Name</label>
-        <input asp-for="Selected" type="checkbox" />
-    }
     <div class="divRight">
 
-        <form method="POST" asp-action="DeleteUser" asp-controller="Admin" asp-route-userId="@Model.user.Id">
-            <button class="btn btn-primary" type="submit">Delete User</button>
-        </form>
+  
         <form method="POST" asp-action="UpdateUser" asp-controller="Admin" asp-route-userId="@Model.user.Id">
+            @foreach (var role in roleManager.Roles)
+            {
+
+                if (Model.Selected)
+                {
+                    <label class="labelRadio">
+                        @role.Name
+                    </label>
+                        <input type="radio" asp-for="RoleName" value="@role.Name">
+                    
+
+                }
+                else{
+                    <label class="labelRadio">@role.Name</label>
+
+                        <input type="radio" asp-for="RoleName" value="@role.Name">
+                  
+                }
+
+            }
             <button class="btn btn-primary" type="submit">Update User</button>
+            <button class="btn btn-primary" type="submit" asp-action="DeleteUser" asp-route-userId="@Model.user.Id">Delete User</button>
         </form>
+     
     </div>
 }
 else

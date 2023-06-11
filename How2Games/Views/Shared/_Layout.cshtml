@@ -31,7 +31,8 @@
             <div class="right">
                 @*If the user is signed in, then it will show the code below*@
                     @if (SignedIn.IsSignedIn(User))
-                    {
+                            {
+                                
                  <div class="right-div">
                             <h4 asp-area="Identity">Hello @User.Identity?.Name</h4>
                             <form method="POST" asp-action="LogOut" asp-controller="User" class="form2">
