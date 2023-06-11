@@ -1,1 +1,52 @@
-﻿
+﻿@using How2Games.Domain.Form
+@model FormGameCreate;
+<link rel="stylesheet" href="~/css/GameCreate.css" />
+<script src="~/js/GameCreate.js" defer></script>
+
+
+<form method="POST" asp-action="Create" asp-controller="Game" class="game-form">
+    <label for="Name">Name</label>
+    <input type="text" asp-for="@Model.Name" name="Name" placeholder="Name" class="form-input">
+    <label for="ShortDescription">Short description</label>
+    <input type="text" asp-for="@Model.ShortDescription" name="ShortDescription" placeholder="Short description" class="form-input">
+    <label for="ImgUrl">Image URL</label>
+    <input type="text" asp-for="@Model.ImgUrl" name="ImgUrl" placeholder="https://" class="form-input">
+
+    <div class="tag-section">
+        <div class="tag-input-container">
+            <label for="textInputPublisher">Add Publisher tags here</label>
+            <input type="text" id="textInputPublisher" class="tag-input">
+            <button type="button" onclick="appendToTextBox('textInputPublisher', 'textBoxPublisher')" class="add-button">Add</button>
+        </div>
+        <div class="tag-output-container">
+            <label for="PublisherTags">Publisher Tag</label>
+            <textarea asp-for="@Model.PublisherTags" name="PublisherTags" id="textBoxPublisher" rows="5" cols="50" readonly class="tag-output"></textarea>
+        </div>
+    </div>
+
+    <div class="tag-section">
+        <div class="tag-input-container">
+            <label for="textInputDeveloper">Add Developer tags here</label>
+            <input type="text" id="textInputDeveloper" class="tag-input">
+            <button type="button" onclick="appendToTextBox('textInputDeveloper', 'textBoxDeveloper')" class="add-button">Add</button>
+        </div>
+        <div class="tag-output-container">
+            <label for="DeveloperTags">Developer Tags</label>
+            <textarea asp-for="@Model.DeveloperTags" name="DeveloperTags" id="textBoxDeveloper" rows="5" cols="50" readonly class="tag-output"></textarea>
+        </div>
+    </div>
+
+    <div class="tag-section">
+        <div class="tag-input-container">
+            <label for="textInputGenre">Add Genre tags here</label>
+            <input type="text" id="textInputGenre" class="tag-input">
+            <button type="button" onclick="appendToTextBox('textInputGenre', 'textBoxGenre')" class="add-button">Add</button>
+        </div>
+        <div class="tag-output-container">
+            <label for="GenreTags">Genre Tags</label>
+            <textarea asp-for="@Model.GenreTags" name="GenreTags" id="textBoxGenre" rows="5" cols="50" readonly class="tag-output"></textarea>
+        </div>
+    </div>
+    <input type="submit" value="Submit" class="submit-button">
+</form>
+

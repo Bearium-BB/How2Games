@@ -1,5 +1,6 @@
 ﻿using How2Games.DataAccess.Data;
 using How2Games.Domain.DB;
+using How2Games.Domain.Form;
 using How2Games.Services.GameServices;
 using How2Games.Services.TagServices;
 using How2Games.Services.User;
@@ -47,7 +48,7 @@ namespace How2Games.Controllers
             return RedirectToAction("GamePage", "Game", new { GameName = GameName });
 
         }
-        [Authorize(Roles = "Admin")]
+
         public IActionResult GamePage(string GameName)
         {
             var Game = _gamedb.Games.Include(x => x.GenreTags).FirstOrDefault(x => x.Name == GameName);
@@ -56,8 +57,20 @@ namespace How2Games.Controllers
 
         public IActionResult Create()
         {
-            return View(new Game());
+            return View(new FormGameCreate());
         }
+
+        [HttpPost]
+        public IActionResult Create(FormGameCreate formGameCreate)
+        {
+            var GenreTags = formGameCreate.GenreTags.Split(",").ToList();
+            var PublisherTags = formGameCreate.PublisherTags.Split(",").ToList();
+            var DeveloperTags = formGameCreate.DeveloperTags.Split(",").ToList();
+
+            _gameCRUDServices.Insert(formGameCreate.Name, formGameCreate.ShortDescription, "", formGameCreate.ImgUrl, GenreTags, PublisherTags, DeveloperTags);
+            return RedirectToAction("GamePage", "Game", new { GameName = formGameCreate.Name });
+        }
+
 
         [HttpPost]
         public IActionResult SteamCreate()
