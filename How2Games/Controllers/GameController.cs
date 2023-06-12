@@ -47,11 +47,16 @@ namespace How2Games.Controllers
             return RedirectToAction("GamePage", "Game", new { GameName = GameName });
 
         }
-        [Authorize(Roles = "Admin")]
         public IActionResult GamePage(string GameName)
         {
             var Game = _gamedb.Games.Include(x => x.GenreTags).FirstOrDefault(x => x.Name == GameName);
-            return View(Game);
+            if (Game != null)
+            {
+                Game.ViewCount++;
+                _gamedb.SaveChanges();
+                return View(Game);
+            }
+            return RedirectToAction("Error", "Home");
         }
 
         public IActionResult Create()
@@ -65,6 +70,5 @@ namespace How2Games.Controllers
 
             return View();
         }
-
     }
 }
