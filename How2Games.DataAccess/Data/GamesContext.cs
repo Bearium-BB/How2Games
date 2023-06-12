@@ -32,7 +32,7 @@ namespace How2Games.DataAccess.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False; MultipleActiveResultSets=True;", b => b.MigrationsAssembly("How2Games.DataAccess"));
+            optionsBuilder.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=How2Games;Integrated Security=false;User ID=zach;Password=NewPassword1234; TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False; MultipleActiveResultSets=True;", b => b.MigrationsAssembly("How2Games.DataAccess"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

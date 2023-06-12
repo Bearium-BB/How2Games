@@ -19,26 +19,33 @@
 
   
         <form method="POST" asp-action="UpdateUser" asp-controller="Admin" asp-route-userId="@Model.user.Id">
+            <div class="Roles">
             @foreach (var role in roleManager.Roles)
             {
 
                 if (Model.Selected)
                 {
-                    <label class="labelRadio">
-                        @role.Name
-                    </label>
-                        <input type="radio" asp-for="RoleName" value="@role.Name">
-                    
+                    <div class="radioButton">
+                        <label class="labelRadio" for="RoleName">
+                            @role.Name
+                        </label>
+                            <input type="radio" asp-for="RoleName" value="@role.Name">
+                            </div>
+
+                        
 
                 }
                 else{
-                    <label class="labelRadio">@role.Name</label>
+                    <div class="radioButton">
+                        <label class="labelRadio" for="RoleName">@role.Name</label>
 
                         <input type="radio" asp-for="RoleName" value="@role.Name">
+                    </div>
                   
                 }
 
             }
+            </div>
             <button class="btn btn-primary" type="submit">Update User</button>
             <button class="btn btn-primary" type="submit" asp-action="DeleteUser" asp-route-userId="@Model.user.Id">Delete User</button>
         </form>

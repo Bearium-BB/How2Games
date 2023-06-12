@@ -21,7 +21,7 @@
     <header>
         <div class="flex-container">
             <div class="left"> 
-            <div id="imgDiv"><img src="/Logo.png" id="pfp"></div>
+            <div id="imgDiv"><a asp-action="Index" asp-controller="Home"><img src="/Logo.png" id="pfp"></a></div>
             </div>
             <div class="mid">
                 <fieldset>
@@ -72,9 +72,7 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div>
-                &copy; 2023 - How2Games - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        <div class="container">
+         <div class="container">
             &copy; 2023 - How2Games
         
         </div>
