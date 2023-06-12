@@ -1,5 +1,6 @@
 ﻿using How2Games.DataAccess.Data;
 using How2Games.Domain.DB;
+using How2Games.Domain.Form;
 using How2Games.Services.GameServices;
 using How2Games.Services.TagServices;
 using How2Games.Services.User;
@@ -47,27 +48,35 @@ namespace How2Games.Controllers
             return RedirectToAction("GamePage", "Game", new { GameName = GameName });
 
         }
-        [Authorize(Roles = "Admin")]
+
         public IActionResult GamePage(string GameName)
         {
             var Game = _gamedb.Games.Include(x => x.GenreTags).FirstOrDefault(x => x.Name == GameName);
-            return View(Game);
+            if (Game != null)
+            {
+                Game.ViewCount++;
+                _gamedb.SaveChanges();
+                return View(Game);
+            }
+            return RedirectToAction("Error", "Home");
         }
 
         public IActionResult Create()
         {
-            var question = new Question
-            {
-                Title = "Example Question",
-                UserId = 1,
-                Text = "This is an example question for ARK 2",
-                ViewCount = 0
-            };
-            _gamedb.Games.Include(x => x.Questions).First(x => x.Name == "ARK 2").Questions.Add(question);
-
-            _gamedb.SaveChanges();
-            return View(new Game());
+            return View(new FormGameCreate());
         }
+
+        [HttpPost]
+        public IActionResult Create(FormGameCreate formGameCreate)
+        {
+            var GenreTags = formGameCreate.GenreTags.Split(",").ToList();
+            var PublisherTags = formGameCreate.PublisherTags.Split(",").ToList();
+            var DeveloperTags = formGameCreate.DeveloperTags.Split(",").ToList();
+
+            _gameCRUDServices.Insert(formGameCreate.Name, formGameCreate.ShortDescription, "", formGameCreate.ImgUrl, GenreTags, PublisherTags, DeveloperTags);
+            return RedirectToAction("GamePage", "Game", new { GameName = formGameCreate.Name });
+        }
+
 
         [HttpPost]
         public IActionResult SteamCreate()
@@ -75,6 +84,5 @@ namespace How2Games.Controllers
 
             return View();
         }
-
     }
 }

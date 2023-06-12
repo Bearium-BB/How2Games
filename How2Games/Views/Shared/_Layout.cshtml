@@ -57,7 +57,7 @@
     <br />
     <div class="container">
         @Html.Partial("_LoginPartial", new FormUser())
-       
+
         <main role="main" class="pb-3">
                 @if (SignedIn.IsSignedIn(User) && User.IsInRole("Admin"))
                 {
@@ -72,9 +72,8 @@
     </div>
 
     <footer class="border-top footer text-muted">
-         <div class="container">
+        <div class="container">
             &copy; 2023 - How2Games
-        
         </div>
     </footer>
     

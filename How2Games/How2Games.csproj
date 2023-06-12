@@ -42,7 +42,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\js\" />
-
     <ProjectReference Include="..\How2Games.Services\How2Games.Services.csproj" />
 
   </ItemGroup>

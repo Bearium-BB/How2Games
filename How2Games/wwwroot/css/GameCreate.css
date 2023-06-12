@@ -1,0 +1,84 @@
+﻿@keyframes blink-red {
+    0% {
+        color: red;
+    }
+
+    50% {
+        color: transparent;
+    }
+
+    100% {
+        color: red;
+    }
+}
+
+.game-form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.form-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.tag-section {
+    margin-bottom: 20px;
+}
+
+.tag-input-container {
+    display: flex;
+    margin-bottom: 10px;
+    flex-direction: column;
+}
+
+.tag-input {
+    flex-grow: 1;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.add-button {
+    width: 50px;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.tag-output-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.tag-output {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    resize: vertical;
+}
+
+.submit-button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+    .submit-button:hover {
+        background-color: #0056b3;
+    }
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
