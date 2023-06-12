@@ -13,7 +13,6 @@ namespace How2Games.DataAccess.GameAction
         void Update(int? id, string? name, string? detailedDescription, string? imgUrl, List<string>? tags);
         Game Read(int id);
         void Delete(int id);
-        Game Create(string name, string shortDescription, string detailedDescription, string imgUrl, List<string> tags);
         void AutoCreateSteamGameByAppId(string Name);
     }
 }

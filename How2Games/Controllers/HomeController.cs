@@ -1,5 +1,5 @@
 using How2Games.DataAccess.Data;
-
+using How2Games.Domain.Models;
 using How2Games.Domain.DB;
 using How2Games.Services.GameServices;
 using How2Games.Services.TagServices;
@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
 using How2Games.DataAccess.User;
+using Microsoft.EntityFrameworkCore;
 using How2Games.DataAccess;
 using How2Games.Domain.Roles;
 
@@ -41,18 +42,13 @@ namespace How2Games.Controllers
 
         }
 
-        public  IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            List<Game> MostViewed = await _gamesContext.Games.Include(g => g.GenreTags).Include(g => g.DeveloperTags).OrderByDescending(g => g.ViewCount).Take(4).ToListAsync();
+            List<Game> MostQuestions = await _gamesContext.Games.Include(g => g.GenreTags).Include(g => g.DeveloperTags).OrderByDescending(g => g.Questions.Count).Take(4).ToListAsync();
 
-            return View();
+            return View(new HomePageViewModel(MostViewed, MostQuestions));
         }
-        
-        public IActionResult HomePage()
-        {
-            return View();
-        }
-
- 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
