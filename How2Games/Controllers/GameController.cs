@@ -3,6 +3,7 @@ using How2Games.Domain.DB;
 using How2Games.Services.GameServices;
 using How2Games.Services.TagServices;
 using How2Games.Services.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,7 @@ namespace How2Games.Controllers
         private readonly IGameCRUDServices _gameCRUDServices;
         private readonly SteamApiContext _steamdb;
         private readonly GamesContext _gamedb;
+
 
         public GameController(ILogger<HomeController> logger, IUserCRUDServices userCRUDServices, IGameCRUDServices gameCRUDServices, SteamApiContext steamdb, GamesContext gamedb)
         {
@@ -45,6 +47,7 @@ namespace How2Games.Controllers
             return RedirectToAction("GamePage", "Game", new { GameName = GameName });
 
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult GamePage(string GameName)
         {
             var Game = _gamedb.Games.Include(x => x.GenreTags).FirstOrDefault(x => x.Name == GameName);
@@ -59,6 +62,7 @@ namespace How2Games.Controllers
         [HttpPost]
         public IActionResult SteamCreate()
         {
+
             return View();
         }
 

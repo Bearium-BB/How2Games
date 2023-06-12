@@ -1,5 +1,6 @@
 ﻿using How2Games.DataAccess.GameAction;
 using How2Games.DataAccess.SearchBarAction;
+using How2Games.Domain.DB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace How2Games.Services.SearchBarServices
         public async Task<HashSet<string>> GameSearchBar(string searchQuery) { 
             return await _searchTypes.GameSearchBar(searchQuery);
         }
+        public async Task<HashSet<Question>> QuestionSearchBar(string searchQuery, string gameName)
+        {
+            return await _searchTypes.QuestionSearchBar(searchQuery, gameName);
+        }
+
 
     }
 }

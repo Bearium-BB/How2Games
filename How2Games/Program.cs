@@ -12,17 +12,26 @@ using How2Games.DataAccess.SearchBarAction;
 using How2Games.Services.SearchBarServices;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Options;
+using Microsoft.Identity.Client;
+using How2Games.Domain.Roles;
+using Microsoft.AspNetCore.Authorization;
+using How2Games.DataAccess;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using How2Games.DataAccess.SearchBarAction;
 
 namespace How2Games
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddControllersWithViews();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
@@ -31,7 +40,8 @@ namespace How2Games
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<GamesContext>(options =>
 
-            options.UseSqlServer(builder.Configuration.GetConnectionString(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Connect Timeout=1200;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")));
+
+            options.UseSqlServer(builder.Configuration.GetConnectionString(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Connect Timeout=1200;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False; MultipleActiveResultSets=True;")));
             
             builder.Services.AddDbContext<SteamApiContext>(options =>
             options.UseMySql("server=mysql.brettbowley.com;port=3306;database=test;user=brett;",
@@ -41,7 +51,8 @@ namespace How2Games
 
 
             builder.Services.AddDefaultIdentity<How2GamesUser>(options => options.SignIn.RequireConfirmedAccount = false)
-            .AddEntityFrameworkStores<GamesContext>();
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<GamesContext>();
             builder.Services.AddScoped<PasswordHasher<IdentityUser>>();
 
             builder.Services.AddScoped<IUserCRUD, UserCRUD>();
@@ -62,12 +73,14 @@ namespace How2Games
             builder.Services.AddScoped<IGameCRUD, GameCRUD>();
             builder.Services.AddScoped<IGameCRUDServices, GameCRUDServices>();
 
+
             builder.Services.AddScoped<ISearchTypes, SearchTypes>();
             builder.Services.AddScoped<ISearchBarServices, SearchBarServices>();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+
+// Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -83,12 +96,14 @@ namespace How2Games
             app.UseAuthentication();
             app.UseAuthorization();
 
-
+  
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
+         
             app.Run();
         }
+
     }
 }

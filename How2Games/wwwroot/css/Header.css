@@ -26,7 +26,7 @@ header {
 
     header div {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
     }
 
 header {
@@ -66,6 +66,7 @@ header {
 
 .left{
     width: 33%;
+    justify-content: left;
     align-items: flex-start;
 
 }
@@ -103,6 +104,7 @@ fieldset{
     margin-bottom: 10px;
 
 }
+/* Work in Progress(Dark Mode) */
 .darkmode-toggle{
     background-color: black;
     color: white;
@@ -138,7 +140,6 @@ fieldset{
 
     display: block;
     width: 40vw;
-    height: 85vh;
     margin: 10%;
     background: #FFF;
     border: 3px solid whitesmoke;
@@ -149,7 +150,7 @@ fieldset{
 
 .form1 {
     width: 35vw;
-    height: 55vh;
+    
     margin: 10%;
     background: #FFF;
     border: 3px solid whitesmoke;
@@ -385,54 +386,18 @@ h4{
     }
 }
 
-
-
-
-
-
-
-
-
-
-#DetailedDescription{
-    width: 616px;
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    flex-direction:column;
-    margin:0 auto;
+.footer div {
+    margin-left: 10px;
 }
 
 
-.hero-banner {
-    position: relative;
-    height: 400px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-    padding: 20px;
-}
 
-.hero-banner img {
-    width: 100%;
-    height: auto;
-    object-fit:cover;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 
-.hero-banner h1 {
-    font-size: 40px;
-    margin-bottom: 10px;
-}
 
-.hero-banner p {
-    font-size: 20px;
-    margin-bottom: 20px;
-}
+
+
+
+
+
+
+
