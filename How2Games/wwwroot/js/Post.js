@@ -1,18 +1,12 @@
 ﻿function CreateQuestion() {
-    var consoleLogger = document.getElementById("console");
-    var formData = FormData();
-    var question = document.getElementById("post");
-    var game = document.getElementById("gameId");
-    var title = document.getElementById("title");
-    var questionText = question.innerHTML;
-    var titleText = title.value;
-    var gameId = game.value;
+    var formData = new FormData();
+    var question = document.getElementById("post").innerHTML;
+    var gameId = document.getElementById("gameId").value;
+    var title = document.getElementById("title").value;
 
-    consoleLogger.innerText = "semen";
-
-    formData.append("questionText", "testing");
-    formData.append("gameId", 1);
-    formData.append("title", "testing");
+    formData.append("questionText", question);
+    formData.append("gameId", gameId);
+    formData.append("title", title);
 
     fetch('/Posts/SubmitQuestion', {
         method: "POST",
@@ -72,7 +66,7 @@ function SelectChange(element) {
     var selection = window.getSelection();
 
     //content editable div
-    const textBox = document.getElementById("text");
+    const textBox = document.getElementById("textBox");
 
     //span element to wrap highlighted text
     const span = document.createElement("span");
@@ -164,7 +158,7 @@ function ChangeText(element) {
     var selection = window.getSelection();
 
     //content editable div
-    const textBox = document.getElementById("text");
+    const textBox = document.getElementById("textBox");
 
     //span element to wrap highlighted text
     const span = document.createElement("span");
@@ -197,7 +191,6 @@ function ChangeText(element) {
 
         // Check if the span range intersects with the selected range
         if (spanRange.intersectsNode(range.startContainer) || spanRange.intersectsNode(range.endContainer)) {
-            console.log(spanElement);
 
             // Access the computed styles and inline styles
             var computedStyles = window.getComputedStyle(spanElement);
@@ -299,7 +292,7 @@ function UploadImage() {
 //when the text is added to the post
 function AddText() {
     var pattern = /(@@|\*\/|\/\*|--|\/\/|@@\*|\*=@@|<|>|@@\*|\*@@)/g;
-    const textBox = document.getElementById("text");
+    const textBox = document.getElementById("textBox");
     const post = document.getElementById("post");
     var cloned = textBox.cloneNode(true);
     post.appendChild(cloned);
@@ -311,4 +304,26 @@ function generateGuid() {
             v = c === 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
+}
+
+function Answer() {
+    const textEditor = document.getElementById("answerText");
+    textEditor.style.display = "block";
+}
+
+function AddAnswer() {
+    var formData = new FormData();
+    var answer = document.getElementById("text2").innerHTML;
+    var questionId = document.getElementById("questionId").value;
+
+    formData.append("answerText", answer);
+    formData.append("questionId", questionId);
+
+    const textEditor = document.getElementById("answerText");
+    textEditor.style.display = "none";
+
+    fetch('/Posts/CreateAnswer', {
+        method: "POST",
+        body: formData
+    })
 }

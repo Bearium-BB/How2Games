@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace How2Games.Domain.Models
 {
-    public class ImageUploadResponseModel
+    public class JsonResponseModel
     {
         public bool Success { get; set; }
 

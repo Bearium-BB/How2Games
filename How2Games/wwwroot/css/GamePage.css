@@ -32,21 +32,13 @@
     margin: 0 auto;
 }
 
-#NewQuestion {
+.blueButton {
     width: 150px;
-    height: 36px;
-    padding: 10px;
+    height: 75px;
     text-align: center;
     background-color: #1A73E8;
-    border: 1px solid #1A73E8;
-    letter-spacing: .2px;
-    font-weight: 600;
-    color: #F8F9F9;
-    cursor: pointer;
-    margin: 0px;
-    display: block;
+    color: white;
     border-radius: 5px;
-    text-decoration: none;
     margin-top: 10px;
     margin-bottom: 10px;
     display: flex;

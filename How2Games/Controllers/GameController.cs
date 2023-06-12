@@ -1,5 +1,6 @@
 ﻿using How2Games.DataAccess.Data;
 using How2Games.Domain.DB;
+using How2Games.Domain.Models;
 using How2Games.Services.GameServices;
 using How2Games.Services.TagServices;
 using How2Games.Services.User;
@@ -16,6 +17,7 @@ namespace How2Games.Controllers
         private readonly IGameCRUDServices _gameCRUDServices;
         private readonly SteamApiContext _steamdb;
         private readonly GamesContext _gamedb;
+        private readonly Microsoft.AspNetCore.Identity.UserManager<How2GamesUser> _userManager;
 
 
         public GameController(ILogger<HomeController> logger, IUserCRUDServices userCRUDServices, IGameCRUDServices gameCRUDServices, SteamApiContext steamdb, GamesContext gamedb)
@@ -51,7 +53,13 @@ namespace How2Games.Controllers
         public IActionResult GamePage(string GameName)
         {
             var Game = _gamedb.Games.Include(x => x.GenreTags).FirstOrDefault(x => x.Name == GameName);
-            return View(Game);
+            Console.WriteLine("Question count: " + _gamedb.Games.Include(x => x.Questions).Count());
+            List<Question> questions = _gamedb.Games.Include(x => x.Questions).FirstOrDefault(x => x.Name == GameName).Questions.ToList();
+            QuestionViewModel questionViewModel = new QuestionViewModel();
+
+            questionViewModel.Game = Game;
+            questionViewModel.Questions = questions;
+            return View(questionViewModel);
         }
 
         [HttpPost]

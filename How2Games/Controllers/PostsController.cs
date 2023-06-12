@@ -40,7 +40,7 @@ namespace How2Games.Controllers
         [HttpPost]
         public JsonResult UploadFile(string fileName, IFormFile file)
         {
-            ImageUploadResponseModel responseModel = new ImageUploadResponseModel();
+            JsonResponseModel responseModel = new JsonResponseModel();
 
             if (file != null && file.Length > 0)
             {
@@ -81,7 +81,7 @@ namespace How2Games.Controllers
         [HttpPost]
         public JsonResult SubmitQuestion(string questionText, int gameId, string title)
         {
-            ImageUploadResponseModel responseModel = new ImageUploadResponseModel();
+            JsonResponseModel responseModel = new JsonResponseModel();
 
             Question question = new Question();
             question.HTML = questionText;
@@ -95,17 +95,68 @@ namespace How2Games.Controllers
             }
             question.UserId = userId;
 
-            Console.WriteLine("Title: " + question.Title);
-            Console.WriteLine("GameId: " + question.GameId);
-            Console.WriteLine("HTML: " + question.HTML);
+            _gamesContext.Questions.Add(question);
+            _gamesContext.SaveChanges();
 
-            /*            _gamesContext.Questions.Add(question);
-                        _gamesContext.SaveChanges();
+            return Json(responseModel);
+        }
 
-                        foreach (var v in _gamesContext.Questions)
-                        {
-                            Console.WriteLine(v.Title);
-                        }*/
+        public IActionResult Question(int id)
+        {
+            QuestionDataViewModel questionData = new QuestionDataViewModel();
+            Question question = _gamesContext.Questions.FirstOrDefault(x => x.Id == id);
+            List<Answer> answers = _gamesContext.Answers.Where(x => x.QuestionId == question.Id).ToList();
+            List<KeyValuePair<string, Answer>> answerKvps = new List<KeyValuePair<string, Answer>>();
+
+            for (int i = 0; i < answers.Count; i++)
+            {
+                KeyValuePair<string, Answer> kvp = new KeyValuePair<string, Answer>();
+                foreach (var v in _userManager.Users)
+                {
+                    if (v.Id == answers[i].UserId)
+                    {
+                        kvp = new KeyValuePair<string, Answer>(v.UserName, answers[i]);
+                        answerKvps.Add(kvp);
+                    }
+                }
+            }
+
+            foreach (var v in _gamesContext.Questions)
+            {
+                if (v.Id == question.Id)
+                {
+                    v.ViewCount++;
+                    _gamesContext.SaveChanges();
+                }
+            }
+            questionData.Question = question;
+            questionData.Username = _userManager.Users.FirstOrDefault(x => x.Id == question.UserId).UserName;
+            questionData.Answers = answerKvps;
+            return View(questionData);
+        }
+
+        [HttpPost]
+        public JsonResult CreateAnswer(string answerText, int questionId)
+        {
+            JsonResponseModel responseModel = new JsonResponseModel();
+            Answer answer = new Answer();
+
+            answer.HTML = answerText;
+            answer.QuestionId = questionId;
+            string userId = "";
+            if (_signInManager.IsSignedIn(User))
+            {
+                userId = User.Identity.GetUserId();
+            }
+            answer.UserId = userId;
+
+            Console.WriteLine("Answer: " + answer.HTML);
+            Console.WriteLine("UserId: " + answer.UserId);
+            Console.WriteLine("QuestionId: " + answer.QuestionId);
+
+            _gamesContext.Answers.Add(answer);
+            _gamesContext.SaveChanges();
+            Console.WriteLine("answer saved");
             return Json(responseModel);
         }
     }

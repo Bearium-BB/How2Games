@@ -1,0 +1,176 @@
+﻿@using How2Games.Domain.Models;
+
+@model QuestionDataViewModel
+
+<link rel="stylesheet" href="~/css/TextEditor.css" />
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    .questionContainer {
+        display: flex;
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        flex-direction: column;
+        align-items: center;
+        border-bottom: 2px solid black;
+        margin-bottom: 30px;
+    }
+
+    .title {
+        display: flex;
+        width: 100%;
+        height: 75px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .no-margin {
+        margin: 0;
+    }
+
+    .column {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 100%;
+    }
+
+    .left-align  {
+        align-items: flex-start;
+    }
+
+    .rright-align {
+        align-items: flex-end;
+    }
+
+    .answers {
+        font-size: 15px;
+    }
+
+    .button {
+        width: 80px;
+    }
+
+    img {
+        width: 50%;
+        height: auto;
+        margin: 20px;
+    }
+
+    .answerContainer {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .textEditor {
+        width: 100%;
+        height: 200px;
+    }
+
+    .text {
+        width: 100%;
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .box {
+        width: 100%;
+    }
+
+    .qAndA {
+        width: 40%;
+        height: auto;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .operation {
+        font-size: 12px;
+    }
+
+    .select {
+        font-size: 12px;
+    }
+
+    footer {
+        display: none;
+    }
+
+    #create {
+        height: 20px;
+        width: 75px;
+        background-color: white;
+        font-size: 12px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    #create:hover {
+        border: 1px solid lightgray;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    #answerText {
+        display: none;
+    }
+</style>
+<script src="~/js/Answer.js" defer></script>
+<script src="~/js/Post.js" defer></script>
+
+<input type="text" class="hidden" id="questionId" value="@Model.Question.Id"/>
+<div class="qAndA">
+    <div class="questionContainer">
+        <div class="title">
+            <div class="column left-align">
+                <h4 class="no-margin">@Model.Question.Title</h4>
+                <h5 style="margin: 0;">Posted By @Model.Username</h5>
+            </div>
+            <div class="column right-align">
+                <h4 class="no-margin answers">Answers: @Model.Question.Answers.Count</h4>
+                <button onclick="Answer()" type="button" class="btn btn-primary button">Answer</button>
+            </div>
+        </div>
+        @Html.Raw(Model.Question.HTML)
+    </div>
+    <div class="answerContainer">
+        <div id="answerText" class="textEditor">
+            <div class="box">
+                <div class="text" contenteditable="true" id="text2"></div>
+                <form class="operations" id="form1" name="form1" method="post">
+                    <select onchange="SelectChange(this)" id="colour" class="select">
+                        <option value="red" style="color: red">Aa</option>
+                        <option value="orange" style="color: orange">Aa</option>
+                        <option value="yellow" style="color: yellow">Aa</option>
+                        <option value="green" style="color: green">Aa</option>
+                        <option value="blue" style="color: blue">Aa</option>
+                        <option value="purple" style="color: purple">Aa</option>
+                        <option value="pink" style="color: pink">Aa</option>
+                        <option value="black" style="color: black">Aa</option>
+                        <option value="gray" style="color: gray">Aa</option>
+                    </select>
+                    <button onclick="ChangeText(this)" type="button" id="italic" class="operation small-operation">I</button>
+                    <button onclick="ChangeText(this)" type="button" id="bold" class="operation small-operation">B</button>
+                    <button onclick="AddAnswer()" id="create" type="button">Post Answer</button>
+                </form>
+            </div>
+        </div>
+        @for(int i = 0; i < Model.Answers.Count; i++) {
+            <div>
+                @Html.Raw(Model.Answers[i].Value.HTML)
+                <p>Posted by @Model.Answers[i].Key</p>
+            </div>
+        }
+    </div>
+</div>
