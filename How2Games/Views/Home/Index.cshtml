@@ -13,6 +13,7 @@
     <div class="cont">
         <div><h1>Most Viewed</h1></div>
         <div class="imgs">
+            <!--loops through most vied games to display them on the page-->
             @foreach (var v in Model.MostViewedGames)
             {
                 <div>
@@ -25,6 +26,7 @@
                         <p>@v.Questions.Count Questions</p>
                     </div>
                     <div class="tags">
+                        <!--loops through the genre tags of the game and makes as many possible up to three -->
                         @for (int i = 0; i <= v.GenreTags.Count() - 1 && i !<= 2; i++)
                         {
                             <p>@v.GenreTags.ElementAt(i).Text</p>
@@ -39,6 +41,7 @@
     <div class="cont">
         <div><h1>Most Questions</h1></div>
         <div class="imgs">
+            <!--loops through most vied games to display them on the page-->
             @foreach (var v in Model.MostQuestionGame)
             {
                 <div>
@@ -51,6 +54,7 @@
                         <p>@v.Questions.Count Questions</p>
                     </div>
                     <div class="tags">
+                        <!--loops through the genre tags of the game and makes as many possible up to three -->
                         @for (int i = 0; i <= v.GenreTags.Count() - 1 && i! <= 2; i++)
                         {
                             <p>@v.GenreTags.ElementAt(i).Text</p>
