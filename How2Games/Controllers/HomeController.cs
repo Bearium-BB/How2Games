@@ -1,5 +1,5 @@
 using How2Games.DataAccess.Data;
-
+using How2Games.Domain.Models;
 using How2Games.Domain.DB;
 using How2Games.Services.GameServices;
 using How2Games.Services.TagServices;
@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
 using How2Games.DataAccess.User;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace How2Games.Controllers
 {
@@ -40,14 +40,20 @@ namespace How2Games.Controllers
 
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            List<Game> MostViewed = await _gamesContext.Games.Include(g => g.GenreTags).Include(g => g.DeveloperTags).OrderByDescending(g => g.ViewCount).Take(4).ToListAsync();
+            List<Game> MostQuestions = await _gamesContext.Games.Include(g => g.GenreTags).Include(g => g.DeveloperTags).OrderByDescending(g => g.Questions.Count).Take(4).ToListAsync();
+
+            return View(new HomePageViewModel(MostViewed, MostQuestions));
         }
         
-        public IActionResult HomePage()
+        public async Task<IActionResult> HomePage()
         {
-            return View();
+            List<Game> MostViewed = await _gamesContext.Games.Include(g => g.GenreTags).Include(g => g.DeveloperTags).OrderByDescending(g => g.ViewCount).Take(4).ToListAsync();
+            List<Game> MostQuestions = await _gamesContext.Games.Include(g => g.GenreTags).Include(g => g.DeveloperTags).OrderByDescending(g => g.Questions.Count).Take(4).ToListAsync();
+            
+            return View(new HomePageViewModel(MostViewed, MostQuestions));
         }
 
         [HttpPost]
