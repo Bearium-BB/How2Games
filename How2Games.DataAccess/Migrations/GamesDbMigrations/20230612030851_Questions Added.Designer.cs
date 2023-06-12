@@ -4,6 +4,7 @@ using How2Games.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace How2Games.DataAccess.Migrations.GamesDbMigrations
 {
     [DbContext(typeof(GamesContext))]
-    partial class GamesContextModelSnapshot : ModelSnapshot
+    [Migration("20230612030851_Questions Added")]
+    partial class QuestionsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,9 +88,8 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -277,14 +279,14 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
                         {
                             Id = "b7ac3d84-d8a8-4628-a254-be921b4b5630",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e308c27d-f460-4155-a314-9356f9cf3e3e",
+                            ConcurrencyStamp = "2927610d-8609-4dac-8d3d-b57476370dec",
                             Email = "abc1@gmail.com",
                             EmailConfirmed = false,
                             FullName = "Zack Zed",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEDqMTcmdOVrQQ2BW+//SCDd/rdGKmT3MfN6W4KLwzvjtjBD8kxSEMwGF+iUt5x+cow==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB4psrwLzicPhpELFBRMrHYGykqPT6WeVFCesqmr0OJbSzoc0kSbX44AHb/zImXAhg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c9f9f05e-9d7f-43c8-a744-a319c3088b4f",
+                            SecurityStamp = "94f870ac-c01e-43c2-995b-675915d737eb",
                             TwoFactorEnabled = false,
                             UserName = "ZackZad"
                         });
@@ -447,21 +449,21 @@ namespace How2Games.DataAccess.Migrations.GamesDbMigrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "8d099c51-2345-4ac9-94d1-5ffd060baea5",
+                            ConcurrencyStamp = "aff7f212-92c0-473d-8855-71b43a126443",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "9272836c-fe5e-4344-b6f8-4e6274e65abc",
+                            ConcurrencyStamp = "f3c72bd5-97ce-450d-871e-b6af939f2456",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "f3fca3b6-a8cb-46a3-840f-bd0e17c57c11",
+                            ConcurrencyStamp = "3cf9dec4-409f-4676-85cc-1d8c9b3b96c3",
                             Name = "Blacklist",
                             NormalizedName = "BLACKLISTED"
                         });

@@ -1,4 +1,20 @@
-﻿document.getElementById('fileInput').addEventListener('change', function () {
+﻿function CreateQuestion() {
+    var formData = new FormData();
+    var question = document.getElementById("post").innerHTML;
+    var gameId = document.getElementById("gameId").value;
+    var title = document.getElementById("title").value;
+
+    formData.append("questionText", question);
+    formData.append("gameId", gameId);
+    formData.append("title", title);
+
+    fetch('/Posts/SubmitQuestion', {
+        method: "POST",
+        body: formData
+    })
+}
+
+document.getElementById('fileInput').addEventListener('change', function () {
     console.log("File Selected");
     var fileInput = this;
     var file = fileInput.files[0];
@@ -6,34 +22,42 @@
     if (file) {
         var formData = new FormData();
         formData.append('file', file);
-        var fileName = generateGuid()
-        var imgElement = document.createElement('img');
-        var fileName = generateGuid();
-        imgElement.src = "/Images/" + fileName;
+        var fileName = generateGuid() + ".jpg";
 
-        var imageContainer = document.getElementById('post');
-        imageContainer.appendChild(imgElement);
+        formData.append('fileName', fileName);
 
         fetch('/Posts/UploadFile', {
             method: 'POST',
-            body: JSON.stringify({ fileName: fileName, file: file })
+            body: formData
         })
+            .then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('File upload failed.');
+                }
+            })
+            .then(function (data) {
+                if (data.success) {
+                    console.log('File uploaded successfully.');
 
-        .then(function (response) {
-            if (response.ok) {
-                console.log('File uploaded successfully.');
-                // Perform any additional actions on success if needed
-            } else {
-                console.error('File upload failed.');
+                    var imgElement = document.createElement('img');
+                    imgElement.src = data.filePath;
+
+                    var imageContainer = document.getElementById('post');
+                    imageContainer.appendChild(imgElement);
+                } else {
+                    console.error(data.error);
+                    // Handle the error if needed
+                }
+            })
+            .catch(function (error) {
+                console.error(error);
                 // Handle the error if needed
-            }
-        })
-        .catch(function (error) {
-            console.error(error);
-            // Handle the error if needed
-        });
+            });
     }
 });
+
 
 
 //when one of the selects is changed
@@ -42,7 +66,7 @@ function SelectChange(element) {
     var selection = window.getSelection();
 
     //content editable div
-    const textBox = document.getElementById("text");
+    const textBox = document.getElementById("textBox");
 
     //span element to wrap highlighted text
     const span = document.createElement("span");
@@ -75,7 +99,6 @@ function SelectChange(element) {
 
         // Check if the span range intersects with the selected range
         if (spanRange.intersectsNode(range.startContainer) || spanRange.intersectsNode(range.endContainer)) {
-            console.log(spanElement);
 
             // Access the computed styles and inline styles
             var computedStyles = window.getComputedStyle(spanElement);
@@ -131,12 +154,11 @@ function SelectChange(element) {
 
 //when either italics or bold is selected
 function ChangeText(element) {
-    console.log("test");
     //highlighted text
     var selection = window.getSelection();
 
     //content editable div
-    const textBox = document.getElementById("text");
+    const textBox = document.getElementById("textBox");
 
     //span element to wrap highlighted text
     const span = document.createElement("span");
@@ -169,7 +191,6 @@ function ChangeText(element) {
 
         // Check if the span range intersects with the selected range
         if (spanRange.intersectsNode(range.startContainer) || spanRange.intersectsNode(range.endContainer)) {
-            console.log(spanElement);
 
             // Access the computed styles and inline styles
             var computedStyles = window.getComputedStyle(spanElement);
@@ -271,7 +292,7 @@ function UploadImage() {
 //when the text is added to the post
 function AddText() {
     var pattern = /(@@|\*\/|\/\*|--|\/\/|@@\*|\*=@@|<|>|@@\*|\*@@)/g;
-    const textBox = document.getElementById("text");
+    const textBox = document.getElementById("textBox");
     const post = document.getElementById("post");
     var cloned = textBox.cloneNode(true);
     post.appendChild(cloned);
@@ -283,4 +304,26 @@ function generateGuid() {
             v = c === 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
+}
+
+function Answer() {
+    const textEditor = document.getElementById("answerText");
+    textEditor.style.display = "block";
+}
+
+function AddAnswer() {
+    var formData = new FormData();
+    var answer = document.getElementById("text2").innerHTML;
+    var questionId = document.getElementById("questionId").value;
+
+    formData.append("answerText", answer);
+    formData.append("questionId", questionId);
+
+    const textEditor = document.getElementById("answerText");
+    textEditor.style.display = "none";
+
+    fetch('/Posts/CreateAnswer', {
+        method: "POST",
+        body: formData
+    })
 }

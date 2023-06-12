@@ -1,0 +1,86 @@
+﻿@using How2Games.Domain.Models;
+
+@model GameViewModel
+@{
+    Layout = "";    
+}
+
+<head>
+    <script src="~/js/Post.js" defer></script>
+
+    <link rel="stylesheet" href="~/css/TextEditor.css" />
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            margin-right: 10px;
+            border: none;
+            height: 20px;
+            background-color: white;
+        }
+
+        button:hover {
+            border: 1px solid lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <textarea id="title" placeholder="Title here"></textarea>
+        <div class="post" id="post"></div>
+
+        <div class="textEditor">
+            <div class="box">
+                <div class="text" contenteditable="true" id="textBox"></div>
+                <form class="operations" id="form1" name="form1" method="post">
+                    <select onchange="SelectChange(this)" id="colour" class="select">
+                        <option value="red" style="color: red">Aa</option>
+                        <option value="orange" style="color: orange">Aa</option>
+                        <option value="yellow" style="color: yellow">Aa</option>
+                        <option value="green" style="color: green">Aa</option>
+                        <option value="blue" style="color: blue">Aa</option>
+                        <option value="purple" style="color: purple">Aa</option>
+                        <option value="pink" style="color: pink">Aa</option>
+                        <option value="black" style="color: black">Aa</option>
+                        <option value="gray" style="color: gray">Aa</option>
+                    </select>
+                    <select onchange="SelectChange(this)" id="size" class="select">
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="15">15</option>
+                        <option value="18">18</option>
+                        <option value="20">20</option>
+                        <option value="22">22</option>
+                        <option value="25">25</option>
+                    </select>
+                    <button onclick="ChangeText(this)" type="button" id="italic" class="operation">I</button>
+                    <button onclick="ChangeText(this)" type="button" id="bold" class="operation">B</button>
+                    <button onclick="UploadImage()" type="button" id="addImage">Add Image</button>
+                    <button onclick="AddText()" id="add" type="button">Add Text</button>
+                    <button onclick="CreateQuestion()" id="create" type="button">Create Question</button>
+                    <input class="hidden" accept="image/*" id="fileInput" name="fileInput" type="file">
+                    <input type="text" id="gameId" name="gameId" class="hidden" value="@Model.Id"/>
+                    <input type="text" id="gameName" name="gameName" class="hidden" value="@Model.Name"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
