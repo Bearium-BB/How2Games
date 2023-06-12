@@ -39,10 +39,6 @@ namespace How2Games.Services.GameServices
             _gameCRUD.Delete(id);
         }
 
-        public Game Create(string name, string shortDescription, string detailedDescription, string imgUrl, List<string> tags)
-        {
-            return _gameCRUD.Create(name, shortDescription, detailedDescription, imgUrl, tags);
-        }
         public void AutoCreateSteamGameByAppId(string Name)
         {
             _gameCRUD.AutoCreateSteamGameByAppId(Name);

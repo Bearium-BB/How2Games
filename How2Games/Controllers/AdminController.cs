@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
+using Microsoft.IdentityModel.Tokens;
 
 namespace How2Games.Controllers
 {
@@ -121,6 +122,22 @@ namespace How2Games.Controllers
         {
             var user = await _userManager.FindByIdAsync(userId);
             await _userManager.DeleteAsync(user);
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser(string userid, ManageUserRolesViewModel model)
+        {
+            var user = await _userManager.FindByIdAsync(userid);
+            var role = await _userManager.GetRolesAsync(user);
+            if (!role.IsNullOrEmpty())
+            {
+                await _userManager.RemoveFromRoleAsync(user, role.First().ToString());
+            }
+            model.user = user;
+               await _userManager.AddToRoleAsync(user, model.RoleName);
+     
+            
+            await _userManager.UpdateAsync(user);
             return RedirectToAction("Index");
         }
     }

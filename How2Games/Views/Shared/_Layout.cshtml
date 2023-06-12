@@ -21,7 +21,7 @@
     <header>
         <div class="flex-container">
             <div class="left"> 
-            <div id="imgDiv"><img src="/Logo.png" id="pfp"></div>
+            <div id="imgDiv"><a asp-action="Index" asp-controller="Home"><img src="/Logo.png" id="pfp"></a></div>
             </div>
             <div class="mid">
                 <fieldset>
@@ -31,7 +31,8 @@
             <div class="right">
                 @*If the user is signed in, then it will show the code below*@
                     @if (SignedIn.IsSignedIn(User))
-                    {
+                            {
+                                
                  <div class="right-div">
                             <h4 asp-area="Identity">Hello @User.Identity?.Name</h4>
                             <form method="POST" asp-action="LogOut" asp-controller="User" class="form2">
@@ -56,7 +57,7 @@
     <br />
     <div class="container">
         @Html.Partial("_LoginPartial", new FormUser())
-       
+
         <main role="main" class="pb-3">
                 @if (SignedIn.IsSignedIn(User) && User.IsInRole("Admin"))
                 {
@@ -71,11 +72,8 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div>
-                &copy; 2023 - How2Games - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         <div class="container">
             &copy; 2023 - How2Games
-        
         </div>
     </footer>
     

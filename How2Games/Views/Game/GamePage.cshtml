@@ -45,6 +45,16 @@
     </div>
     <div id="SearchResultsQuestionContainer">
         <div id="searchResultsQuestion">
+            @if (Model.Questions != null)
+            {
+                @foreach (var i in Model.Questions)
+                {
+                    <div id="Question">
+                        <h3>@i.Title</h3>
+                        <p>@i.HTML</p>
+                    </div>
+                }
+            }
         </div>
     </div>
 
@@ -63,6 +73,7 @@
         </div>
     }
 }
+
 @*<div id="DetailedDescription">
     @Html.Raw(HttpUtility.HtmlDecode(Model.DetailedDescription));
 </div>
