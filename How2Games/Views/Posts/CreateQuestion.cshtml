@@ -1,4 +1,7 @@
-﻿@{
+﻿@using How2Games.Domain.Models;
+
+@model GameViewModel
+@{
     Layout = "";    
 }
 
@@ -123,19 +126,7 @@
         }
 
         #add {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 10px;
-            margin-right: 10px;
-            border: none;
-            height: 20px;
             width: 75px;
-            background-color: white;
-        }
-
-        #add:hover {
-            border: 1px solid lightgray;
         }
 
         #file-input {
@@ -143,6 +134,25 @@
         }
 
         #addImage {
+            width: 80px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #title {
+            width: 90%;
+            height: 30px;
+            overflow: hidden;
+            resize: none;
+            font-size: 20px;
+            margin-top: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        button {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -150,23 +160,24 @@
             margin-right: 10px;
             border: none;
             height: 20px;
-            width: 80px;
             background-color: white;
         }
 
-        #addImage:hover {
-            border: 1px solid lightgray;
+        #create {
+            width: 115px;
         }
 
-        .hidden {
-            display: none;
+        button:hover {
+            border: 1px solid lightgray;
         }
     </style>
 </head>
 
 <body>
     <div class="main-container">
-        <div class="post" id="post"></div>
+        <div class="post" id="post">
+            <input type="text" id="title" value="testing testing" input/>
+        </div>
 
         <div class="textEditor">
             <div class="box">
@@ -196,7 +207,11 @@
                     <button onclick="ChangeText(this)" type="button" id="bold" class="operation">B</button>
                     <button onclick="UploadImage()" type="button" id="addImage">Add Image</button>
                     <button onclick="AddText()" id="add" type="button">Add Text</button>
+                    <button onclick="CreateQuestion()" id="create" type="button">Create Question</button>
                     <input class="hidden" accept="image/*" id="fileInput" name="fileInput" type="file">
+                    <input type="text" id="gameId" name="gameId" class="hidden" value="@Model.Id"/>
+                    <input type="text" id="gameName" name="gameName" class="hidden" value="@Model.Name"/>
+                    <p id="console"></p>
                 </form>
             </div>
         </div>

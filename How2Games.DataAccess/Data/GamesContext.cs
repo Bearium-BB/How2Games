@@ -14,6 +14,7 @@ namespace How2Games.DataAccess.Data
         }
 
         public GamesContext(DbContextOptions<GamesContext> options) : base(options) { }
+        public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Post> Posts { get; set; }

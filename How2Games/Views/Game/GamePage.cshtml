@@ -10,7 +10,11 @@
         <p>@Model.ShortDescription</p>
     </div>
     <div id="newQuestionedFlexbox">
-        <a src="" id="NewQuestion">New Question</a>
+        <form method="post">
+            <input id="gameId" name="gameId" type="text" value="@Model.Id" style="display: none;"/>
+            <input id="gameName" name="gameName" type="text" value="@Model.Name" style="display: none;" />
+            <button onclick="NewQuestion()" type="submit" id="NewQuestion">New Question</button>
+        </form>
         <partial name="~/Views/SearchBar/_GamePageSearchBar.cshtml" />
     </div>
     <div id="SearchResultsQuestionContainer">

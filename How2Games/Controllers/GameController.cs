@@ -47,11 +47,17 @@ namespace How2Games.Controllers
             return RedirectToAction("GamePage", "Game", new { GameName = GameName });
 
         }
-        [Authorize(Roles = "Admin")]
+
         public IActionResult GamePage(string GameName)
         {
             var Game = _gamedb.Games.Include(x => x.GenreTags).FirstOrDefault(x => x.Name == GameName);
             return View(Game);
+        }
+
+        [HttpPost]
+        public IActionResult GamePage(int gameId, string gameName)
+        {
+            return RedirectToAction("CreateQuestion", "Posts", new { gameId = gameId, gameName = gameName });
         }
 
         public IActionResult Create()
