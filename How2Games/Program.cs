@@ -42,7 +42,7 @@ namespace How2Games
             builder.Services.AddDbContext<GamesContext>(options =>
 
 
-            options.UseSqlServer(builder.Configuration.GetConnectionString(@"Server=localhost\SQLEXPRESS;Database=How2Games;Integrated Security=false;User ID=zach;Password=NewPassword1234;TrustServerCertificate=true;MultipleActiveResultSets=True;")));
+            options.UseSqlServer(builder.Configuration.GetConnectionString(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=True")));
             
             builder.Services.AddDbContext<SteamApiContext>(options =>
             options.UseMySql("server=mysql.brettbowley.com;port=3306;database=test;user=brett;",
