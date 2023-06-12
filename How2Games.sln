@@ -11,6 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "How2Games.Services", "How2G
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "How2Games.DataAccess", "How2Games.DataAccess\How2Games.DataAccess.csproj", "{151EA157-016A-4157-8E9D-93AD61AC899E}"
 EndProject
+
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTesting", "UnitTesting", "{F17F20EB-284C-4033-97F7-46CA352F443C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "How2Games.DomainTests", "How2Games.DomainTests\How2Games.DomainTests.csproj", "{E37B2281-0EE2-413D-98D2-2DC242B4ECC9}"

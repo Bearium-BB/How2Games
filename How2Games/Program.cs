@@ -22,6 +22,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using How2Games.DataAccess.SearchBarAction;
+using How2Games.Domain;
 
 namespace How2Games
 {
@@ -41,7 +42,7 @@ namespace How2Games
             builder.Services.AddDbContext<GamesContext>(options =>
 
 
-            options.UseSqlServer(builder.Configuration.GetConnectionString(@"Data Source=(localdb)\ProjectModels;Initial Catalog=How2Games;Integrated Security=True;Connect Timeout=1200;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False; MultipleActiveResultSets=True;")));
+            options.UseSqlServer(builder.Configuration.GetConnectionString(@"Server=localhost\SQLEXPRESS;Database=How2Games;Integrated Security=false;User ID=zach;Password=NewPassword1234;TrustServerCertificate=true;MultipleActiveResultSets=True;")));
             
             builder.Services.AddDbContext<SteamApiContext>(options =>
             options.UseMySql("server=mysql.brettbowley.com;port=3306;database=test;user=brett;",
@@ -78,10 +79,24 @@ namespace How2Games
             builder.Services.AddScoped<ISearchBarServices, SearchBarServices>();
 
             var app = builder.Build();
+            using (var scope = app.Services.CreateScope())
+            {
+                var service = scope.ServiceProvider;
+
+                var context = service.GetRequiredService<GamesContext>();
+
+                context.Database.Migrate();
+
+                var roleManager = service.GetRequiredService<RoleManager<IdentityRole>>();
+
+                // Call the InitializeRoles method
+                RoleInitializer.InitializeRoles(roleManager);
 
 
-// Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            }
+
+                // Configure the HTTP request pipeline.
+                if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
@@ -101,7 +116,7 @@ namespace How2Games
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-         
+            _ = RoleInitializer.Initialize(app);
             app.Run();
         }
 

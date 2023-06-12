@@ -50,9 +50,9 @@
                 <br>
                 <form method="POST" asp-action="LogIn" asp-controller="User" name="registration">
                     @*Grabs username*@
-                    <input asp-for="@Model.UserName" class="check" type="text" name="UserName" placeholder="Username *" required pattern="{1-30}">
+                    <input asp-for="@Model.UserName" class="check" type="text" name="UserName" placeholder="Username *" required pattern="{1-30}" />
                     @*Grabs password*@
-                    <input asp-for="@Model.Password" class="check" type="password" name="password" placeholder="Password12345!!! *" id="password">
+                    <input asp-for="@Model.Password" class="check" type="password" name="password" placeholder="Password12345!!! *" id="password" />
                     <br>
                     <div class="buttons">
                         <input class="clearBtn" type="reset" value="Clear">

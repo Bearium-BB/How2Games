@@ -23,7 +23,12 @@ function validatePassword() {
 
     return true;
 }
-
+function PasswordIsValid() {
+    alert("Password is not valid");
+}
+function UsernameIsValid() {
+    alert("Username is not valid");
+}
 function darkMode() {
     var element = document.body;
     element.classList.toggle("darkmode-toggle");

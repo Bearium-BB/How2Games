@@ -4,11 +4,15 @@ using How2Games.Domain.DB;
 using How2Games.Services.GameServices;
 using How2Games.Services.LogInService;
 using How2Games.Services.TagServices;
+using System.Windows;
 using How2Games.Services.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using How2Games.Domain.Roles;
+using NuGet.Common;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace How2Games.Controllers
 {
@@ -55,8 +59,7 @@ namespace How2Games.Controllers
             }
             else
             {
-                throw new ArgumentException("Invalid Sign Up attempt");
-
+                return RedirectToAction("Index", "Home");
             }
 
         }
@@ -93,13 +96,12 @@ namespace How2Games.Controllers
                 }
                 else
                 {
-                    throw new ArgumentException("Didnt Log in try again");
-
+                    return RedirectToAction("Index", "Home");
                 }
             }
             else
             {
-                throw new ArgumentException("No user found with that username");
+                return RedirectToAction("Index", "Home");
             }
 
 
