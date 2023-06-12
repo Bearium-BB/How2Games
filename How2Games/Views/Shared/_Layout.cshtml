@@ -56,7 +56,7 @@
     <br />
     <div class="container">
         @Html.Partial("_LoginPartial", new FormUser())
-       
+
         <main role="main" class="pb-3">
                 @if (SignedIn.IsSignedIn(User) && User.IsInRole("Admin"))
                 {
