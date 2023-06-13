@@ -1,0 +1,38 @@
+﻿@using System.Web;
+@using How2Games.DataAccess.QuestionAction;
+@using How2Games.DataAccess.Data;
+@inject AdminMenuQuestion injection;
+@inject GamesContext context;
+
+@if(context.Questions.Count() > 0){
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Views</th>
+                <th scope="col">Answers</th>
+            </tr>
+        </thead>
+        @if (Model != null)
+        {
+            @foreach (var question in context.Questions)
+            {
+                <tbody>
+                    <tr>
+                        <th>@question.Id</th>
+                        <th>@question.Title</th>
+                        <th>@question.ViewCount</th>
+                        <th>@question.Answers.Count()</th>
+                        <td>
+                            <button onsubmit="@injection.DeleteQuuestion(question.Id)">Delete Question</button>
+                        </td>
+
+                    </tr>
+                </tbody>
+            }
+
+        }
+    </table>
+
+}

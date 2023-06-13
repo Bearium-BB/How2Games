@@ -140,5 +140,9 @@ namespace How2Games.Controllers
             await _userManager.UpdateAsync(user);
             return RedirectToAction("Index");
         }
+       public IActionResult QuestionsDeleter()
+        {
+            return View();
+        }
     }
 }
