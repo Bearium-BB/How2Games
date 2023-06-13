@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace How2Games.DataAccess.QuestionAction
 {
-    public class AdminMenuQuestion
+    public class AdminMenuQuestion : IAdminMenuQuestion
     {
         
     private readonly GamesContext _gamesContext;
