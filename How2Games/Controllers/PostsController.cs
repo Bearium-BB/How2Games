@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNet.Identity;
 using How2Games.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace How2Games.Controllers
 {
@@ -32,7 +33,7 @@ namespace How2Games.Controllers
             _gamesContext = gamesContext;
             _roleManager = roleManager;
         }
-
+        [Authorize]
         public IActionResult CreateQuestion(int gameId, string gameName)
         {
             GameViewModel gameViewModel = new GameViewModel(gameName, gameId);
@@ -109,10 +110,6 @@ namespace How2Games.Controllers
             List<Answer> answers = _gamesContext.Answers.Include(x => x.UpVotes).Include(x => x.DownVotes).Include(x => x.Comments).Where(x => x.QuestionId == question.Id).ToList();
             List<KeyValuePair<string, Answer>> answerKvps = new List<KeyValuePair<string, Answer>>();
 
-            for (int i = 0; i < answers.Count; i++)
-            {
-                Console.WriteLine("Vote Count: " + _gamesContext.Upvotes.Where(x => x.AnswerId == answers[i].Id).Count());
-            }
 
             for (int i = 0; i < answers.Count; i++)
             {
@@ -136,7 +133,16 @@ namespace How2Games.Controllers
                 }
             }
             questionData.Question = question;
-            questionData.Username = _userManager.Users.FirstOrDefault(x => x.Id == question.UserId).UserName;
+            var User =  _userManager.Users.FirstOrDefault(x => x.Id == question.UserId);
+
+            if (User != null)
+            {
+                questionData.Username = _userManager.Users.FirstOrDefault(x => x.Id == question.UserId).UserName;
+            }
+            else
+            {
+                questionData.Username = "[User Deleted]";
+            }
             questionData.Answers = answerKvps;
             return View(questionData);
         }

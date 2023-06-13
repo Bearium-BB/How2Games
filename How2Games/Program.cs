@@ -78,6 +78,10 @@ namespace How2Games
             builder.Services.AddScoped<ISearchTypes, SearchTypes>();
             builder.Services.AddScoped<ISearchBarServices, SearchBarServices>();
 
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Home/LoginPlease"; // Replace with your desired sign-up page URL
+            });
             var app = builder.Build();
             using (var scope = app.Services.CreateScope())
             {

@@ -4,30 +4,6 @@
 
 <link rel="stylesheet" href="~/css/GamePage.css" />
 
-<style>
-    button {
-        margin: 10px;
-    }
-
-    .questionContainer {
-        border-bottom: 2px solid black;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 15px;
-        font-size: 18px;
-    }
-
-    .title {
-        color: black;
-    }
-
-    .title:hover {
-        color: cornflowerblue;
-        text-decoration: none;
-    }
-</style>
 
 <div id="Flex-GamePage">
     <h1>@Model.Game.Name</h1>
@@ -44,36 +20,19 @@
         <partial name="~/Views/SearchBar/_GamePageSearchBar.cshtml" />
     </div>
     <div id="SearchResultsQuestionContainer">
+        <h3>Questions</h3>
         <div id="searchResultsQuestion">
+
             @if (Model.Questions != null)
             {
-                @foreach (var i in Model.Questions)
+                @foreach (var v in Model.Questions)
                 {
-                    <div id="Question">
-                        <a href="/Posts/Question/@i.Id" class="title">@i.Title</a>
+                    <div class="questionContainer">
+                        <a href="/Posts/Question/@v.Id" class="title">@v.Title.ToUpper()</a>
+                        <p>Views: @v.ViewCount</p>
                     </div>
                 }
             }
         </div>
     </div>
-
-
 </div>
-
-
-@if (Model.Questions != null)
-{
-    <h3>Questions</h3>
-    @foreach (var v in Model.Questions)
-    {
-        <div class="questionContainer">
-            <a href="/Posts/Question/@v.Id" class="title">@v.Title</a>
-            <p>Views: @v.ViewCount</p>
-        </div>
-    }
-}
-
-@*<div id="DetailedDescription">
-    @Html.Raw(HttpUtility.HtmlDecode(Model.DetailedDescription));
-</div>
-*@
