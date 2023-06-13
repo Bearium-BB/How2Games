@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNet.Identity;
 using How2Games.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace How2Games.Controllers
 {
@@ -105,8 +106,13 @@ namespace How2Games.Controllers
         {
             QuestionDataViewModel questionData = new QuestionDataViewModel();
             Question question = _gamesContext.Questions.FirstOrDefault(x => x.Id == id);
-            List<Answer> answers = _gamesContext.Answers.Where(x => x.QuestionId == question.Id).ToList();
+            List<Answer> answers = _gamesContext.Answers.Include(x => x.UpVotes).Include(x => x.DownVotes).Include(x => x.Comments).Where(x => x.QuestionId == question.Id).ToList();
             List<KeyValuePair<string, Answer>> answerKvps = new List<KeyValuePair<string, Answer>>();
+
+            for (int i = 0; i < answers.Count; i++)
+            {
+                Console.WriteLine("Vote Count: " + _gamesContext.Upvotes.Where(x => x.AnswerId == answers[i].Id).Count());
+            }
 
             for (int i = 0; i < answers.Count; i++)
             {
@@ -150,13 +156,96 @@ namespace How2Games.Controllers
             }
             answer.UserId = userId;
 
-            Console.WriteLine("Answer: " + answer.HTML);
-            Console.WriteLine("UserId: " + answer.UserId);
-            Console.WriteLine("QuestionId: " + answer.QuestionId);
-
             _gamesContext.Answers.Add(answer);
             _gamesContext.SaveChanges();
-            Console.WriteLine("answer saved");
+            return Json(responseModel);
+        }
+
+        [HttpPost]
+        public JsonResult CreateComment(string commentText, int answerId)
+        {
+            JsonResponseModel responseModel = new JsonResponseModel();
+            Comment comment = new Comment();
+
+            comment.HTML = commentText;
+            comment.AnswerId = answerId;
+            string userId = "";
+            if (_signInManager.IsSignedIn(User))
+            {
+                userId = User.Identity.GetUserId();
+            }
+            comment.UserId = userId;
+            Console.WriteLine(comment.AnswerId);
+            _gamesContext.Comments.Add(comment);
+            _gamesContext.SaveChanges();
+            return Json(responseModel);
+        }
+
+        [HttpPost]
+        public JsonResult CreateUpVote(int answerId)
+        {
+            JsonResponseModel responseModel = new JsonResponseModel();
+
+            string userId = "";
+            if (_signInManager.IsSignedIn(User))
+            {
+                userId = User.Identity.GetUserId();
+            }
+
+            bool alreadyExists = false;
+
+            foreach (var v in _gamesContext.Upvotes)
+            {
+                if (v.AnswerId == answerId && v.UserId == userId)
+                {
+                    alreadyExists = true;
+                }
+            }
+
+            if (alreadyExists == false)
+            {
+                Upvote upVote = new Upvote();
+                upVote.AnswerId = answerId;
+                upVote.UserId = userId;
+
+                _gamesContext.Upvotes.Add(upVote);
+                _gamesContext.SaveChanges();
+            }
+
+            return Json(responseModel);
+        }
+
+        [HttpPost]
+        public JsonResult CreateDownVote(int answerId)
+        {
+            JsonResponseModel responseModel = new JsonResponseModel();
+
+            string userId = "";
+            if (_signInManager.IsSignedIn(User))
+            {
+                userId = User.Identity.GetUserId();
+            }
+
+            bool alreadyExists = false;
+
+            foreach (var v in _gamesContext.DownVotes)
+            {
+                if (v.AnswerId == answerId && v.UserId == userId)
+                {
+                    alreadyExists = true;
+                }
+            }
+
+            if (alreadyExists == false)
+            {
+                Downvote downVote = new Downvote();
+                downVote.AnswerId = answerId;
+                downVote.UserId = userId;
+
+                _gamesContext.DownVotes.Add(downVote);
+                _gamesContext.SaveChanges();
+            }
+
             return Json(responseModel);
         }
     }

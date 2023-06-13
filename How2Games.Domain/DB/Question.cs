@@ -9,8 +9,6 @@
         public string HTML { get; set; } = null!;
         public int ViewCount { get; set; } = 0;
         public ICollection<Answer> Answers { get; set; } = new List<Answer>();
-        public ICollection<VoteQuestion> Votes { get; set; } = new List<VoteQuestion>();
-
 
 
     }

@@ -7,8 +7,8 @@
         public string UserId { get; set; }
         public int QuestionId { get; set; }
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
-        public ICollection<VoteAnswer> Votes { get; set; } = new List<VoteAnswer>();
-
+        public ICollection<Upvote> UpVotes { get; set; } = new List<Upvote>();
+        public ICollection<Downvote> DownVotes { get; set; } = new List<Downvote>();
 
     }
 }

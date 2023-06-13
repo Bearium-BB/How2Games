@@ -2,134 +2,173 @@
 
 @model QuestionDataViewModel
 
-<link rel="stylesheet" href="~/css/TextEditor.css" />
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        border: 0;
-    }
+<head>
+    <script src="~/js/Answer.js" defer></script>
+    <script src="~/js/Post.js" defer></script>
+    <script src="https://kit.fontawesome.com/b703d8010e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/TextEditor.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
 
-    .questionContainer {
-        display: flex;
-        width: 100%;
-        height: auto;
-        padding: 20px;
-        flex-direction: column;
-        align-items: center;
-        border-bottom: 2px solid black;
-        margin-bottom: 30px;
-    }
+        .questionContainer {
+            display: flex;
+            width: 100%;
+            height: auto;
+            padding: 20px;
+            flex-direction: column;
+            align-items: center;
+            border-bottom: 2px solid black;
+            margin-bottom: 30px;
+        }
 
-    .title {
-        display: flex;
-        width: 100%;
-        height: 75px;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 20px;
-    }
+        .title {
+            display: flex;
+            width: 100%;
+            height: 75px;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
 
-    .no-margin {
-        margin: 0;
-    }
+        .no-margin {
+            margin: 0;
+        }
 
-    .column {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        height: 100%;
-    }
+        .column {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            height: 100%;
+        }
 
-    .left-align  {
-        align-items: flex-start;
-    }
+        .left-align {
+            align-items: flex-start;
+        }
 
-    .rright-align {
-        align-items: flex-end;
-    }
+        .rright-align {
+            align-items: flex-end;
+        }
 
-    .answers {
-        font-size: 15px;
-    }
+        .answers {
+            font-size: 15px;
+        }
 
-    .button {
-        width: 80px;
-    }
+        .button {
+            width: 80px;
+        }
 
-    img {
-        width: 50%;
-        height: auto;
-        margin: 20px;
-    }
+        img {
+            width: 50%;
+            height: auto;
+            margin: 20px;
+        }
 
-    .answerContainer {
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-    }
+        .answerContainer {
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .textEditor {
-        width: 100%;
-        height: 200px;
-    }
+        .textEditor {
+            width: 100%;
+            height: 200px;
+        }
 
-    .text {
-        width: 100%;
-        padding: 10px;
-        font-size: 13px;
-    }
+        .text {
+            width: 100%;
+            padding: 10px;
+            font-size: 13px;
+        }
 
-    .box {
-        width: 100%;
-    }
+        .box {
+            width: 100%;
+        }
 
-    .qAndA {
-        width: 40%;
-        height: auto;
-        flex-direction: column;
-        align-items: center;
-    }
+        .qAndA {
+            width: 40%;
+            height: auto;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    .operation {
-        font-size: 12px;
-    }
+        .operation {
+            font-size: 12px;
+        }
 
-    .select {
-        font-size: 12px;
-    }
+        .select {
+            font-size: 12px;
+        }
 
-    footer {
-        display: none;
-    }
+        footer {
+            display: none;
+        }
 
-    #create {
-        height: 20px;
-        width: 75px;
-        background-color: white;
-        font-size: 12px;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
+        #create {
+            height: 20px;
+            width: 85px;
+            background-color: white;
+            font-size: 12px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
 
-    #create:hover {
-        border: 1px solid lightgray;
-    }
+            #create:hover {
+                border: 1px solid lightgray;
+            }
 
-    .hidden {
-        display: none;
-    }
+        .hidden {
+            display: none;
+        }
 
-    #answerText {
-        display: none;
-    }
-</style>
-<script src="~/js/Answer.js" defer></script>
-<script src="~/js/Post.js" defer></script>
+        #answerText {
+            display: none;
+        }
+
+        #commentText {
+            display: none;
+        }
+
+        .votes {
+            display: flex;
+            flex-direction: row;
+            font-size: 15px;
+            align-items: center;
+            justify-content: space-between;
+            width: 150px;
+            height: 30px;
+        }
+
+        i:hover {
+            color: cornflowerblue;
+        }
+
+        .user {
+            margin-top: 10px;
+        }
+
+        .comments {
+            width: 75%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        .comments div {
+            margin: 5px;
+        }
+    </style>
+</head>
 
 <input type="text" class="hidden" id="questionId" value="@Model.Question.Id"/>
+<input type="text" class="hidden" id="answerId"/>
 <div class="qAndA">
     <div class="questionContainer">
         <div class="title">
@@ -166,10 +205,55 @@
                 </form>
             </div>
         </div>
+        <div id="commentText" class="textEditor">
+            <div class="box">
+                <div class="text" contenteditable="true" id="text3"></div>
+                <form class="operations" id="form1" name="form1" method="post">
+                    <select onchange="SelectChange(this)" id="colour" class="select">
+                        <option value="red" style="color: red">Aa</option>
+                        <option value="orange" style="color: orange">Aa</option>
+                        <option value="yellow" style="color: yellow">Aa</option>
+                        <option value="green" style="color: green">Aa</option>
+                        <option value="blue" style="color: blue">Aa</option>
+                        <option value="purple" style="color: purple">Aa</option>
+                        <option value="pink" style="color: pink">Aa</option>
+                        <option value="black" style="color: black">Aa</option>
+                        <option value="gray" style="color: gray">Aa</option>
+                    </select>
+                    <button onclick="ChangeText(this)" type="button" id="italic" class="operation small-operation">I</button>
+                    <button onclick="ChangeText(this)" type="button" id="bold" class="operation small-operation">B</button>
+                    <button onclick="AddComment()" id="create" type="button">Post Comment</button>
+                </form>
+            </div>
+        </div>
         @for(int i = 0; i < Model.Answers.Count; i++) {
             <div>
                 @Html.Raw(Model.Answers[i].Value.HTML)
-                <p>Posted by @Model.Answers[i].Key</p>
+                <p class="user">Posted by @Model.Answers[i].Key</p>
+                <div class="votes">
+                    <div>
+                        @Model.Answers[i].Value.UpVotes.Count()
+                        <i onclick="UpVote(@Model.Answers[i].Value.Id)" class="fa-solid fa-thumbs-up"></i>
+                    </div>
+                    <div>
+                        @Model.Answers[i].Value.DownVotes.Count()
+                        <i onclick="DownVote(@Model.Answers[i].Value.Id)" class="fa-solid fa-thumbs-down"></i>
+                    </div>
+                    <div>
+                        @Model.Answers[i].Value.Comments.Count()
+                        <i onclick="Comment(@Model.Answers[i].Value.Id)" class="fa-solid fa-comment"></i>
+                        <i onclick="DisplayComments(@i)" class="fa-solid fa-angle-down"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div id="comments-@i" class="comments" style="display:none;">
+                @foreach (var v in Model.Answers[i].Value.Comments)
+                {
+                    <div>
+                        @v.HTML
+                    </div>
+                }
             </div>
         }
     </div>
