@@ -7,7 +7,7 @@ namespace How2Games.Domain.DB
     {
         public string FullName { get; set; }
         public ICollection<Answer> Answers { get; set; } = new List<Answer>();
-        public ICollection<Post> Posts { get; set; } = new List<Post>();
+        public ICollection<Question> Questions { get; set; } = new List<Question>();
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
     }
     

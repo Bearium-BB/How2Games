@@ -50,8 +50,7 @@
                 @foreach (var i in Model.Questions)
                 {
                     <div id="Question">
-                        <h3>@i.Title</h3>
-                        <p>@i.HTML</p>
+                        <a href="/Posts/Question/@i.Id" class="title">@i.Title</a>
                     </div>
                 }
             }

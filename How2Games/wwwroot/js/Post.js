@@ -308,7 +308,19 @@ function generateGuid() {
 
 function Answer() {
     const textEditor = document.getElementById("answerText");
-    textEditor.style.display = "block";
+
+    if (textEditor.style.display == "none") {
+        textEditor.style.display = "block";
+    }
+
+    else {
+        textEditor.style.display = "none";
+    }
+
+    textEditor.scrollIntoView({
+        behavior: "smooth", // Use smooth scrolling animation
+        block: "start", // Scroll to the top of the div
+    });
 }
 
 function AddAnswer() {
@@ -326,4 +338,75 @@ function AddAnswer() {
         method: "POST",
         body: formData
     })
+}
+
+function UpVote(answerId) {
+    var formData = new FormData();
+
+    formData.append("answerId", answerId);
+
+    fetch('/Posts/CreateUpVote', {
+        method: "POST",
+        body: formData
+    })
+}
+
+function DownVote(answerId) {
+    var formData = new FormData();
+
+    formData.append("answerId", answerId);
+
+    fetch('/Posts/CreateDownVote', {
+        method: "POST",
+        body: formData
+    })
+}
+
+function Comment(answerId) {
+    const textEditor = document.getElementById("commentText");
+
+    if (textEditor.style.display == "none") {
+        textEditor.style.display = "block";
+    }
+
+    else {
+        textEditor.style.display = "none";
+    }
+
+    const answerInput = document.getElementById("answerId");
+    answerInput.value = answerId;
+
+    textEditor.scrollIntoView({
+        behavior: "smooth", // Use smooth scrolling animation
+        block: "start", // Scroll to the top of the div
+    });
+}
+
+function AddComment() {
+    var formData = new FormData();
+    var comment = document.getElementById("text3").innerHTML;
+    var answerId = document.getElementById("answerId").value;
+
+    formData.append("commentText", comment);
+    formData.append("answerId", answerId);
+
+    const textEditor = document.getElementById("commentText");
+    textEditor.style.display = "none";
+
+    fetch('/Posts/CreateComment', {
+        method: "POST",
+        body: formData
+    })
+}
+
+function DisplayComments(i) {
+    const comments = document.getElementById("comments-" + i);
+
+    if (comments.style.display == "none") {
+        comments.style.display = "block";
+    }
+
+    else {
+        comments.style.display = "none";
+    }
 }

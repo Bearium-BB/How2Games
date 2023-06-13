@@ -14,7 +14,9 @@ EndProject
 
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTesting", "UnitTesting", "{F17F20EB-284C-4033-97F7-46CA352F443C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "How2Games.DomainTests", "How2Games.DomainTests\How2Games.DomainTests.csproj", "{E37B2281-0EE2-413D-98D2-2DC242B4ECC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "How2Games.DomainTests", "How2Games.DomainTests\How2Games.DomainTests.csproj", "{E37B2281-0EE2-413D-98D2-2DC242B4ECC9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Brett", "Brett", "{4BB813D2-0993-474B-8B5E-A9ADB4B96746}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,7 +49,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{E37B2281-0EE2-413D-98D2-2DC242B4ECC9} = {F17F20EB-284C-4033-97F7-46CA352F443C}
+		{E37B2281-0EE2-413D-98D2-2DC242B4ECC9} = {4BB813D2-0993-474B-8B5E-A9ADB4B96746}
+		{4BB813D2-0993-474B-8B5E-A9ADB4B96746} = {F17F20EB-284C-4033-97F7-46CA352F443C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16E67680-3409-4B16-8464-E249ED656483}
