@@ -68,6 +68,10 @@ namespace How2Games.DataAccess.TagAction
 
             DeveloperTag NewTag = new DeveloperTag();
             NewTag.Text = text;
+            if(NewTag.Text == null) 
+            {
+                throw new ArgumentNullException(NewTag.Text);
+            }
             return NewTag;
         }
     }
