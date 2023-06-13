@@ -144,5 +144,10 @@ namespace How2Games.Controllers
         {
             return View();
         }
+        public IActionResult AdminMenu()
+        {
+            return View();
+        }
+
     }
 }

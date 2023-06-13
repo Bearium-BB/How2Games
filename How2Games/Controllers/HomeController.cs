@@ -44,14 +44,19 @@ namespace How2Games.Controllers
 
         public async Task<IActionResult> Index()
         {
-            List<Game> MostViewed = await _gamesContext.Games.Include(g => g.GenreTags).Include(g => g.DeveloperTags).OrderByDescending(g => g.ViewCount).Take(4).ToListAsync();
-            List<Game> MostQuestions = await _gamesContext.Games.Include(g => g.GenreTags).Include(g => g.DeveloperTags).OrderByDescending(g => g.Questions.Count).Take(4).ToListAsync();
+            List<Game> MostViewed = await _gamesContext.Games.Include(g => g.Questions).Include(g => g.GenreTags).Include(g => g.DeveloperTags).OrderByDescending(g => g.ViewCount).Take(4).ToListAsync();
+            List<Game> MostQuestions = await _gamesContext.Games.Include(g => g.Questions).Include(g => g.GenreTags).Include(g => g.DeveloperTags).OrderByDescending(g => g.Questions.Count).Take(4).ToListAsync();
 
             return View(new HomePageViewModel(MostViewed, MostQuestions));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult LoginPlease()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }

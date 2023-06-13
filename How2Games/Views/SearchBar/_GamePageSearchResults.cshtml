@@ -2,8 +2,8 @@
 
 @foreach (var result in Model)
 {
-    <div id="Question">
-        <h3>@result.Title</h3>
-        <p>@result.HTML</p>
+    <div class="questionContainer">
+        <a href="/Posts/Question/@result.Id" class="title">@result.Title.ToUpper()</a>
+        <p>Views: @result.ViewCount</p>
     </div>
 }

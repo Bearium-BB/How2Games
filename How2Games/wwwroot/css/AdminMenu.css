@@ -1,0 +1,126 @@
+﻿
+.Container1 {
+    width: 100%;
+    height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+}
+
+.Col-1 {
+    width: 15%;
+    height: 100%;
+    display: inline;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.Col-2 {
+    width: 85%;
+    height: 100%;
+    display: inline;
+}
+
+.Row {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .Row p {
+        color: rgba(255, 255, 255, 0.45);
+    }
+
+        .Row p:hover {
+            color: rgba(255, 255, 255);
+            cursor: pointer;
+        }
+
+.Page {
+    height: 100%;
+    width: 100%;
+    display: block;
+    overflow-y: scroll;
+}
+
+.ContainerVideos {
+    display: grid;
+    grid-template-columns: repeat(3, 330px);
+    grid-gap: 10px;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+    .ContainerVideos a {
+        text-decoration: none;
+        color: white;
+    }
+
+.Card a p {
+    overflow: hidden;
+}
+
+.Card a h3 {
+    overflow: hidden;
+}
+
+.Card {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 5px;
+    display: block;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    border-radius: 5px;
+    height: 255px;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.CardImg {
+    border-radius: 5px;
+    width: 320px;
+    height: 180px;
+    margin: 0px
+}
+
+.del {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    width: 100%;
+    margin-top: 15px;
+    display: inline-block;
+    text-align: center;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+    .del:hover {
+        background-color: #c82333;
+        /* Darker red background on hover */
+    }
+
+.InnerContainer {
+    height: 100%;
+    padding: 20px;
+}
+
+.Logout {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    width: 150px;
+    display: inline-block;
+    text-align: center;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+    .Logout:hover {
+        background-color: #c82333;
+        /* Darker red background on hover */
+    }

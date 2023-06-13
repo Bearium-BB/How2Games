@@ -54,13 +54,18 @@ namespace How2Games.Controllers
         public IActionResult GamePage(string GameName)
         {
             var Game = _gamedb.Games.Include(x => x.GenreTags).FirstOrDefault(x => x.Name == GameName);
-            Console.WriteLine("Question count: " + _gamedb.Games.Include(x => x.Questions).Count());
-            List<Question> questions = _gamedb.Games.Include(x => x.Questions).FirstOrDefault(x => x.Name == GameName).Questions.ToList();
-            QuestionViewModel questionViewModel = new QuestionViewModel();
+            if (Game != null)
+            {
+                List<Question> questions = _gamedb.Games.Include(x => x.Questions).FirstOrDefault(x => x.Name == GameName).Questions.ToList();
+                QuestionViewModel questionViewModel = new QuestionViewModel();
+                Game.ViewCount++;
+                _gamedb.SaveChanges();
+                questionViewModel.Game = Game;
+                questionViewModel.Questions = questions;
+                return View(questionViewModel);
+            }
+            return RedirectToAction("Error", "Home", new {gameName = GameName });
 
-            questionViewModel.Game = Game;
-            questionViewModel.Questions = questions;
-            return View(questionViewModel);
         }
 
         [HttpPost]
