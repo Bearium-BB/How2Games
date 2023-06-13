@@ -28,7 +28,7 @@ namespace How2Games.Controllers
         private readonly UserManager<How2GamesUser> _userManager;
         private readonly SignInManager<How2GamesUser> _signInManager;
         private readonly GamesContext _gamesContext;
-
+        
 
         public HomeController(ILogger<HomeController> logger, IUserCRUDServices userCRUDServices, UserManager<How2GamesUser> userManager, SignInManager<How2GamesUser> signInManager, GamesContext gamesContext)
 

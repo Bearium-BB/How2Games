@@ -67,10 +67,6 @@ namespace How2Games.DataAccess.TagAction
 
             PublisherTag NewTag = new PublisherTag();
             NewTag.Text = text;
-            if (NewTag.Text == null)
-            {
-                throw new ArgumentNullException(NewTag.Text);
-            }
             return NewTag;
         }
     }
